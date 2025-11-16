@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{AACA637A-AB7B-A537-17F3-444F118BECF9}</ProjectGuid>
+    <ProjectGuid>{31F6BF17-423F-06FA-C0DC-85E4E6DD55B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -68,7 +68,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-    <Compile Include="Assets\Scripts\LoginManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
@@ -85,18 +84,21 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-    <Compile Include="Assets\Scripts\StartUI Manager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\UI\StartUI Manager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\Scripts\RegisterManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\UI\FixedCameraAspect.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Scripts\Network\AuthManager.cs" />
+    <Compile Include="Assets\Scripts\UI\LoginManager.cs" />
+    <Compile Include="Assets\Scripts\UI\RegisterManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\Quantum\Assemblies\Quantum.Deterministic.xml" />
@@ -1162,27 +1164,27 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Quantum.Unity.csproj">
-      <Project>{3601FBF7-E8D9-594B-E0EF-82DD76BE73D8}</Project>
+      <Project>{4E6908AD-3D2E-003D-4400-94C7D4978F85}</Project>
       <Name>Quantum.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Menu.csproj">
-      <Project>{9AA5AF3D-42C8-2F33-F589-81979D1C5134}</Project>
+      <Project>{F3D5D6C8-80AD-6460-6BEB-2C09F22243E3}</Project>
       <Name>Quantum.Menu</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Unity.Editor.csproj">
-      <Project>{17556D28-6E92-4CB1-CC03-FB63E81F56C5}</Project>
+      <Project>{6D3F0A9F-B8B0-1CD8-8425-EAC7706F8993}</Project>
       <Name>Quantum.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Simulation.csproj">
-      <Project>{221644E8-C7E3-2773-3568-8B4AA9A8936E}</Project>
+      <Project>{63DA7B85-5A14-3523-C9B7-C2EA593823BC}</Project>
       <Name>Quantum.Simulation</Name>
     </ProjectReference>
     <ProjectReference Include="Photon.Realtime.csproj">
-      <Project>{3BED926D-8939-A62B-19A8-632B5A2BCA89}</Project>
+      <Project>{041097CF-4020-0E3F-E4E9-CC6889DC96E4}</Project>
       <Name>Photon.Realtime</Name>
     </ProjectReference>
     <ProjectReference Include="Quantum.Menu.Editor.csproj">
-      <Project>{B2617112-E2C0-9685-90FE-2FA3D2F72FDF}</Project>
+      <Project>{7C3B8676-58DF-AC93-F6A5-4EB6B01B2E3E}</Project>
       <Name>Quantum.Menu.Editor</Name>
     </ProjectReference>
   </ItemGroup>

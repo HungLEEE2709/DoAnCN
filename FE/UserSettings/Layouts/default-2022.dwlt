@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Project
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -316,9 +316,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 20b70000
-      m_LastClickedID: 46880
-      m_ExpandedIDs: 5c28ffff5c33ffff6a54ffff7677ffffc077ffff8879ffffa679ffffc479ffff1c7cffff3891ffffd293ffffc895ffff4696ffffc8b1ffff06b5ffff48cfffffd0cffffffcfaffff206f0000
+      m_SelectedIDs: b68b0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 3459ffff3c7affffb8a5ffffd0aaffffe2baffffc0beffffaabfffff04c0fffffcfaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -433,7 +433,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/QuantumUser/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -442,7 +443,7 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\game\DoAnCN
+  m_LastProjectPath: D:\game\DoAn\FE
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -477,7 +478,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000016610000006a0000
+    m_ExpandedIDs: ffffffff0000000016610000ba6e0000a8880000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -765,7 +766,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Light Settings
-      index: 2
+      index: 1
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -960,7 +961,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Tilemap Focus
-      index: 1
+      index: 2
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -973,7 +974,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Path
-      index: 9
+      index: 10
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -986,7 +987,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/TrailRenderer
-      index: 10
+      index: 9
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -1014,9 +1015,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.0595171, y: -1.3661622, z: 1.5473402}
+    m_Target: {x: 444.41653, y: 114.49025, z: -1.4170976}
     speed: 2
-    m_Value: {x: -2.1556451, y: -1.1848145, z: 1.5442722}
+    m_Value: {x: 444.41653, y: 114.49025, z: -1.4170976}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1049,7 +1050,7 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0, y: 0}
+      m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
         m_Target: 1
@@ -1066,9 +1067,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.510793
+    m_Target: 223.10385
     speed: 2
-    m_Value: 6.8175845
+    m_Value: 223.10385
   m_Ortho:
     m_Target: 1
     speed: 2
