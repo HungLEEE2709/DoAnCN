@@ -1,0 +1,66 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Mm]emoryCaptures/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+sysinfo.txt
+
+# Asset Store tools
+Assets/AssetStoreTools*
+
+# Addressables
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Unity packages
+*.unitypackage
+*.unitypackage.meta
+
+# Unity crash logs
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Crashlytics
+crashlytics-build.properties
+
+# IDEs and editors
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.ide
+
+# Rider
+.idea/
+Assets/Plugins/Editor/JetBrains*
+*.sln.iml
+
+# VS
+.vs/
+.gradle/
+
+# Consulo
+.consulo/
+ExportedObj/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
