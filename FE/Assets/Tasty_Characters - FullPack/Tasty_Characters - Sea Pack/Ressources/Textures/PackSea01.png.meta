@@ -340,7 +340,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -353,7 +353,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 1
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -374,13 +374,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 6
-        y: 860
+        y: 862
         width: 91
-        height: 109
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -396,13 +395,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 133
-        y: 864
+        y: 865
         width: 96
-        height: 109
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -418,13 +416,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 259
-        y: 864
+        y: 865
         width: 103
-        height: 109
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -440,13 +437,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 370
-        y: 864
-        width: 90
-        height: 129
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        y: 865
+        width: 89
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -461,14 +457,13 @@ TextureImporter:
       name: PackSea01_4
       rect:
         serializedVersion: 2
-        x: 466
-        y: 864
-        width: 146
-        height: 133
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 469
+        y: 865
+        width: 140
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,14 +478,13 @@ TextureImporter:
       name: PackSea01_5
       rect:
         serializedVersion: 2
-        x: 782
-        y: 864
-        width: 91
-        height: 129
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 618
+        y: 865
+        width: 161
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -505,14 +499,13 @@ TextureImporter:
       name: PackSea01_6
       rect:
         serializedVersion: 2
-        x: 906
-        y: 864
-        width: 103
-        height: 117
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 782
+        y: 865
+        width: 91
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -527,14 +520,13 @@ TextureImporter:
       name: PackSea01_7
       rect:
         serializedVersion: 2
-        x: 534
-        y: 809
-        width: 97
-        height: 51
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 906
+        y: 865
+        width: 103
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -549,14 +541,13 @@ TextureImporter:
       name: PackSea01_8
       rect:
         serializedVersion: 2
-        x: 693
-        y: 815
-        width: 61
-        height: 25
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 534
+        y: 809
+        width: 97
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -571,14 +562,13 @@ TextureImporter:
       name: PackSea01_9
       rect:
         serializedVersion: 2
-        x: 795
-        y: 781
-        width: 89
-        height: 76
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 693
+        y: 815
+        width: 61
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -593,14 +583,13 @@ TextureImporter:
       name: PackSea01_10
       rect:
         serializedVersion: 2
-        x: 905
-        y: 798
-        width: 81
-        height: 45
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 795
+        y: 781
+        width: 89
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -615,14 +604,13 @@ TextureImporter:
       name: PackSea01_11
       rect:
         serializedVersion: 2
-        x: 232
-        y: 747
-        width: 26
+        x: 905
+        y: 798
+        width: 81
         height: 45
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -637,14 +625,13 @@ TextureImporter:
       name: PackSea01_12
       rect:
         serializedVersion: 2
-        x: 279
-        y: 788
-        width: 11
-        height: 4
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 232
+        y: 747
+        width: 26
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -659,14 +646,13 @@ TextureImporter:
       name: PackSea01_13
       rect:
         serializedVersion: 2
-        x: 301
-        y: 749
-        width: 73
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 279
+        y: 788
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -681,14 +667,13 @@ TextureImporter:
       name: PackSea01_14
       rect:
         serializedVersion: 2
-        x: 413
-        y: 723
-        width: 77
-        height: 76
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 301
+        y: 749
+        width: 73
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -703,14 +688,13 @@ TextureImporter:
       name: PackSea01_15
       rect:
         serializedVersion: 2
-        x: 550
-        y: 722
-        width: 67
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 413
+        y: 723
+        width: 77
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -725,14 +709,13 @@ TextureImporter:
       name: PackSea01_16
       rect:
         serializedVersion: 2
-        x: 688
-        y: 755
-        width: 73
-        height: 49
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 550
+        y: 773
+        width: 67
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -747,14 +730,13 @@ TextureImporter:
       name: PackSea01_17
       rect:
         serializedVersion: 2
-        x: 958
-        y: 742
-        width: 36
-        height: 47
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 688
+        y: 755
+        width: 73
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -769,14 +751,13 @@ TextureImporter:
       name: PackSea01_18
       rect:
         serializedVersion: 2
-        x: 36
-        y: 769
-        width: 10
-        height: 5
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 958
+        y: 742
+        width: 36
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -791,14 +772,13 @@ TextureImporter:
       name: PackSea01_19
       rect:
         serializedVersion: 2
-        x: 62
-        y: 734
-        width: 73
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 36
+        y: 769
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -813,14 +793,13 @@ TextureImporter:
       name: PackSea01_20
       rect:
         serializedVersion: 2
-        x: 160
-        y: 742
-        width: 55
-        height: 40
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 62
+        y: 734
+        width: 73
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -835,14 +814,13 @@ TextureImporter:
       name: PackSea01_21
       rect:
         serializedVersion: 2
-        x: 279
-        y: 766
-        width: 11
-        height: 15
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 160
+        y: 742
+        width: 55
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -857,14 +835,13 @@ TextureImporter:
       name: PackSea01_22
       rect:
         serializedVersion: 2
-        x: 634
-        y: 763
-        width: 19
-        height: 22
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 279
+        y: 766
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -879,14 +856,13 @@ TextureImporter:
       name: PackSea01_23
       rect:
         serializedVersion: 2
-        x: 37
-        y: 751
-        width: 11
-        height: 14
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 551
+        y: 722
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -901,14 +877,13 @@ TextureImporter:
       name: PackSea01_24
       rect:
         serializedVersion: 2
-        x: 279
-        y: 754
-        width: 11
-        height: 4
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 634
+        y: 763
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -923,14 +898,13 @@ TextureImporter:
       name: PackSea01_25
       rect:
         serializedVersion: 2
-        x: 539
-        y: 753
-        width: 10
-        height: 4
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 37
+        y: 751
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -945,14 +919,13 @@ TextureImporter:
       name: PackSea01_26
       rect:
         serializedVersion: 2
-        x: 37
-        y: 739
-        width: 10
+        x: 279
+        y: 754
+        width: 11
         height: 4
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -967,14 +940,13 @@ TextureImporter:
       name: PackSea01_27
       rect:
         serializedVersion: 2
-        x: 307
-        y: 677
-        width: 55
-        height: 69
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 539
+        y: 753
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -989,14 +961,13 @@ TextureImporter:
       name: PackSea01_28
       rect:
         serializedVersion: 2
-        x: 538
-        y: 736
-        width: 11
-        height: 11
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 37
+        y: 739
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1011,14 +982,13 @@ TextureImporter:
       name: PackSea01_29
       rect:
         serializedVersion: 2
-        x: 689
-        y: 691
-        width: 66
-        height: 60
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 307
+        y: 677
+        width: 55
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1033,14 +1003,13 @@ TextureImporter:
       name: PackSea01_30
       rect:
         serializedVersion: 2
-        x: 806
-        y: 709
-        width: 66
-        height: 45
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 538
+        y: 736
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1055,14 +1024,13 @@ TextureImporter:
       name: PackSea01_31
       rect:
         serializedVersion: 2
-        x: 34
-        y: 680
-        width: 29
-        height: 44
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 689
+        y: 691
+        width: 66
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1077,14 +1045,13 @@ TextureImporter:
       name: PackSea01_32
       rect:
         serializedVersion: 2
-        x: 68
-        y: 675
-        width: 62
-        height: 55
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 806
+        y: 709
+        width: 66
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1099,14 +1066,13 @@ TextureImporter:
       name: PackSea01_33
       rect:
         serializedVersion: 2
-        x: 140
-        y: 683
-        width: 19
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 34
+        y: 680
+        width: 29
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1121,14 +1087,13 @@ TextureImporter:
       name: PackSea01_34
       rect:
         serializedVersion: 2
-        x: 243
-        y: 711
-        width: 15
-        height: 19
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 68
+        y: 675
+        width: 62
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1143,14 +1108,13 @@ TextureImporter:
       name: PackSea01_35
       rect:
         serializedVersion: 2
-        x: 419
-        y: 658
-        width: 63
-        height: 55
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 140
+        y: 683
+        width: 19
+        height: 48
+      alignment: 9
+      pivot: {x: 0.32554626, y: 0.9327405}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1165,14 +1129,13 @@ TextureImporter:
       name: PackSea01_36
       rect:
         serializedVersion: 2
-        x: 551
-        y: 658
-        width: 63
-        height: 55
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 243
+        y: 711
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1187,14 +1150,13 @@ TextureImporter:
       name: PackSea01_37
       rect:
         serializedVersion: 2
-        x: 641
-        y: 682
-        width: 19
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 419
+        y: 658
+        width: 63
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1209,14 +1171,13 @@ TextureImporter:
       name: PackSea01_38
       rect:
         serializedVersion: 2
-        x: 914
-        y: 671
-        width: 66
-        height: 46
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 551
+        y: 658
+        width: 63
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1231,14 +1192,13 @@ TextureImporter:
       name: PackSea01_39
       rect:
         serializedVersion: 2
-        x: 205
-        y: 683
-        width: 66
-        height: 22
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 641
+        y: 682
+        width: 19
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1253,14 +1213,13 @@ TextureImporter:
       name: PackSea01_40
       rect:
         serializedVersion: 2
-        x: 402
-        y: 560
-        width: 19
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 914
+        y: 671
+        width: 66
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1275,14 +1234,13 @@ TextureImporter:
       name: PackSea01_41
       rect:
         serializedVersion: 2
-        x: 512
-        y: 658
-        width: 30
-        height: 44
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 205
+        y: 683
+        width: 66
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1297,14 +1255,13 @@ TextureImporter:
       name: PackSea01_42
       rect:
         serializedVersion: 2
-        x: 68
-        y: 642
-        width: 62
-        height: 21
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 512
+        y: 658
+        width: 30
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1319,14 +1276,13 @@ TextureImporter:
       name: PackSea01_43
       rect:
         serializedVersion: 2
-        x: 259
-        y: 627
-        width: 30
-        height: 44
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 68
+        y: 642
+        width: 62
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1341,14 +1297,13 @@ TextureImporter:
       name: PackSea01_44
       rect:
         serializedVersion: 2
-        x: 304
-        y: 616
-        width: 89
-        height: 59
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 259
+        y: 627
+        width: 30
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1363,14 +1318,13 @@ TextureImporter:
       name: PackSea01_45
       rect:
         serializedVersion: 2
-        x: 596
-        y: 565
-        width: 61
-        height: 85
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 304
+        y: 616
+        width: 89
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1385,14 +1339,13 @@ TextureImporter:
       name: PackSea01_46
       rect:
         serializedVersion: 2
-        x: 668
-        y: 575
-        width: 70
-        height: 79
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 596
+        y: 564
+        width: 62
+        height: 86
+      alignment: 9
+      pivot: {x: 0.91181207, y: 0.0633992}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1407,14 +1360,13 @@ TextureImporter:
       name: PackSea01_47
       rect:
         serializedVersion: 2
-        x: 744
-        y: 636
-        width: 37
-        height: 47
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 668
+        y: 575
+        width: 70
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1429,14 +1381,13 @@ TextureImporter:
       name: PackSea01_48
       rect:
         serializedVersion: 2
-        x: 78
-        y: 616
-        width: 6
-        height: 21
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 743
+        y: 636
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1451,14 +1402,13 @@ TextureImporter:
       name: PackSea01_49
       rect:
         serializedVersion: 2
-        x: 124
+        x: 78
         y: 616
         width: 6
-        height: 23
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1473,14 +1423,13 @@ TextureImporter:
       name: PackSea01_50
       rect:
         serializedVersion: 2
-        x: 437
-        y: 622
-        width: 8
-        height: 19
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 124
+        y: 616
+        width: 6
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1495,14 +1444,13 @@ TextureImporter:
       name: PackSea01_51
       rect:
         serializedVersion: 2
-        x: 519
-        y: 589
-        width: 42
-        height: 44
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 437
+        y: 622
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1517,14 +1465,13 @@ TextureImporter:
       name: PackSea01_52
       rect:
         serializedVersion: 2
-        x: 577
-        y: 612
-        width: 6
-        height: 26
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 519
+        y: 589
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1539,14 +1486,13 @@ TextureImporter:
       name: PackSea01_53
       rect:
         serializedVersion: 2
-        x: 61
-        y: 592
-        width: 85
-        height: 20
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 577
+        y: 612
+        width: 6
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1561,14 +1507,13 @@ TextureImporter:
       name: PackSea01_54
       rect:
         serializedVersion: 2
-        x: 4
-        y: 428
-        width: 124
-        height: 112
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 61
+        y: 593
+        width: 85
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1583,14 +1528,13 @@ TextureImporter:
       name: PackSea01_55
       rect:
         serializedVersion: 2
-        x: 137
-        y: 428
-        width: 108
-        height: 109
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 402
+        y: 561
+        width: 19
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1605,14 +1549,13 @@ TextureImporter:
       name: PackSea01_56
       rect:
         serializedVersion: 2
-        x: 268
-        y: 428
-        width: 97
-        height: 112
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 4
+        y: 429
+        width: 124
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1627,14 +1570,13 @@ TextureImporter:
       name: PackSea01_57
       rect:
         serializedVersion: 2
-        x: 375
-        y: 428
-        width: 134
-        height: 111
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 137
+        y: 429
+        width: 108
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1649,14 +1591,13 @@ TextureImporter:
       name: PackSea01_58
       rect:
         serializedVersion: 2
-        x: 521
-        y: 428
-        width: 91
-        height: 136
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 268
+        y: 429
+        width: 97
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1671,14 +1612,13 @@ TextureImporter:
       name: PackSea01_59
       rect:
         serializedVersion: 2
-        x: 624
-        y: 428
-        width: 137
-        height: 131
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 375
+        y: 429
+        width: 134
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1693,14 +1633,13 @@ TextureImporter:
       name: PackSea01_60
       rect:
         serializedVersion: 2
-        x: 769
-        y: 428
-        width: 98
-        height: 110
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 521
+        y: 429
+        width: 91
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1715,14 +1654,13 @@ TextureImporter:
       name: PackSea01_61
       rect:
         serializedVersion: 2
-        x: 892
-        y: 428
-        width: 101
-        height: 144
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 624
+        y: 429
+        width: 137
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1737,14 +1675,13 @@ TextureImporter:
       name: PackSea01_62
       rect:
         serializedVersion: 2
-        x: 48
-        y: 389
-        width: 59
-        height: 17
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 769
+        y: 429
+        width: 98
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1759,14 +1696,13 @@ TextureImporter:
       name: PackSea01_63
       rect:
         serializedVersion: 2
-        x: 535
-        y: 368
-        width: 39
-        height: 47
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 893
+        y: 429
+        width: 100
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1781,14 +1717,13 @@ TextureImporter:
       name: PackSea01_64
       rect:
         serializedVersion: 2
-        x: 874
-        y: 340
-        width: 100
-        height: 57
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 48
+        y: 389
+        width: 59
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1803,14 +1738,13 @@ TextureImporter:
       name: PackSea01_65
       rect:
         serializedVersion: 2
-        x: 44
-        y: 352
-        width: 66
-        height: 20
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 535
+        y: 368
+        width: 39
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.41063738}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1825,14 +1759,13 @@ TextureImporter:
       name: PackSea01_66
       rect:
         serializedVersion: 2
-        x: 116
-        y: 327
-        width: 36
-        height: 46
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 874
+        y: 340
+        width: 100
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1847,14 +1780,13 @@ TextureImporter:
       name: PackSea01_67
       rect:
         serializedVersion: 2
-        x: 190
-        y: 327
-        width: 46
-        height: 44
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 44
+        y: 352
+        width: 66
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1869,14 +1801,13 @@ TextureImporter:
       name: PackSea01_68
       rect:
         serializedVersion: 2
-        x: 283
-        y: 369
-        width: 59
-        height: 17
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 116
+        y: 327
+        width: 36
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1891,14 +1822,13 @@ TextureImporter:
       name: PackSea01_69
       rect:
         serializedVersion: 2
-        x: 409
-        y: 323
-        width: 51
-        height: 61
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 190
+        y: 327
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1913,14 +1843,13 @@ TextureImporter:
       name: PackSea01_70
       rect:
         serializedVersion: 2
-        x: 349
-        y: 321
-        width: 39
-        height: 47
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 283
+        y: 369
+        width: 59
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1935,14 +1864,13 @@ TextureImporter:
       name: PackSea01_71
       rect:
         serializedVersion: 2
-        x: 500
-        y: 349
-        width: 10
-        height: 4
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 409
+        y: 323
+        width: 51
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1957,14 +1885,13 @@ TextureImporter:
       name: PackSea01_72
       rect:
         serializedVersion: 2
-        x: 515
-        y: 314
-        width: 81
-        height: 49
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 349
+        y: 321
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1979,14 +1906,13 @@ TextureImporter:
       name: PackSea01_73
       rect:
         serializedVersion: 2
-        x: 681
-        y: 304
-        width: 69
-        height: 58
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 500
+        y: 349
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2001,14 +1927,13 @@ TextureImporter:
       name: PackSea01_74
       rect:
         serializedVersion: 2
-        x: 773
-        y: 301
-        width: 66
-        height: 55
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 515
+        y: 314
+        width: 80
+        height: 49
+      alignment: 9
+      pivot: {x: 0.48037416, y: 0.0620877}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2023,14 +1948,13 @@ TextureImporter:
       name: PackSea01_75
       rect:
         serializedVersion: 2
-        x: 36
-        y: 321
-        width: 25
-        height: 24
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 681
+        y: 304
+        width: 69
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2045,14 +1969,13 @@ TextureImporter:
       name: PackSea01_76
       rect:
         serializedVersion: 2
-        x: 277
-        y: 269
+        x: 773
+        y: 301
         width: 66
-        height: 64
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2067,14 +1990,13 @@ TextureImporter:
       name: PackSea01_77
       rect:
         serializedVersion: 2
-        x: 472
-        y: 279
-        width: 32
-        height: 43
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 36
+        y: 321
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2089,14 +2011,13 @@ TextureImporter:
       name: PackSea01_78
       rect:
         serializedVersion: 2
-        x: 604
-        y: 279
-        width: 19
-        height: 48
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 277
+        y: 269
+        width: 66
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2111,14 +2032,13 @@ TextureImporter:
       name: PackSea01_79
       rect:
         serializedVersion: 2
-        x: 11
-        y: 276
-        width: 26
-        height: 26
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 474
+        y: 279
+        width: 30
+        height: 43
+      alignment: 9
+      pivot: {x: 0.88787335, y: 0.9252433}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2133,14 +2053,13 @@ TextureImporter:
       name: PackSea01_80
       rect:
         serializedVersion: 2
-        x: 46
-        y: 255
-        width: 62
-        height: 58
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 604
+        y: 279
+        width: 19
+        height: 48
+      alignment: 9
+      pivot: {x: 0.38334575, y: 0.9213505}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2155,14 +2074,13 @@ TextureImporter:
       name: PackSea01_81
       rect:
         serializedVersion: 2
-        x: 130
-        y: 278
-        width: 39
-        height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 11
+        y: 276
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2177,14 +2095,13 @@ TextureImporter:
       name: PackSea01_82
       rect:
         serializedVersion: 2
-        x: 173
-        y: 252
-        width: 66
-        height: 67
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 46
+        y: 255
+        width: 62
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2199,14 +2116,13 @@ TextureImporter:
       name: PackSea01_83
       rect:
         serializedVersion: 2
-        x: 520
-        y: 243
-        width: 63
-        height: 60
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 130
+        y: 278
+        width: 39
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2221,14 +2137,13 @@ TextureImporter:
       name: PackSea01_84
       rect:
         serializedVersion: 2
-        x: 889
-        y: 295
-        width: 83
-        height: 26
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 173
+        y: 255
+        width: 66
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2243,14 +2158,13 @@ TextureImporter:
       name: PackSea01_85
       rect:
         serializedVersion: 2
-        x: 994
-        y: 291
-        width: 6
-        height: 16
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 520
+        y: 243
+        width: 63
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5049109, y: 0.9383138}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2265,14 +2179,13 @@ TextureImporter:
       name: PackSea01_86
       rect:
         serializedVersion: 2
-        x: 898
-        y: 250
-        width: 65
-        height: 37
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 889
+        y: 295
+        width: 83
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2287,14 +2200,13 @@ TextureImporter:
       name: PackSea01_87
       rect:
         serializedVersion: 2
-        x: 184
-        y: 234
+        x: 994
+        y: 291
         width: 6
         height: 16
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2309,14 +2221,13 @@ TextureImporter:
       name: PackSea01_88
       rect:
         serializedVersion: 2
-        x: 617
-        y: 863
-        width: 164
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 611
+        y: 244
+        width: 6
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.81168556}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2331,14 +2242,13 @@ TextureImporter:
       name: PackSea01_89
       rect:
         serializedVersion: 2
-        x: 550
-        y: 773
-        width: 67
-        height: 33
+        x: 898
+        y: 250
+        width: 65
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2353,14 +2263,13 @@ TextureImporter:
       name: PackSea01_90
       rect:
         serializedVersion: 2
-        x: 610
-        y: 243
-        width: 8
-        height: 18
+        x: 184
+        y: 234
+        width: 6
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2372,18 +2281,15 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
-    customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5551aef1ae9b2d040909832c64f19189
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
     nameFileIdTable:
       PackSea01_0: 21300000
       PackSea01_1: 21300002

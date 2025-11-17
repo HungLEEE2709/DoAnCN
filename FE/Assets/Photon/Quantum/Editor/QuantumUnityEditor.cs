@@ -18558,49 +18558,52 @@ namespace Quantum.Editor {
 
     private void ForceBackgroundColor() {
       Color unityDark = new Color32(56, 56, 56, 255);
-
       const string bgClassName = "overlay-box-background";
 
-      // set background color!!
       EditorApplication.delayCall += () => {
         var contentRoot = typeof(Overlay)
-          .GetProperty("contentRoot",
-            _flags)?
-          .GetValue(this) as VisualElement;
+            .GetProperty("contentRoot", _flags)?
+            .GetValue(this) as VisualElement;
 
-        if (contentRoot == null) {
+        if (contentRoot == null)
           return;
-        }
 
         // not in toolbar and not floating
-        if (isInToolbar == false && floating == false) {
+        if (!isInToolbar && !floating) {
           var bg = FindParentWithClass(contentRoot, bgClassName);
-          bg.style.backgroundColor = unityDark;
+          if (bg != null) {
+            bg.style.backgroundColor = unityDark;
+          }
         }
 
         // floating and expanded
-        if (floating && collapsed == false) {
-          var tree = contentRoot.panel.visualTree;
+        if (floating && !collapsed) {
+          var tree = contentRoot.panel?.visualTree;
+          if (tree == null)
+            return;
+
           var overlay = tree.Q<VisualElement>(DISPLAY_NAME);
-
-          var overlayBox = overlay.Q<VisualElement>(className: bgClassName);
-
-          overlayBox.style.backgroundColor = unityDark;
+          if (overlay != null) {
+            var overlayBox = overlay.Q<VisualElement>(className: bgClassName);
+            if (overlayBox != null) {
+              overlayBox.style.backgroundColor = unityDark;
+            }
+          }
         }
 
-        // access the modal popup and set the background color
+        // collapsed modal popup
         if (collapsed) {
           var modalPopup = typeof(Overlay)
-            .GetField("m_ModalPopup",
-              _flags)?
-            .GetValue(this) as VisualElement;
+              .GetField("m_ModalPopup", _flags)?
+              .GetValue(this) as VisualElement;
 
-          if (modalPopup == null) {
+          if (modalPopup == null)
             return;
-          }
-          
+
           var bg = modalPopup.Q(className: bgClassName);
-          bg.style.backgroundColor = unityDark;
+          if (bg != null) {
+            bg.style.backgroundColor = unityDark;
+          }
         }
       };
     }
