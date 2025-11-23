@@ -428,7 +428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: "M\u1EADt Kh\u1EA9u\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -849,12 +849,9 @@ MonoBehaviour:
   usernameInput: {fileID: 1327566155}
   passwordInput: {fileID: 1311327347}
   statusText: {fileID: 1281474109}
-  baseUrl: http://localhost:5000/api/auth
-  playerUrl: http://localhost:5000/api/player
-  StartUI: StartUI
-  RegisterUI: RegisterUI
-  CharacterSelect: CharacterSelect
-  GameScene: GameScene
+  baseUrl: http://localhost:5000/api/users
+  StartScene: Start
+  RegisterUI: Register
 --- !u!114 &489768753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: "T\xE0i Kho\u1EA3n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

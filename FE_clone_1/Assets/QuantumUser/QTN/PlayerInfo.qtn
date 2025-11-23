@@ -1,9 +1,0 @@
-component PlayerInfo
-{
-    player_ref PlayerRef;
-    FP Damage;
-    FP Health;
-    FP Speed;
-    bool IsAttacking;
-    int AttackTimer;
-}

@@ -1469,6 +1469,14 @@ MonoBehaviour:
       Id:
         Value: 1495296751964812047
     PlayerNickname: 
+  - PlayerAvatar:
+      Id:
+        Value: 1495296751964812047
+    PlayerNickname: 
+  - PlayerAvatar:
+      Id:
+        Value: 1442227720379123794
+    PlayerNickname: 
   MaxPlayerCount: 0
   SimulationSpeedMultiplier: 1
   DisplaySaveAndReloadButton: 0

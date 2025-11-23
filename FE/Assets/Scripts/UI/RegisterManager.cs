@@ -66,7 +66,7 @@ public class RegisterManager : MonoBehaviour
             // 3. Xử lý kết quả
             if (req.result == UnityWebRequest.Result.Success)
             {
-                statusText.text = "Đăng ký thành công ✅. Đang chuyển về màn hình chính...";
+                statusText.text = "Đăng ký thành công. Đang chuyển về màn hình chính...";
                 // Tùy chọn: Tự động chuyển về màn hình Login sau 2 giây
                 yield return new WaitForSeconds(2);
                 SceneManager.LoadScene(StartUi);

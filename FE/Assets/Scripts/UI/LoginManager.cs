@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Text;
 
 [System.Serializable]
 public class AuthPayload
@@ -22,130 +23,82 @@ public class LoginResponse
 [System.Serializable]
 public class UserData
 {
-    public int idUser;
-    public string UserName;
-}
-
-[System.Serializable]
-public class PlayerInfoData
-{
-    public int idUser;
-    public string UserName;
-    public string Planet;
-    public string CharacterName;
-    public bool CharacterChosen;
+    public string _id;
+    public string username;
+    public string email;
 }
 
 public class LoginManager : MonoBehaviour
 {
+
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
     public TMP_Text statusText;
 
-    public string baseUrl = "http://localhost:5000/api/auth";
-    public string playerUrl = "http://localhost:5000/api/player";
+    public string baseUrl = "http://localhost:5000/api/users";
 
-    public string StartUI = "StartUI";
+    public string StartScene = "Start";
     public string RegisterUI = "RegisterUI";
-    public string CharacterSelect = "CharacterSelect";
-    public string GameScene = "GameScene";
 
-    void GoToStartUI() => SceneManager.LoadScene(StartUI);
     public void OnRegister() => SceneManager.LoadScene(RegisterUI);
     public void OnLogin() => StartCoroutine(LoginCoroutine());
 
     IEnumerator LoginCoroutine()
     {
-        AuthPayload data = new AuthPayload
+
+        statusText.text = "Đang đăng nhập...";
+
+        AuthPayload payload = new AuthPayload
         {
             username = usernameInput.text,
             password = passwordInput.text
         };
-        string json = JsonUtility.ToJson(data);
+
+        string jsonBody = JsonUtility.ToJson(payload);
 
         using (UnityWebRequest req = new UnityWebRequest(baseUrl + "/login", "POST"))
         {
-            byte[] body = System.Text.Encoding.UTF8.GetBytes(json);
-            req.uploadHandler = new UploadHandlerRaw(body);
+            req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody));
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
 
             yield return req.SendWebRequest();
 
-            if (req.result == UnityWebRequest.Result.Success)
+            if (req.result != UnityWebRequest.Result.Success)
             {
-                string res = req.downloadHandler.text;
-
-                // Parse login response
-                LoginResponse loginData = JsonUtility.FromJson<LoginResponse>(res);
-                if (loginData == null || loginData.user == null)
-                {
-                    statusText.text = "❌ Dữ liệu trả về không hợp lệ!";
-                    yield break;
-                }
-
-                string token = loginData.token;
-
-                // Lưu token & idUser
-                PlayerPrefs.SetString("jwt_token", token);
-                PlayerPrefs.SetInt("idUser", loginData.user.idUser);
-                PlayerPrefs.SetString("UserName", loginData.user.UserName);
-                PlayerPrefs.Save();
-
-                // ⬇ Thêm phần GET PlayerInfo tại đây
-                yield return StartCoroutine(GetPlayerInfo(loginData.user.idUser));
+                statusText.text = "Lỗi đăng nhập: " + req.error;
+                yield break;
             }
-            else statusText.text = "Lỗi Đăng nhập: " + req.downloadHandler.text;
+
+            LoginResponse loginData = null;
+
+            try
+            {
+                loginData = JsonUtility.FromJson<LoginResponse>(req.downloadHandler.text);
+            }
+            catch
+            {
+                statusText.text = "JSON backend sai định dạng!";
+                yield break;
+            }
+
+            if (loginData == null || loginData.user == null)
+            {
+                statusText.text = "Không thể đọc dữ liệu user!";
+                yield break;
+            }
+
+            // 🔥 XÓA SẠCH dữ liệu tài khoản cũ
+            PlayerPrefs.DeleteAll();
+
+            // 🔥 LƯU thông tin user mới
+            PlayerPrefs.SetString("jwt_token", loginData.token);
+            PlayerPrefs.SetString("idUser", loginData.user._id);   // <- đúng key
+            PlayerPrefs.SetString("UserName", loginData.user.username);
+            PlayerPrefs.Save();
+
+            // 🔥 Chuyển tới Start UI
+            SceneManager.LoadScene(StartScene);
         }
-    }
-
-    IEnumerator GetPlayerInfo(int idUser)
-    {
-        using (UnityWebRequest req = UnityWebRequest.Get($"{playerUrl}/{idUser}"))
-        {
-            req.downloadHandler = new DownloadHandlerBuffer();
-            yield return req.SendWebRequest();
-
-            if (req.result == UnityWebRequest.Result.Success)
-            {
-                string json = req.downloadHandler.text;
-                PlayerInfoData info = JsonUtility.FromJson<PlayerInfoData>(json);
-
-                if (info == null)
-                {
-                    statusText.text = "❌ Không thể đọc dữ liệu nhân vật!";
-                    yield break;
-                }
-
-                // Lưu vào PlayerPrefs
-                PlayerPrefs.SetString($"CharacterName_{idUser}", info.CharacterName);
-                PlayerPrefs.SetString($"Planet_{idUser}", info.Planet);
-                PlayerPrefs.SetInt("CharacterChosen", info.CharacterChosen ? 1 : 0);
-                PlayerPrefs.Save();
-
-                if (info.CharacterChosen)
-                {
-                    SceneManager.LoadScene(GameScene); 
-                }
-                else
-                {
-                    SceneManager.LoadScene(CharacterSelect); 
-                }
-            }
-            else
-            {
-                statusText.text = "Lỗi tải PlayerInfo: " + req.error;
-            }
-        }
-    }
-
-    string ExtractToken(string json)
-    {
-        int idx = json.IndexOf("\"token\":\"");
-        if (idx == -1) return null;
-        int start = idx + 9;
-        int end = json.IndexOf("\"", start);
-        if (end == -1) return null;
-        return json.Substring(start, end - start);
     }
 }
