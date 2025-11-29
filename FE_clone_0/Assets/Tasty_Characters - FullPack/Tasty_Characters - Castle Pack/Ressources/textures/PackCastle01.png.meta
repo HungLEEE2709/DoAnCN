@@ -653,8 +653,8 @@ TextureImporter:
         y: 759
         width: 65
         height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5057758, y: 0.04321594}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -989,8 +989,8 @@ TextureImporter:
         y: 678
         width: 67
         height: 52
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9548598}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1451,8 +1451,8 @@ TextureImporter:
         y: 580
         width: 61
         height: 69
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.91852206, y: 0.36941308}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2249,8 +2249,8 @@ TextureImporter:
         y: 19
         width: 70
         height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.9049216, y: 0.10115644}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2270,8 +2270,8 @@ TextureImporter:
         y: 97
         width: 30
         height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.87960714, y: 0.92151225}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2300,6 +2300,27 @@ TextureImporter:
       bones: []
       spriteID: 6d305410000000000800000000000000
       internalID: 21300182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PackCastle01_92
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 752
+        width: 14
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1f2822db025f745bd53df832f668f6
+      internalID: 531423809
       vertices: []
       indices: 
       edges: []
@@ -2407,6 +2428,7 @@ TextureImporter:
       PackCastle01_9: 21300018
       PackCastle01_90: 21300180
       PackCastle01_91: 21300182
+      PackCastle01_92: 531423809
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1464,11 +1464,7 @@ MonoBehaviour:
         Value: 2068505900157597384
   UseRandomSeed: 0
   SessionConfig: {fileID: 0}
-  LocalPlayers:
-  - PlayerAvatar:
-      Id:
-        Value: 1495296751964812047
-    PlayerNickname: 
+  LocalPlayers: []
   MaxPlayerCount: 0
   SimulationSpeedMultiplier: 1
   DisplaySaveAndReloadButton: 0

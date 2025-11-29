@@ -14,7 +14,7 @@ public class PlayerView : QuantumEntityViewComponent
 
     private void Update()
     {
-        // 💥 Fix: Nếu chưa vào game hoặc chưa có QuantumRunner → Thoát ngay
+
         if (QuantumRunner.Default == null ||
             QuantumRunner.Default.Game == null ||
             QuantumRunner.Default.Game.Frames == null)

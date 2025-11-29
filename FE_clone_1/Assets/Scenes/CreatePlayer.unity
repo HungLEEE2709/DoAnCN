@@ -2201,11 +2201,11 @@ MonoBehaviour:
   char1Text: {fileID: 331880873}
   char2Text: {fileID: 448724310}
   ryuPrefab: {fileID: 2950260600966529446, guid: e3ae2b795c661e4499b10c7b81f38b80, type: 3}
-  lunaPrefab: {fileID: 0}
+  lunaPrefab: {fileID: 3812346611979494213, guid: 3ba77142e2decf94bbf9384af497d875, type: 3}
   grimPrefab: {fileID: 3165516369446211393, guid: febbe43a7b41b884fbe6e864fd959f64, type: 3}
-  zikkPrefab: {fileID: 0}
+  zikkPrefab: {fileID: 4339753313138287834, guid: d7d08b5e3610e3a49b5eecff006ac99b, type: 3}
   eldriaPrefab: {fileID: 4475524685625335397, guid: 4ad07fd4c8123b846ba701542e3c38a4, type: 3}
-  morokPrefab: {fileID: 0}
+  morokPrefab: {fileID: 903760224832693654, guid: 22e8d38521e89e04488e81d602c86011, type: 3}
   nextScene: MyMenu
   apiCreate: http://localhost:5000/api/player/create
 --- !u!1 &1510191052
