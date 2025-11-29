@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 4914526070975669562}
   - component: {fileID: 8891253023572496400}
   - component: {fileID: 6235066576994739101}
-  - component: {fileID: 924662438898665430}
+  - component: {fileID: -5087460609651845836}
   m_Layer: 0
   m_Name: RYU DAIKI
   m_TagString: Untagged
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3733bc5193a3edd4ab1ea4cfa3b20cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &924662438898665430
+--- !u!114 &-5087460609651845836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -941,11 +941,11 @@ MonoBehaviour:
     PlayerRef:
       _index: 0
     Damage:
-      RawValue: 251658
+      RawValue: 112067
     Health:
-      RawValue: 169083
+      RawValue: 262144
     Speed:
-      RawValue: 223478
+      RawValue: 108134
     IsAttacking:
       Value: 0
     AttackTimer: 0

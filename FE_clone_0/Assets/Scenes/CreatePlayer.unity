@@ -2206,8 +2206,7 @@ MonoBehaviour:
   zikkPrefab: {fileID: 0}
   eldriaPrefab: {fileID: 4475524685625335397, guid: 4ad07fd4c8123b846ba701542e3c38a4, type: 3}
   morokPrefab: {fileID: 0}
-  nextScene: QuantumGameScene
-  startScene: Start
+  nextScene: MyMenu
   apiCreate: http://localhost:5000/api/player/create
 --- !u!1 &1510191052
 GameObject:

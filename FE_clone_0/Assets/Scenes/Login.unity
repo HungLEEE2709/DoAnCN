@@ -850,7 +850,7 @@ MonoBehaviour:
   passwordInput: {fileID: 1311327347}
   statusText: {fileID: 1281474109}
   baseUrl: http://localhost:5000/api/users
-  StartScene: Start
+  StartScene: MyMenu
   RegisterUI: Register
 --- !u!114 &489768753
 MonoBehaviour:

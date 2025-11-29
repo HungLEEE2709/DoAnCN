@@ -1,4 +1,4 @@
-namespace Quantum.Menu {
+﻿namespace Quantum.Menu {
   using System.Threading.Tasks;
 #if QUANTUM_ENABLE_TEXTMESHPRO
   using Text = TMPro.TMP_Text;
@@ -105,54 +105,89 @@ namespace Quantum.Menu {
       InitUser();
     }
 
-    /// <summary>
-    /// The screen show method. Calls partial method <see cref="ShowUser"/> to be implemented on the SDK side.
-    /// </summary>
-    public override void Show() {
-      base.Show();
+        /// <summary>
+        /// The screen show method. Calls partial method <see cref="ShowUser"/> to be implemented on the SDK side.
+        /// </summary>
+        public override void Show()
+        {
+            base.Show();
 
-      // Always reset the region, it's set again when transitioning to online modes (quick play, party or mmpm)
-      ConnectionArgs.Region = null;
+  
+            ConnectionArgs.Region = null;
 
-      _usernameView.SetActive(false);
-      if (_usernameLabel) {
-        _usernameLabel.text = ConnectionArgs.Username;
-      }
+            _usernameView.SetActive(false);
 
-      if (Config.AvailableSceneAssets.Count > 1) {
-        _sceneButton.interactable = true;
-      } else {
-        _sceneButton.interactable = false;
-      }
 
-      if (ConnectionArgs.Scene == null || string.IsNullOrEmpty(ConnectionArgs.Scene.NameOrSceneName)) {
-        _playButton.interactable = false;
-        _partyButton.interactable = false;
-        Debug.LogWarning("No valid scene to start found. Add a QuantumMenuSceneInfo asset to Resources.");
-      } else {
-        _playButton.interactable = true;
-        _partyButton.interactable = true;
-      }
+            string loadedName = PlayerPrefs.GetString("UserName", "");  
 
-      if (_sceneButton.gameObject.activeInHierarchy && _sceneThumbnail != null) {
-        var preview = ConnectionArgs.Scene == null || ConnectionArgs.Scene.Preview == null ? Config.DefaultScenePreview : ConnectionArgs.Scene.Preview;
-        if (preview != null) {
-          _sceneThumbnail.transform.parent.gameObject.SetActive(true);
-          _sceneThumbnail.sprite = preview;
-          _sceneThumbnail.gameObject.SendMessage("OnResolutionChanged", SendMessageOptions.DontRequireReceiver);
-        } else {
-          _sceneThumbnail.transform.parent.gameObject.SetActive(false);
-          _sceneThumbnail.sprite = null;
+            if (!string.IsNullOrEmpty(loadedName))
+            {
+                _usernameLabel.text = loadedName;      
+                ConnectionArgs.Username = loadedName;   
+                ConnectionArgs.SaveToPlayerPrefs();
+
+                Debug.Log(">>> Username updated from Login: " + loadedName);
+            }
+            else
+            {
+                // fallback nếu PlayerPrefs rỗng
+                _usernameLabel.text = ConnectionArgs.Username;
+                Debug.LogWarning(">>> PlayerName rỗng → dùng ConnectionArgs.Username");
+            }
+
+            if (Config.AvailableSceneAssets.Count > 1)
+            {
+                _sceneButton.interactable = true;
+            }
+            else
+            {
+                _sceneButton.interactable = false;
+            }
+
+            if (ConnectionArgs.Scene == null || string.IsNullOrEmpty(ConnectionArgs.Scene.NameOrSceneName))
+            {
+                _playButton.interactable = false;
+                _partyButton.interactable = false;
+                Debug.LogWarning("No valid scene to start found. Add a QuantumMenuSceneInfo asset to Resources.");
+            }
+            else
+            {
+                _playButton.interactable = true;
+                _partyButton.interactable = true;
+            }
+            if (_sceneButton.gameObject.activeInHierarchy && _sceneThumbnail != null)
+            {
+                var preview = ConnectionArgs.Scene == null || ConnectionArgs.Scene.Preview == null
+                    ? Config.DefaultScenePreview
+                    : ConnectionArgs.Scene.Preview;
+
+                if (preview != null)
+                {
+                    _sceneThumbnail.transform.parent.gameObject.SetActive(true);
+                    _sceneThumbnail.sprite = preview;
+                    _sceneThumbnail.gameObject.SendMessage(
+                        "OnResolutionChanged",
+                        SendMessageOptions.DontRequireReceiver
+                    );
+                }
+                else
+                {
+                    _sceneThumbnail.transform.parent.gameObject.SetActive(false);
+                    _sceneThumbnail.sprite = null;
+                }
+            }
+
+            // Call user extension
+            ShowUser();
         }
-      }
 
-      ShowUser();
-    }
 
-    /// <summary>
-    /// The screen hide method. Calls partial method <see cref="HideUser"/> to be implemented on the SDK side.
-    /// </summary>
-    public override void Hide() {
+
+
+        /// <summary>
+        /// The screen hide method. Calls partial method <see cref="HideUser"/> to be implemented on the SDK side.
+        /// </summary>
+        public override void Hide() {
       base.Hide();
       HideUser();
     }
@@ -185,28 +220,56 @@ namespace Quantum.Menu {
       _usernameInput.text = _usernameLabel.text;
     }
 
-    /// <summary>
-    /// Is called when the <see cref="_playButton"/> is pressed using SendMessage() from the UI object.
-    /// Initiates the connection and expects the connection object to set further screen states.
-    /// </summary>
-    protected virtual async void OnPlayButtonPressed() {
-      ConnectionArgs.Session = null;
-      ConnectionArgs.Creating = false;
-      ConnectionArgs.Region = ConnectionArgs.PreferredRegion;
+        /// <summary>
+        /// Is called when the <see cref="_playButton"/> is pressed using SendMessage() from the UI object.
+        /// Initiates the connection and expects the connection object to set further screen states.
+        /// </summary>
+        protected virtual async void OnPlayButtonPressed()
+        {
 
-      Controller.Show<QuantumMenuUILoading>();
+            Controller.Show<QuantumMenuUILoading>();
 
-      var result = await Connection.ConnectAsync(ConnectionArgs);
+            // tạo loader
+            var loader = gameObject.AddComponent<PlayerDataLoader>();
 
-      await Controller.HandleConnectionResult(result, this.Controller);
-    }
+            bool done = false;
+            bool success = false;
 
-    
+            StartCoroutine(loader.LoadPlayerFromServer(ok => {
+                success = ok;
+                done = true;
+            }));
 
-    /// <summary>
-    /// Is called when the <see cref="_partyButton"/> is pressed using SendMessage() from the UI object.
-    /// </summary>
-    protected virtual void OnPartyButtonPressed() {
+            while (!done)
+                await System.Threading.Tasks.Task.Yield();
+
+            if (!success)
+            {
+                Debug.LogError("Không load được nhân vật → chuyển CreatePlayer");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("CreatePlayer");
+                return;
+            }
+            ConnectionArgs.Region = "asia";
+            string name = PlayerPrefs.GetString("PlayerName", "");
+            ConnectionArgs.Username = name;
+            ConnectionArgs.SaveToPlayerPrefs();
+            Debug.Log("Đặt username Quantum = " + name);
+
+            ConnectionArgs.Session = null;
+            ConnectionArgs.Creating = false;
+            ConnectionArgs.Region = ConnectionArgs.PreferredRegion;
+
+            var result = await Connection.ConnectAsync(ConnectionArgs);
+            await Controller.HandleConnectionResult(result, this.Controller);
+        }
+
+
+
+
+        /// <summary>
+        /// Is called when the <see cref="_partyButton"/> is pressed using SendMessage() from the UI object.
+        /// </summary>
+        protected virtual void OnPartyButtonPressed() {
       Controller.Show<QuantumMenuUIParty>();
     }
 
@@ -236,5 +299,13 @@ namespace Quantum.Menu {
     protected virtual void OnQuitButtonPressed() {
       Application.Quit();
     }
-  }
+        protected virtual void OnLoginButtonPressed()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Login");
+        }
+        protected virtual void OnCreatePlayerButtonPressed()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("CreatePlayer");
+        }
+    }
 }

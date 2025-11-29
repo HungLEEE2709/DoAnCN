@@ -1,4 +1,4 @@
-namespace Quantum.Menu {
+﻿namespace Quantum.Menu {
   using System.Linq;
   using System.Threading.Tasks;
 #if QUANTUM_ENABLE_TEXTMESHPRO
@@ -8,6 +8,7 @@ namespace Quantum.Menu {
 #endif
   using UnityEngine;
 
+
   /// <summary>
   /// The scene selection screen.
   /// </summary>
@@ -15,6 +16,8 @@ namespace Quantum.Menu {
     /// <summary>
     /// The dropdown element for the scene selection.
     /// </summary>
+    [SerializeField] private TMPro.TMP_Text _accountLabel;
+
     [InlineHelp, SerializeField] protected Dropdown _availableScenes;
     /// <summary>
     /// The image element for the screenshot preview.
@@ -55,26 +58,43 @@ namespace Quantum.Menu {
       InitUser();
     }
 
-    /// <summary>
-    /// The screen show method. Calls partial method <see cref="ShowUser"/> to be implemented on the SDK side.
-    /// </summary>
-    public override void Show() {
-      base.Show();
+        /// <summary>
+        /// The screen show method. Calls partial method <see cref="ShowUser"/> to be implemented on the SDK side.
+        /// </summary>
+        public override void Show()
+        {
+            base.Show();
 
-      _availableScenes.ClearOptions();
-      _availableScenes.AddOptions(Config.AvailableSceneAssets.Select(m => m.NameOrSceneName).ToList());
+            _availableScenes.ClearOptions();
+            _availableScenes.AddOptions(Config.AvailableSceneAssets.Select(m => m.NameOrSceneName).ToList());
 
-      var sceneIndex = Config.AvailableSceneAssets.FindIndex(m => m.ScenePath == ConnectionArgs.Scene.ScenePath);
-      if (sceneIndex >= 0) {
-        _availableScenes.SetValueWithoutNotify(sceneIndex);
-        RefreshPreviewSprite();
-      } else if (Config.AvailableSceneAssets.Count > 0) {
-        _availableScenes.SetValueWithoutNotify(0);
-        ConnectionArgs.Scene = Config.AvailableSceneAssets[0];
-      }
+            var sceneIndex = Config.AvailableSceneAssets
+                .FindIndex(m => m.ScenePath == ConnectionArgs.Scene.ScenePath);
 
-      ShowUser();
-    }
+            if (sceneIndex >= 0)
+            {
+                _availableScenes.SetValueWithoutNotify(sceneIndex);
+                RefreshPreviewSprite();
+            }
+            else if (Config.AvailableSceneAssets.Count > 0)
+            {
+                _availableScenes.SetValueWithoutNotify(0);
+                ConnectionArgs.Scene = Config.AvailableSceneAssets[0];
+            }
+
+            // ⭐⭐ HIỂN THỊ TÊN TÀI KHOẢN ⭐⭐
+            if (_accountLabel != null)
+            {
+                string accName = PlayerPrefs.GetString("LoginUserName", "");
+
+                if (!string.IsNullOrEmpty(accName))
+                    _accountLabel.text = "CHƠI TÀI KHOẢN: " + accName;
+                else
+                    _accountLabel.text = "CHƯA ĐĂNG NHẬP";
+            }
+
+            ShowUser();
+        }
 
     /// <summary>
     /// The screen hide method. Calls partial method <see cref="HideUser"/> to be implemented on the SDK side.
