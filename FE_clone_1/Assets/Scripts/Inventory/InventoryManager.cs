@@ -7,10 +7,9 @@ public class InventoryManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject slotsHolder;
-    [SerializeField] private ItemClass itemToAdd;
-    [SerializeField] private ItemClass itemToRemove;
-    [SerializeField] private SlotClass[] items;
-    [SerializeField] private SlotClass[] startingItems;
+
+    private GameObject[] slots;
+    private SlotClass[] items;
 
     [Header("Moving Items")]
     [SerializeField] private SlotClass movingSlot;
@@ -21,35 +20,27 @@ public class InventoryManager : MonoBehaviour
     public Image itemCursor;
     public string userId;
 
-    private GameObject[] slots;
-    public bool isMoving;
+    private bool isMoving;
 
     void Start()
     {
-        // 🔥 LẤY USER ID TỰ ĐỘNG TỪ LOGIN (đúng key LoginManager lưu)
+        // LẤY USER ID TỪ LOGIN
         userId = PlayerPrefs.GetString("idUser", "");
-
-        Debug.Log("====================================================");
-        Debug.Log("📌 [InventoryManager] STARTED in scene: " + gameObject.scene.name);
-        Debug.Log("📌 userId (from PlayerPrefs) = " + userId);
-        Debug.Log("📌 slotsHolder = " + slotsHolder);
-        Debug.Log("====================================================");
-
-        if (slotsHolder == null)
-        {
-            Debug.LogError("❌ slotsHolder = NULL → Bạn chưa gán SlotsHolder trong Inspector!");
-            return;
-        }
 
         if (string.IsNullOrEmpty(userId))
         {
-            Debug.LogError("❌ USER ID RỖNG → Bạn chưa login, hoặc login chưa lưu PlayerPrefs!");
+            Debug.LogError("❌ USER ID RỖNG → Bạn chưa login!");
             return;
         }
 
-        // 1) LẤY TẤT CẢ SLOT TRONG UI
+        if (slotsHolder == null)
+        {
+            Debug.LogError("❌ slotsHolder = NULL");
+            return;
+        }
+
+        // LẤY UI SLOTS
         int count = slotsHolder.transform.childCount;
-        Debug.Log("📦 Tổng số UI Slots tìm thấy: " + count);
 
         slots = new GameObject[count];
         items = new SlotClass[count];
@@ -60,68 +51,84 @@ public class InventoryManager : MonoBehaviour
             items[i] = new SlotClass();
         }
 
-        // 2) SLOT TẠM CHO KÉO THẢ
+        // SLOT TẠM CHO KÉO THẢ
         originalSlot = new SlotClass();
         movingSlot = new SlotClass();
         tempSlot = new SlotClass();
 
-        if (InventoryAPI.Instance == null)
+        // LOAD INVENTORY TỪ API
+        StartCoroutine(InventoryAPI.Instance.LoadInventory(userId, OnInventoryLoaded));
+    }
+
+    void OnInventoryLoaded(InventoryContent inv)
+    {
+        if (inv == null)
         {
-            Debug.LogError("❌ InventoryAPI.Instance = NULL!");
+            Debug.LogError("❌ API trả về NULL");
             return;
         }
 
-        string url = "http://localhost:5000/api/inventory/" + userId;
-        Debug.Log("🌐 Gửi LoadInventory tới URL: " + url);
-
-        // 3) GỌI API
-        StartCoroutine(InventoryAPI.Instance.LoadInventory(userId, (inv) =>
+        for (int i = 0; i < items.Length; i++)
         {
-            Debug.Log("📥 API callback triggered");
+            if (i >= inv.slots.Length) break;
 
-            if (inv == null)
+            string id = inv.slots[i].itemId;
+
+            if (string.IsNullOrEmpty(id))
             {
-                Debug.LogError("❌ API returned NULL Inventory!");
-                return;
+                items[i].RemoveItem();
+                continue;
             }
 
-            if (inv.slots == null)
+            var item = ItemDatabase.Get(id);
+            if (item == null)
             {
-                Debug.LogError("❌ inv.slots = NULL!");
-                return;
+                items[i].RemoveItem();
+                continue;
             }
 
-            // 4) Đổ dữ liệu vào UI
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (i >= inv.slots.Length) break;
+            items[i].AddItem(item, inv.slots[i].quantity);
+        }
 
-                string id = inv.slots[i].itemId;
-
-                if (string.IsNullOrEmpty(id))
-                {
-                    items[i].RemoveItem();
-                    continue;
-                }
-
-                var item = ItemDatabase.Get(id);
-                if (item == null)
-                {
-                    Debug.LogWarning("⚠ Item không tồn tại: " + id);
-                    items[i].RemoveItem();
-                    continue;
-                }
-
-                items[i].AddItem(item, inv.slots[i].quantity);
-            }
-
-            RefreshUI();
-            Debug.Log("<color=lime>🎉 INVENTORY UI ĐÃ CẬP NHẬT!</color>");
-        }));
+        RefreshUI();
+        Debug.Log("<color=lime>🎉 INVENTORY LOADED!</color>");
     }
 
+    // ===========================
+    // UPDATE (KÉO THẢ)
+    // ===========================
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isMoving)
+                EndMove();
+            else
+                BeginMove();
+        }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!isMoving)
+                BeginSplit();
+        }
 
+        if (isMoving)
+        {
+            itemCursor.enabled = true;
+            itemCursor.transform.position = Input.mousePosition;
+            itemCursor.sprite = movingSlot.GetItem().itemIcon;
+        }
+        else
+        {
+            itemCursor.enabled = false;
+            itemCursor.sprite = null;
+        }
+    }
+
+    // ===========================
+    // UI UPDATE
+    // ===========================
     private void RefreshUI()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -143,5 +150,136 @@ public class InventoryManager : MonoBehaviour
             qty.text = items[i].GetItem().isStackable ?
                         items[i].GetQuantity().ToString() : "";
         }
+    }
+
+    // ===========================
+    // KÉO THẢ
+    // ===========================
+    private SlotClass GetClosestSlot()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            RectTransform rect = slots[i].GetComponent<RectTransform>();
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition))
+                return items[i];
+        }
+
+        return null;
+    }
+
+    private void BeginMove()
+    {
+        originalSlot = GetClosestSlot();
+
+        if (originalSlot == null || originalSlot.GetItem() == null)
+            return;
+
+        movingSlot.AddItem(originalSlot.GetItem(), originalSlot.GetQuantity());
+        originalSlot.RemoveItem();
+
+        isMoving = true;
+        RefreshUI();
+    }
+
+    private void BeginSplit()
+    {
+        originalSlot = GetClosestSlot();
+
+        if (originalSlot == null || originalSlot.GetItem() == null) return;
+        if (originalSlot.GetQuantity() <= 1) return;
+
+        int half = Mathf.CeilToInt(originalSlot.GetQuantity() / 2f);
+
+        movingSlot.AddItem(originalSlot.GetItem(), half);
+        originalSlot.SubQuantity(half);
+
+        isMoving = true;
+        RefreshUI();
+    }
+
+    private void EndMove()
+    {
+        originalSlot = GetClosestSlot();
+
+        if (originalSlot == null)
+        {
+            AddItem(movingSlot.GetItem(), movingSlot.GetQuantity());
+        }
+        else
+        {
+            if (originalSlot.GetItem() != null)
+            {
+                // STACK
+                if (originalSlot.GetItem() == movingSlot.GetItem() &&
+                    originalSlot.GetItem().isStackable)
+                {
+                    int max = originalSlot.GetItem().maxStackQuantity;
+                    int sum = originalSlot.GetQuantity() + movingSlot.GetQuantity();
+
+                    if (sum > max)
+                    {
+                        originalSlot.SetQuantity(max);
+                        movingSlot.SetQuantity(sum - max);
+                        isMoving = true;
+                        RefreshUI();
+                        return;
+                    }
+
+                    originalSlot.AddQuantity(movingSlot.GetQuantity());
+                    movingSlot.RemoveItem();
+                }
+                else
+                {
+                    tempSlot.AddItem(originalSlot.GetItem(), originalSlot.GetQuantity());
+                    originalSlot.AddItem(movingSlot.GetItem(), movingSlot.GetQuantity());
+                    movingSlot.AddItem(tempSlot.GetItem(), tempSlot.GetQuantity());
+                    tempSlot.RemoveItem();
+                }
+            }
+            else
+            {
+                originalSlot.AddItem(movingSlot.GetItem(), movingSlot.GetQuantity());
+                movingSlot.RemoveItem();
+            }
+        }
+
+        isMoving = false;
+        RefreshUI();
+    }
+
+    // ===========================
+    // ADD / REMOVE
+    // ===========================
+    private void AddItem(ItemClass item, int quantity)
+    {
+        SlotClass slot = ContainsItem(item);
+
+        if (slot != null && slot.GetItem().isStackable)
+        {
+            slot.AddQuantity(quantity);
+        }
+        else
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i].GetItem() == null)
+                {
+                    items[i].AddItem(item, quantity);
+                    break;
+                }
+            }
+        }
+
+        RefreshUI();
+    }
+
+    private SlotClass ContainsItem(ItemClass item)
+    {
+        for (int i = 0; i < items.Length; i++)
+            if (items[i].GetItem() == item)
+                return items[i];
+
+        return null;
     }
 }
