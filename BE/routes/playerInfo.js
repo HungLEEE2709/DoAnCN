@@ -1,8 +1,9 @@
-// routes/player.js
+
 const express = require("express");
 const router = express.Router();
 const PlayerInfo = require("../models/PlayerInfo");
 const Character = require("../models/Character");
+const Inventory = require("../models/Inventory");
 
 // 1) Tạo nhân vật mới cho user
 router.post("/create", async (req, res) => {
