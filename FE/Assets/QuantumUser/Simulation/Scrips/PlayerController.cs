@@ -1,4 +1,7 @@
-﻿namespace Quantum
+﻿using UnityEngine.Networking;
+using UnityEngine;
+
+namespace Quantum
 {
     using Photon.Deterministic;
 

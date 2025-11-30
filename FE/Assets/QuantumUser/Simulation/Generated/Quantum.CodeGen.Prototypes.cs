@@ -67,6 +67,9 @@ namespace Quantum.Prototypes {
     public PlayerRef PlayerRef;
     public FP Damage;
     public FP Health;
+    public FP MaxHealth;
+    public FP Ki;
+    public FP MaxKi;
     public FP Speed;
     public QBoolean IsAttacking;
     public Int32 AttackTimer;
@@ -80,6 +83,9 @@ namespace Quantum.Prototypes {
         result.PlayerRef = this.PlayerRef;
         result.Damage = this.Damage;
         result.Health = this.Health;
+        result.MaxHealth = this.MaxHealth;
+        result.Ki = this.Ki;
+        result.MaxKi = this.MaxKi;
         result.Speed = this.Speed;
         result.IsAttacking = this.IsAttacking;
         result.AttackTimer = this.AttackTimer;

@@ -944,6 +944,12 @@ MonoBehaviour:
       RawValue: 112067
     Health:
       RawValue: 262144
+    MaxHealth:
+      RawValue: 0
+    Ki:
+      RawValue: 0
+    MaxKi:
+      RawValue: 0
     Speed:
       RawValue: 108134
     IsAttacking:

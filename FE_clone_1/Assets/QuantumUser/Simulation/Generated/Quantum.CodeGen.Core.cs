@@ -617,7 +617,7 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct PlayerInfo : Quantum.IComponent {
-    public const Int32 SIZE = 40;
+    public const Int32 SIZE = 64;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(4)]
     public PlayerRef PlayerRef;
@@ -625,7 +625,13 @@ namespace Quantum {
     public FP Damage;
     [FieldOffset(24)]
     public FP Health;
+    [FieldOffset(40)]
+    public FP MaxHealth;
     [FieldOffset(32)]
+    public FP Ki;
+    [FieldOffset(48)]
+    public FP MaxKi;
+    [FieldOffset(56)]
     public FP Speed;
     [FieldOffset(8)]
     public QBoolean IsAttacking;
@@ -637,6 +643,9 @@ namespace Quantum {
         hash = hash * 31 + PlayerRef.GetHashCode();
         hash = hash * 31 + Damage.GetHashCode();
         hash = hash * 31 + Health.GetHashCode();
+        hash = hash * 31 + MaxHealth.GetHashCode();
+        hash = hash * 31 + Ki.GetHashCode();
+        hash = hash * 31 + MaxKi.GetHashCode();
         hash = hash * 31 + Speed.GetHashCode();
         hash = hash * 31 + IsAttacking.GetHashCode();
         hash = hash * 31 + AttackTimer.GetHashCode();
@@ -650,6 +659,9 @@ namespace Quantum {
         QBoolean.Serialize(&p->IsAttacking, serializer);
         FP.Serialize(&p->Damage, serializer);
         FP.Serialize(&p->Health, serializer);
+        FP.Serialize(&p->Ki, serializer);
+        FP.Serialize(&p->MaxHealth, serializer);
+        FP.Serialize(&p->MaxKi, serializer);
         FP.Serialize(&p->Speed, serializer);
     }
   }

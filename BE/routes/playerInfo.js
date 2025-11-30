@@ -56,6 +56,52 @@ router.post("/create", async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+// 5) Cập nhật HP / KI của nhân vật đang chọn
+router.post("/updatestats", async (req, res) => {
+  try {
+    const { idUser, Hp, Ki } = req.body;
+
+    if (!idUser)
+      return res.status(400).json({ success: false, message: "Missing idUser" });
+
+    const player = await PlayerInfo.findOneAndUpdate(
+      { idUser, CharacterChosen: true },
+      { $set: { Hp, Ki } },
+      { new: true }
+    );
+
+    if (!player)
+      return res
+        .status(404)
+        .json({ success: false, message: "Player not found" });
+
+    res.json({ success: true, player });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+router.post("/update-stats", async (req, res) => {
+  try {
+    const { idUser, Hp, Ki } = req.body;
+
+    if (!idUser)
+      return res.status(400).json({ success: false, message: "Missing idUser" });
+
+    const player = await PlayerInfo.findOneAndUpdate(
+      { idUser, CharacterChosen: true },
+      { $set: { Hp, Ki } },
+      { new: true }
+    );
+
+    if (!player)
+      return res.status(404).json({ success: false, message: "Player not found" });
+
+    res.json({ success: true, player });
+
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // 2) Lấy danh sách tất cả nhân vật của user
 router.get("/list/:idUser", async (req, res) => {

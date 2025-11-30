@@ -2207,7 +2207,7 @@ MonoBehaviour:
   eldriaPrefab: {fileID: 4475524685625335397, guid: 4ad07fd4c8123b846ba701542e3c38a4, type: 3}
   morokPrefab: {fileID: 903760224832693654, guid: 22e8d38521e89e04488e81d602c86011, type: 3}
   nextScene: MyMenu
-  apiCreate: http://localhost:5000/api/player/create
+  apiCreate: http://localhost:5000/api/playerInfo/create
 --- !u!1 &1510191052
 GameObject:
   m_ObjectHideFlags: 0

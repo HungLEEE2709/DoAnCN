@@ -17,7 +17,7 @@ console.log("Loading all routes...");
 // ---- ROUTES ----
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/character", require("./routes/characterSelect"));
-app.use("/api/player-info", require("./routes/playerInfo"));
+app.use("/api/playerInfo", require("./routes/playerInfo"));
 app.use("/api/items", require("./routes/item"));
 app.use("/api/seed", require("./routes/seed"));
 

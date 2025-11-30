@@ -4,8 +4,7 @@ using System.Collections;
 
 public class PlayerDataLoader : MonoBehaviour
 {
-    // API LẤY NHÂN VẬT ĐANG ĐƯỢC CHỌN
-    public string apiGetPlayer = "http://localhost:5000/api/player-info/chosen/";
+    public string apiGetPlayer = "http://localhost:5000/api/playerInfo/chosen/";
 
     public IEnumerator LoadPlayerFromServer(System.Action<bool> onDone)
     {
