@@ -1,0 +1,20 @@
+﻿component PlayerInfo 
+{
+    player_ref PlayerRef;
+    FP Damage;
+    FP Health;
+    FP MaxHealth;
+    FP Ki;
+    FP MaxKi;
+    FP Speed;
+    bool IsAttacking;
+    int AttackTimer;
+}
+component EnemyInfo {
+    FP Time;
+    FP ChangeDirectionTime;
+    FPVector2 Direction;
+
+    FP MaxDistance;
+    FPVector2 Origin;
+}
