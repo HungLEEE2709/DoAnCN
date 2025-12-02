@@ -1,0 +1,30 @@
+﻿component PlayerInfo 
+{
+    player_ref PlayerRef;
+    FP Damage;
+    FP Health;
+    FP CurrentHealth;
+    FP MaxHealth;
+    FP Ki;
+    FP MaxKi;
+    FP Speed;
+    bool IsAttacking;
+    int AttackTimer;
+   
+}
+component EnemyInfo {
+    FP Time;
+    FP ChangeDirectionTime;
+    FPVector2 Direction;
+
+    FPVector2 SpawnPosition;
+    FP Radius;
+    FP Health;
+    FP CurrentHealth;
+    FP AttackRange;
+    FP DetectionRange;
+    FP Damage;
+    bool IsAttacking;
+    bool IsDead;
+    EntityRef PlayerEntity;
+}
