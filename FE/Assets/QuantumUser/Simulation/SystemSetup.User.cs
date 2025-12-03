@@ -9,6 +9,10 @@
         {
             // The system collection is already filled with systems coming from the SystemsConfig. 
             // Add or remove systems to the collection: systems.Add(new SystemFoo());
+            systems.Add(new PlayerController());
+            systems.Add(new CollisionSystem());
+            systems.Add(new EnemyController());
+            systems.Add(new PlayerSpawner());
         }
     }
 }

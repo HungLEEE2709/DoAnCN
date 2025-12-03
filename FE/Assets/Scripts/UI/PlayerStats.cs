@@ -4,6 +4,7 @@ public class PlayerStatsData
     public string idUser;
     public string UserName;
     public int SucManh;
+    public int TiemNang;
     public int Hp;
     public int Ki;
     public int Dame;

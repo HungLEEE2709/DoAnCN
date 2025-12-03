@@ -4,51 +4,31 @@ namespace Quantum
 {
     public unsafe class CollisionSystem :
         SystemSignalsOnly,
-        ISignalOnCollisionEnter2D
+        ISignalOnCollisionEnter2D,
+        ISignalOnTriggerEnter2D
     {
 
         public void OnCollisionEnter2D(Frame f, CollisionInfo2D info)
         {
+            // Log.Debug("Collision Detected");
             EntityRef a = info.Entity;
             EntityRef b = info.Other;
-
-            // ======================
-            // PLAYER → ENEMY (Attack)
-            // ======================
-            if (f.TryGet<PlayerInfo>(a, out var playerA) &&
-                f.TryGet<EnemyInfo>(b, out var enemyB))
-            {
-                HandlePlayerAttack(f, a, ref playerA, b, ref enemyB);
-            }
-
-            if (f.TryGet<PlayerInfo>(b, out var playerB) &&
-                f.TryGet<EnemyInfo>(a, out var enemyA))
-            {
-                HandlePlayerAttack(f, b, ref playerB, a, ref enemyA);
-            }
+            ProcessCollision(f, a, b);
         }
 
-        private void HandlePlayerAttack(Frame f,
-            EntityRef playerEnt, ref PlayerInfo player,
-            EntityRef enemyEnt, ref EnemyInfo enemy)
+        public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
         {
-
-            if (!player.IsAttacking)
-                return;
-
-            if (enemy.IsDead)
-                return;
-
-            enemy.CurrentHealth -= player.Damage;
-
-            if (enemy.CurrentHealth <= FP._0)
-            {
-                enemy.CurrentHealth = FP._0;
-                enemy.IsDead = true;
-                enemy.IsAttacking = false;
-            }
-
-            f.Set(enemyEnt, enemy);
+            // Log.Debug("Trigger Detected");
+            EntityRef a = info.Entity;
+            EntityRef b = info.Other;
+            ProcessCollision(f, a, b);
         }
+
+        private void ProcessCollision(Frame f, EntityRef a, EntityRef b)
+        {
+            // Removed Player Attack Logic (Now handled in PlayerController via AoE)
+        }
+
+        // HandlePlayerAttack method removed
     }
 }

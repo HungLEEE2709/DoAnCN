@@ -37,7 +37,7 @@ public class LoginManager : MonoBehaviour
 
     public string baseUrl = "http://localhost:5000/api/users";
 
-    public string StartScene = "Start";
+    public string StartScene = "MyMenu";
     public string RegisterUI = "RegisterUI";
 
     public void OnRegister() => SceneManager.LoadScene(RegisterUI);

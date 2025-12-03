@@ -617,15 +617,15 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct EnemyInfo : Quantum.IComponent {
-    public const Int32 SIZE = 120;
+    public const Int32 SIZE = 136;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(80)]
+    [FieldOffset(96)]
     public FP Time;
     [FieldOffset(32)]
     public FP ChangeDirectionTime;
-    [FieldOffset(88)]
-    public FPVector2 Direction;
     [FieldOffset(104)]
+    public FPVector2 Direction;
+    [FieldOffset(120)]
     public FPVector2 SpawnPosition;
     [FieldOffset(72)]
     public FP Radius;
@@ -647,6 +647,10 @@ namespace Quantum {
     public EntityRef PlayerEntity;
     [FieldOffset(16)]
     public FP AttackCooldown;
+    [FieldOffset(80)]
+    public FP RewardSucManh;
+    [FieldOffset(88)]
+    public FP RewardTiemNang;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 14407;
@@ -664,6 +668,8 @@ namespace Quantum {
         hash = hash * 31 + IsDead.GetHashCode();
         hash = hash * 31 + PlayerEntity.GetHashCode();
         hash = hash * 31 + AttackCooldown.GetHashCode();
+        hash = hash * 31 + RewardSucManh.GetHashCode();
+        hash = hash * 31 + RewardTiemNang.GetHashCode();
         return hash;
       }
     }
@@ -680,6 +686,8 @@ namespace Quantum {
         FP.Serialize(&p->DetectionRange, serializer);
         FP.Serialize(&p->Health, serializer);
         FP.Serialize(&p->Radius, serializer);
+        FP.Serialize(&p->RewardSucManh, serializer);
+        FP.Serialize(&p->RewardTiemNang, serializer);
         FP.Serialize(&p->Time, serializer);
         FPVector2.Serialize(&p->Direction, serializer);
         FPVector2.Serialize(&p->SpawnPosition, serializer);
@@ -709,7 +717,7 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct PlayerInfo : Quantum.IComponent {
-    public const Int32 SIZE = 72;
+    public const Int32 SIZE = 88;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(4)]
     public PlayerRef PlayerRef;
@@ -731,6 +739,10 @@ namespace Quantum {
     public QBoolean IsAttacking;
     [FieldOffset(0)]
     public Int32 AttackTimer;
+    [FieldOffset(72)]
+    public FP SucManh;
+    [FieldOffset(80)]
+    public FP TiemNang;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 13049;
@@ -744,6 +756,8 @@ namespace Quantum {
         hash = hash * 31 + Speed.GetHashCode();
         hash = hash * 31 + IsAttacking.GetHashCode();
         hash = hash * 31 + AttackTimer.GetHashCode();
+        hash = hash * 31 + SucManh.GetHashCode();
+        hash = hash * 31 + TiemNang.GetHashCode();
         return hash;
       }
     }
@@ -759,6 +773,8 @@ namespace Quantum {
         FP.Serialize(&p->MaxHealth, serializer);
         FP.Serialize(&p->MaxKi, serializer);
         FP.Serialize(&p->Speed, serializer);
+        FP.Serialize(&p->SucManh, serializer);
+        FP.Serialize(&p->TiemNang, serializer);
     }
   }
   public static unsafe partial class Constants {

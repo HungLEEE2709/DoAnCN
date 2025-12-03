@@ -179,6 +179,71 @@
 
             // Call user extension
             ShowUser();
+
+            // Check status to hide/show character button
+            StartCoroutine(CheckStatusForUI());
+        }
+
+        private string apiCheck = "http://localhost:5000/api/playerInfo/check/";
+
+        System.Collections.IEnumerator CheckStatusForUI()
+        {
+            string userId = PlayerPrefs.GetString("idUser", "");
+            if (string.IsNullOrEmpty(userId)) yield break;
+
+            using (UnityEngine.Networking.UnityWebRequest req = UnityEngine.Networking.UnityWebRequest.Get(apiCheck + userId))
+            {
+                yield return req.SendWebRequest();
+
+                if (req.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
+                {
+                    Debug.Log("QuantumMenu: Check Status Response: " + req.downloadHandler.text);
+                    QuantumPlayerCheckResponse data = JsonUtility.FromJson<QuantumPlayerCheckResponse>(req.downloadHandler.text);
+
+                    if (data != null && data.created)
+                    {
+                        // User has character -> Hide "Select Character" button
+                        if (_characterButton) 
+                        {
+                            Debug.Log($"QuantumMenu: Hiding Button '{_characterButton.gameObject.name}'");
+                            _characterButton.gameObject.SetActive(false);
+                            Debug.Log("QuantumMenu: Hidden Character Button");
+                        }
+                    }
+                    else
+                    {
+                         if (_characterButton) 
+                        {
+                            _characterButton.gameObject.SetActive(true);
+                            Debug.Log("QuantumMenu: Show Character Button");
+                        }
+                    }
+                }
+            }
+        }
+
+        [System.Serializable]
+        public class QuantumPlayerInfoData
+        {
+            public string _id;
+            public string idUser;
+            public string UserName;
+            public int SucManh;
+            public int Hp;
+            public int Ki;
+            public int Dame;
+            public string Planet;
+            public string CharacterName;
+            public bool CharacterChosen;
+            public string PrefabKey;
+        }
+
+        [System.Serializable]
+        public class QuantumPlayerCheckResponse
+        {
+            public bool success;
+            public bool created;
+            public QuantumPlayerInfoData player; 
         }
 
 

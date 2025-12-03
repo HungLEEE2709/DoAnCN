@@ -84,14 +84,18 @@ router.post("/updatestats", async (req, res) => {
 });
 router.post("/update-stats", async (req, res) => {
   try {
-    const { idUser, Hp, Ki } = req.body;
+    const { idUser, Hp, Ki, SucManh, TiemNang } = req.body;
 
     if (!idUser)
       return res.status(400).json({ success: false, message: "Missing idUser" });
 
+    const updateData = { Hp, Ki };
+    if (SucManh !== undefined) updateData.SucManh = SucManh;
+    if (TiemNang !== undefined) updateData.TiemNang = TiemNang;
+
     const player = await PlayerInfo.findOneAndUpdate(
       { idUser, CharacterChosen: true },
-      { $set: { Hp, Ki } },
+      { $set: updateData },
       { new: true }
     );
 
@@ -99,7 +103,75 @@ router.post("/update-stats", async (req, res) => {
       return res.status(404).json({ success: false, message: "Player not found" });
 
     res.json({ success: true, player });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
+// 6) Cộng tiềm năng (TiemNang -> Stat)
+router.post("/add-potential", async (req, res) => {
+  try {
+    const { idUser, statType } = req.body; // statType: "hp", "ki", "sd"
+
+    if (!idUser)
+      return res.status(400).json({ success: false, message: "Missing idUser" });
+
+    const player = await PlayerInfo.findOne({ idUser, CharacterChosen: true });
+    if (!player)
+      return res.status(404).json({ success: false, message: "Player not found" });
+
+    let cost = 0;
+    let gain = 0;
+
+    // Logic tính cost và gain
+    switch (statType) {
+      case "hp":
+        // Cost = MaxHp * 102%
+        cost = Math.floor(player.MaxHp * 1.02);
+        gain = 20;
+        break;
+
+      case "ki":
+        // Cost = MaxKi * 102%
+        cost = Math.floor(player.MaxKi * 1.02);
+        gain = 20;
+        break;
+
+      case "sd":
+        // Cost = Dame * 200%
+        cost = Math.floor(player.Dame * 2.0);
+        gain = 5;
+        break;
+
+      default:
+        return res.status(400).json({ success: false, message: "Invalid statType" });
+    }
+
+    // Kiểm tra đủ điểm không
+    if (player.TiemNang < cost) {
+      return res.status(400).json({
+        success: false,
+        message: `Không đủ điểm tiềm năng! Cần ${cost} điểm.`
+      });
+    }
+
+    // Trừ điểm và cộng chỉ số
+    player.TiemNang -= cost;
+
+    if (statType === "hp") {
+      player.MaxHp += gain;
+      // player.Hp += gain; // Giữ nguyên máu hiện tại
+    } else if (statType === "ki") {
+      player.MaxKi += gain;
+      // player.Ki += gain; // Giữ nguyên ki hiện tại
+    } else if (statType === "sd") {
+      player.Dame += gain;
+      player.SucManh += gain; // Tăng sức mạnh tổng (nếu cần)
+    }
+
+    await player.save();
+
+    res.json({ success: true, player });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
@@ -157,7 +229,11 @@ router.get("/chosen/:idUser", async (req, res) => {
 
 router.get("/check/:idUser", async (req, res) => {
   try {
-    const player = await PlayerInfo.findOne({ idUser: req.params.idUser });
+    // Tìm nhân vật đã tạo (có tên nhân vật)
+    const player = await PlayerInfo.findOne({
+      idUser: req.params.idUser,
+      CharacterName: { $ne: null }
+    });
 
     const created = !!(
       player &&

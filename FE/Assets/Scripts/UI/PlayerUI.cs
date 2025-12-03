@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
+using Quantum;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -34,9 +35,38 @@ public class PlayerUI : MonoBehaviour
         StartCoroutine(LoadPlayerStats());
     }
 
+    // New Stats for Sync
+    public int currentSucManh;
+    public int currentTiemNang;
+
     void Update()
     {
         RegenerateKi();
+        
+        // Poll Quantum for latest stats (Sync from Simulation)
+        if (QuantumRunner.Default != null && QuantumRunner.Default.Game != null)
+        {
+            var frame = QuantumRunner.Default.Game.Frames.Verified;
+            if (frame != null)
+            {
+                var players = frame.GetComponentIterator<Quantum.PlayerInfo>();
+                foreach (var p in players)
+                {
+                    // Update local values to sync
+                    int sm = p.Component.SucManh.AsInt;
+                    int tn = p.Component.TiemNang.AsInt;
+                    
+                    if (sm != currentSucManh || tn != currentTiemNang)
+                    {
+                        currentSucManh = sm;
+                        currentTiemNang = tn;
+                        statsChanged = true;
+                    }
+                    break; 
+                }
+            }
+        }
+
         UpdateUI();
 
         if (statsChanged)
@@ -66,6 +96,10 @@ public class PlayerUI : MonoBehaviour
 
         currentHealth = maxHealth;
         currentKi = maxKi;
+        
+        // Load initial
+        currentSucManh = data.player.SucManh;
+        currentTiemNang = data.player.TiemNang;
     }
 
     public void TakeDamage(float dmg)
@@ -110,6 +144,18 @@ public class PlayerUI : MonoBehaviour
         staminaAmount.text = Mathf.RoundToInt(currentKi).ToString();
     }
 
+    public void UpdateMaxStats(int newMaxHp, int newMaxKi)
+    {
+        maxHealth = Mathf.Max(1, newMaxHp);
+        maxKi = Mathf.Max(1, newMaxKi);
+        
+        // Ensure current doesn't exceed max (optional, but good practice)
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        currentKi = Mathf.Min(currentKi, maxKi);
+        
+        UpdateUI();
+    }
+
     IEnumerator UpdateStatsToServer()
     {
         string url = "http://localhost:5000/api/playerInfo/update-stats";
@@ -118,7 +164,9 @@ public class PlayerUI : MonoBehaviour
         {
             idUser = userId,
             Hp = Mathf.RoundToInt(currentHealth),
-            Ki = Mathf.RoundToInt(currentKi)
+            Ki = Mathf.RoundToInt(currentKi),
+            SucManh = currentSucManh,
+            TiemNang = currentTiemNang
         };
 
         string json = JsonUtility.ToJson(payload);
@@ -129,5 +177,14 @@ public class PlayerUI : MonoBehaviour
         req.SetRequestHeader("Content-Type", "application/json");
 
         yield return req.SendWebRequest();
+    }
+    [System.Serializable]
+    public class PlayerStatsData
+    {
+        public string idUser;
+        public int Hp;
+        public int Ki;
+        public int SucManh;
+        public int TiemNang;
     }
 }

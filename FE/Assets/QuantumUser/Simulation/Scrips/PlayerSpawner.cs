@@ -16,6 +16,17 @@
                 return;
             }
 
+            // Check duplicate spawn
+            var existingPlayers = frame.GetComponentIterator<PlayerInfo>();
+            foreach (var p in existingPlayers)
+            {
+                if (p.Component.PlayerRef == player)
+                {
+                    Debug.LogWarning($"Player {player} đã có nhân vật! Bỏ qua spawn.");
+                    return;
+                }
+            }
+
             EntityPrototype proto = null;
             string loadPath = "";
 
@@ -99,6 +110,27 @@
             {
                 var playerInfo = frame.Get<PlayerInfo>(spawnedPlayer);
                 playerInfo.PlayerRef = player;
+
+                // Load stats from PlayerPrefs (Synced from Backend)
+                int maxHp = PlayerPrefs.GetInt("Player_MaxHp", 100);
+                int hp = PlayerPrefs.GetInt("Player_Hp", 100);
+                int maxKi = PlayerPrefs.GetInt("Player_MaxKi", 100);
+                int ki = PlayerPrefs.GetInt("Player_Ki", 100);
+                int dame = PlayerPrefs.GetInt("Player_Dame", 10);
+
+                playerInfo.MaxHealth = maxHp;
+                playerInfo.Health = maxHp; // Hoặc hp nếu muốn giữ máu hiện tại
+                playerInfo.CurrentHealth = hp; 
+                
+                playerInfo.MaxKi = maxKi;
+                playerInfo.Ki = ki; // Current Ki
+                
+                playerInfo.Damage = dame;
+                
+                // Load SucManh & TiemNang
+                playerInfo.SucManh = PlayerPrefs.GetInt("Player_SucManh", 0);
+                playerInfo.TiemNang = PlayerPrefs.GetInt("Player_TiemNang", 0);
+
                 frame.Set(spawnedPlayer, playerInfo);
             }
             else

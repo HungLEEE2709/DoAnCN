@@ -42,9 +42,18 @@ public class PlayerDataLoader : MonoBehaviour
             yield break;
         }
 
-        // Lưu Prefab + UserName
+        // Lưu Prefab + UserName + Stats
         PlayerPrefs.SetString("PrefabKey", data.player.PrefabKey);
         PlayerPrefs.SetString("PlayerName", data.player.UserName);
+        
+        PlayerPrefs.SetInt("Player_MaxHp", data.player.MaxHp);
+        PlayerPrefs.SetInt("Player_Hp", data.player.Hp);
+        PlayerPrefs.SetInt("Player_MaxKi", data.player.MaxKi);
+        PlayerPrefs.SetInt("Player_Ki", data.player.Ki);
+        PlayerPrefs.SetInt("Player_Dame", data.player.Dame);
+        PlayerPrefs.SetInt("Player_SucManh", data.player.SucManh);
+        PlayerPrefs.SetInt("Player_TiemNang", data.player.TiemNang);
+        
         PlayerPrefs.Save();
 
         Debug.Log(">>> PrefabKey = " + data.player.PrefabKey);
@@ -65,4 +74,11 @@ public class PlayerData
 {
     public string UserName;
     public string PrefabKey;
+    public int SucManh;
+    public int TiemNang;
+    public int Hp;
+    public int MaxHp;
+    public int Ki;
+    public int MaxKi;
+    public int Dame;
 }
