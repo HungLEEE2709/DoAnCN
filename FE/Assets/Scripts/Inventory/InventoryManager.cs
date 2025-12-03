@@ -5,6 +5,8 @@ using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance;
+
     [Header("References")]
     [SerializeField] private GameObject slotsHolder;
 
@@ -23,11 +25,10 @@ public class InventoryManager : MonoBehaviour
 
     private bool isMoving;
 
-    public static InventoryManager Instance;
-
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     void Start()
@@ -259,6 +260,20 @@ public class InventoryManager : MonoBehaviour
     // ===========================
     // ADD / REMOVE
     // ===========================
+    public void PickupItem(string itemId, int quantity)
+    {
+        var item = ItemDatabase.Get(itemId);
+
+        if (item == null)
+        {
+            Debug.LogError($"[Inventory] Không tìm thấy item với id = {itemId}");
+            return;
+        }
+
+        AddItem(item, quantity);
+        StartCoroutine(InventoryAPI.Instance.SaveInventory(userId, items));
+    }
+
     private void AddItem(ItemClass item, int quantity)
     {
         SlotClass slot = ContainsItem(item);

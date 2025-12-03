@@ -34,10 +34,15 @@ component EnemyInfo {
     bool IsInitialized;
     Int32 EnemyID;
 
+    // Item Drop
+    int DropItemId;
+    int DropItemQuantity;
+
 }
 component ItemInfo {
     int ItemId;
     int Quantity;
+    bool Collected;
 }
 
 
