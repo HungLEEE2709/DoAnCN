@@ -48,6 +48,11 @@ MonoBehaviour:
     - rid: 1179563807366709250
     - rid: 1179563807366709251
     - rid: 1179563807366709252
+  - Components:
+    - rid: 6590406582310273024
+    - rid: 6590406582310273025
+    - rid: 6590406582310273026
+    - rid: 6590406582310273027
   SerializedTriangleDataUncompressedSize: 8
   references:
     version: 2
@@ -197,3 +202,62 @@ MonoBehaviour:
           SceneIndexPlusOne: 0
         AttackCooldown:
           RawValue: 0
+    - rid: 6590406582310273024
+      type: {class: Transform2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Position:
+          X:
+            RawValue: -75353
+          Y:
+            RawValue: -73623
+        Rotation:
+          RawValue: 0
+    - rid: 6590406582310273025
+      type: {class: PhysicsCollider2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        ShapeConfig:
+          ShapeType: 1
+          PolygonCollider:
+            Id:
+              Value: 0
+          CircleRadius:
+            RawValue: 7838
+          CapsuleSize:
+            X:
+              RawValue: 15675
+            Y:
+              RawValue: 28228
+          EdgeExtent:
+            RawValue: 7838
+          BoxExtents:
+            X:
+              RawValue: 7838
+            Y:
+              RawValue: 7057
+          PositionOffset:
+            X:
+              RawValue: 0
+            Y:
+              RawValue: 0
+          RotationOffset:
+            RawValue: 0
+          UserTag: 0
+          IsPersistent: 1
+          CompoundShapes: []
+        Layer: 0
+        IsTrigger: 1
+        PhysicsMaterial:
+          Id:
+            Value: 0
+    - rid: 6590406582310273026
+      type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        CallbackFlags:
+          Value: 0
+    - rid: 6590406582310273027
+      type: {class: ItemInfoPrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
+      data:
+        ItemId: 1
+        Quantity: 1
+        Collected:
+          Value: 0

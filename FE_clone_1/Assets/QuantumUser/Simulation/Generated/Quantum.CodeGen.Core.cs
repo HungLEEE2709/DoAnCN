@@ -687,17 +687,20 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct ItemInfo : Quantum.IComponent {
-    public const Int32 SIZE = 8;
+    public const Int32 SIZE = 12;
     public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
     public Int32 ItemId;
     [FieldOffset(4)]
     public Int32 Quantity;
+    [FieldOffset(8)]
+    public QBoolean Collected;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 4099;
         hash = hash * 31 + ItemId.GetHashCode();
         hash = hash * 31 + Quantity.GetHashCode();
+        hash = hash * 31 + Collected.GetHashCode();
         return hash;
       }
     }
@@ -705,6 +708,7 @@ namespace Quantum {
         var p = (ItemInfo*)ptr;
         serializer.Stream.Serialize(&p->ItemId);
         serializer.Stream.Serialize(&p->Quantity);
+        QBoolean.Serialize(&p->Collected, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]

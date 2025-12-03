@@ -4,8 +4,30 @@ namespace Quantum
 {
     public unsafe class CollisionSystem :
         SystemSignalsOnly,
-        ISignalOnCollisionEnter2D
+        ISignalOnCollisionEnter2D,
+        ISignalOnTriggerEnter2D
     {
+        public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
+        {
+            Log.Info($"[Quantum] OnTriggerEnter2D detected between {info.Entity} and {info.Other}");
+
+            EntityRef a = info.Entity;
+            EntityRef b = info.Other;
+
+            // Player → Item
+            if (f.TryGet<PlayerInfo>(a, out var playerA) &&
+                f.TryGet<ItemInfo>(b, out var itemB))
+            {
+                HandlePickup(f, a, ref playerA, b, ref itemB);
+            }
+
+            // Item → Player
+            if (f.TryGet<ItemInfo>(a, out var itemA) &&
+                f.TryGet<PlayerInfo>(b, out var playerB))
+            {
+                HandlePickup(f, b, ref playerB, a, ref itemA);
+            }
+        }
 
         public void OnCollisionEnter2D(Frame f, CollisionInfo2D info)
         {
@@ -49,6 +71,22 @@ namespace Quantum
             }
 
             f.Set(enemyEnt, enemy);
+        }
+
+        private void HandlePickup(Frame f, EntityRef playerEnt, ref PlayerInfo player, EntityRef itemEnt, ref ItemInfo item)
+        {
+            if (item.Collected) return;
+
+            Log.Info($"[Quantum] HandlePickup called! ItemID: {item.ItemId}, Qty: {item.Quantity}");
+
+            item.Collected = true;
+            f.Set(itemEnt, item);
+
+            // Gửi event về Unity
+            f.Events.ItemPickedUp(player.PlayerRef, item.ItemId, item.Quantity);
+            Log.Info($"[Quantum] Event ItemPickedUp SENT for Player: {player.PlayerRef}");
+
+            f.Destroy(itemEnt);   // QUANTUM xoá entity
         }
     }
 }

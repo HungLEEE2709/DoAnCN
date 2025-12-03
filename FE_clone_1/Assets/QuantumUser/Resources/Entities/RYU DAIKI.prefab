@@ -740,10 +740,10 @@ MonoBehaviour:
       UserTag: 0
       IsPersistent: 1
       CompoundShapes: []
-    LayerSource: 0
+    LayerSource: 1
     Layer: 0
     CallbackFlags:
-      Value: 0
+      Value: 4095
   PhysicsBody:
     IsEnabled: 1
     Config2D: 118
@@ -925,6 +925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3733bc5193a3edd4ab1ea4cfa3b20cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSmooth: 0.1
+  cameraOffset: {x: 0, y: 1.5, z: -10}
 --- !u!114 &-5087460609651845836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,6 +946,8 @@ MonoBehaviour:
       RawValue: 112067
     Health:
       RawValue: 262144
+    CurrentHealth:
+      RawValue: 0
     MaxHealth:
       RawValue: 0
     Ki:

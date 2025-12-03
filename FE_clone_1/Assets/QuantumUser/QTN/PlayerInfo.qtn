@@ -33,4 +33,5 @@ component EnemyInfo {
 component ItemInfo {
     int ItemId;
     int Quantity;
+    bool Collected;
 }
