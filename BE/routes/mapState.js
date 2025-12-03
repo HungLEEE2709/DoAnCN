@@ -21,14 +21,32 @@ router.post("/save", async (req, res) => {
         }
 
         // Update PlayerInfo (Stats)
-        if (Vang !== undefined && TiemNang !== undefined && SucManh !== undefined) {
-            const PlayerInfo = require("../models/PlayerInfo");
+        // Update PlayerInfo (Stats)
+        const PlayerInfo = require("../models/PlayerInfo");
+        const updateFields = {};
+        if (Vang !== undefined) updateFields.Vang = Vang;
+        if (TiemNang !== undefined) updateFields.TiemNang = TiemNang;
+        if (SucManh !== undefined) updateFields.SucManh = SucManh;
+
+        // Add new stats
+        const { MaxHp, MaxKi, Dame } = req.body;
+        if (MaxHp !== undefined) {
+            updateFields.MaxHp = MaxHp;
+            // updateFields.Hp = MaxHp; // REMOVED: Don't reset current HP
+        }
+        if (MaxKi !== undefined) {
+            updateFields.MaxKi = MaxKi;
+            // updateFields.Ki = MaxKi; // REMOVED: Don't reset current Ki
+        }
+        if (Dame !== undefined) updateFields.Dame = Dame;
+
+        if (Object.keys(updateFields).length > 0) {
             await PlayerInfo.findOneAndUpdate(
-                { idUser },
-                { Vang, TiemNang, SucManh },
+                { idUser, CharacterChosen: true }, // Only update chosen character
+                { $set: updateFields },
                 { new: true }
             );
-            console.log(`Updated Stats for ${idUser}: Vang=${Vang}, TiemNang=${TiemNang}, SucManh=${SucManh}`);
+            console.log(`Updated Stats for ${idUser}:`, updateFields);
         }
 
         res.json({ success: true, state });
