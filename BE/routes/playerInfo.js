@@ -46,7 +46,9 @@ router.post("/create", async (req, res) => {
       PrefabKey: template.PrefabKey,
       SucManh: template.BasePower,
       Hp: template.BaseHp,
+      MaxHp: template.BaseHp,
       Ki: template.BaseKi,
+      MaxKi: template.BaseKi,
       Dame: template.BaseDamage,
       CharacterChosen: true
     });
@@ -118,23 +120,20 @@ router.post("/select", async (req, res) => {
   try {
     const { idUser, CharacterName } = req.body;
 
-    // bỏ chọn các nhân vật khác
+    // 1. Get Base Stats from Character collection
+    const template = await Character.findOne({ CharacterName });
+    if (!template) {
+      return res.status(404).json({ success: false, message: "Character template not found!" });
+    }
+
+    // 2. Deselect others
     await PlayerInfo.updateMany(
       { idUser },
       { $set: { CharacterChosen: false } }
     );
-
-    // chọn nhân vật hiện tại
-    const chosen = await PlayerInfo.findOneAndUpdate(
-      { idUser, CharacterName },
-      { $set: { CharacterChosen: true } },
-      { new: true }
-    );
-
-    if (!chosen)
-      return res
-        .status(404)
-        .json({ success: false, message: "Character does not exist!" });
+    return res
+      .status(404)
+      .json({ success: false, message: "Character does not exist for this user!" });
 
     res.json({ success: true, chosen });
   } catch (err) {

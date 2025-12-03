@@ -5,10 +5,14 @@ const playerInfoSchema = new mongoose.Schema({
 
   UserName: { type: String, default: "" },
 
-  SucManh: { type: Number, default: 1000 },
+  SucManh: { type: Number, default: 0 },
   Hp: { type: Number, default: 100 },
+  MaxHp: { type: Number, default: 100 },
   Ki: { type: Number, default: 50 },
+  MaxKi: { type: Number, default: 50 },
   Dame: { type: Number, default: 5 },
+  Vang: { type: Number, default: 0 },
+  TiemNang: { type: Number, default: 0 },
 
   Planet: { type: String, default: null },
   CharacterName: { type: String, default: null },

@@ -20,6 +20,8 @@ app.use("/api/character", require("./routes/characterSelect"));
 app.use("/api/playerInfo", require("./routes/playerInfo"));
 app.use("/api/items", require("./routes/item"));
 app.use("/api/seed", require("./routes/seed"));
+app.use("/api/enemystate", require("./routes/enemyState"));
+app.use("/api/mapstate", require("./routes/mapState"));
 
 console.log("🔗 Mounting /api/inventory ...");
 app.use("/api/inventory", require("./routes/inventory"));
