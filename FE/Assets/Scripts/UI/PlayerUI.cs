@@ -12,12 +12,18 @@ public class PlayerUI : MonoBehaviour
 
     public TextMeshProUGUI healthAmount;
     public TextMeshProUGUI staminaAmount;
+    public TextMeshProUGUI goldAmount;
+    public TextMeshProUGUI potentialAmount;
+    public TextMeshProUGUI powerAmount;
 
     public float maxHealth;
     public float currentHealth;
 
     public float maxKi;
     public float currentKi;
+    public int currentGold;
+    public int currentPotential;
+    public int currentPower;
 
     private string userId;
 
@@ -61,11 +67,14 @@ public class PlayerUI : MonoBehaviour
         PlayerResponse data =
             JsonUtility.FromJson<PlayerResponse>(req.downloadHandler.text);
 
-        maxHealth = Mathf.Max(1, data.player.Hp);
-        maxKi = Mathf.Max(1, data.player.Ki);
+        maxHealth = Mathf.Max(1, data.player.MaxHp);
+        maxKi = Mathf.Max(1, data.player.MaxKi);
 
-        currentHealth = maxHealth;
-        currentKi = maxKi;
+        currentHealth = data.player.Hp;
+        currentKi = data.player.Ki;
+        currentGold = data.player.Vang;
+        currentPotential = data.player.TiemNang;
+        currentPower = data.player.SucManh;
     }
 
     public void TakeDamage(float dmg)
@@ -98,6 +107,61 @@ public class PlayerUI : MonoBehaviour
         statsChanged = true;
     }
 
+    public void SetGoldFromQuantum(int gold)
+    {
+        if (currentGold != gold)
+        {
+            currentGold = gold;
+            statsChanged = true;
+            
+            // Update Inventory UI
+            if (InventoryManager.Instance != null)
+            {
+                InventoryManager.Instance.UpdateGoldUI(currentGold);
+            }
+        }
+    }
+
+    public void SetPotentialFromQuantum(int potential)
+    {
+        if (currentPotential != potential)
+        {
+            currentPotential = potential;
+            statsChanged = true;
+            
+            if (StatsUpgradeManager.Instance != null)
+            {
+                StatsUpgradeManager.Instance.UpdateStats(currentPotential, currentPower);
+            }
+        }
+    }
+
+    public void SetPowerFromQuantum(int power)
+    {
+        if (currentPower != power)
+        {
+            currentPower = power;
+            statsChanged = true;
+
+            if (StatsUpgradeManager.Instance != null)
+            {
+                StatsUpgradeManager.Instance.UpdateStats(currentPotential, currentPower);
+            }
+        }
+    }
+
+    public void SetMaxHealth(float max)
+    {
+        maxHealth = max;
+        UpdateUI();
+    }
+
+    public void SetMaxKi(float max)
+    {
+        maxKi = max;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         float hpFill = currentHealth / maxHealth;
@@ -108,11 +172,14 @@ public class PlayerUI : MonoBehaviour
 
         healthAmount.text = Mathf.RoundToInt(currentHealth).ToString();
         staminaAmount.text = Mathf.RoundToInt(currentKi).ToString();
+        if (goldAmount != null) goldAmount.text = currentGold.ToString();
+        if (potentialAmount != null) potentialAmount.text = currentPotential.ToString();
+        if (powerAmount != null) powerAmount.text = currentPower.ToString();
     }
 
     IEnumerator UpdateStatsToServer()
     {
-        string url = "http://localhost:5000/api/playerInfo/update-stats";
+        string url = "http://localhost:5000/api/playerInfo/updatestats";
 
         PlayerStatsData payload = new PlayerStatsData()
         {

@@ -41,17 +41,25 @@ public class PlayerView : QuantumEntityViewComponent
         // ===== ATTACK + KI UI =====
         if (info.IsAttacking && !lastAttack)
         {
-            PlayerUI ui = FindObjectOfType<PlayerUI>();
-            if (ui != null)
+            if (QuantumRunner.Default.Game.PlayerIsLocal(info.PlayerRef))
             {
-                if (ui.currentKi < 3)
+                PlayerUI ui = FindObjectOfType<PlayerUI>();
+                if (ui != null)
                 {
-                    lastAttack = false;
-                    return;
-                }
+                    if (ui.currentKi < 3)
+                    {
+                        lastAttack = false;
+                        return;
+                    }
 
+                    animator.SetTrigger("attack");
+                    ui.UseKi(3);
+                }
+            }
+            else
+            {
+                // Remote player visual only
                 animator.SetTrigger("attack");
-                ui.UseKi(3);
             }
         }
 
@@ -60,7 +68,13 @@ public class PlayerView : QuantumEntityViewComponent
         // ===== SYNC HP → UI =====
         {
             PlayerUI ui = FindObjectOfType<PlayerUI>();
-            ui.SetHealthFromQuantum(info.CurrentHealth.AsFloat);
+            if (ui != null)
+            {
+                ui.SetHealthFromQuantum(info.CurrentHealth.AsFloat);
+                ui.SetGoldFromQuantum(info.Vang);
+                ui.SetPotentialFromQuantum(info.TiemNang);
+                ui.SetPowerFromQuantum(info.SucManh);
+            }
         }
 
         // ===== CAMERA FOLLOW LOCAL PLAYER =====

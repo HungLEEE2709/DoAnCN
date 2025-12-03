@@ -196,4 +196,9 @@ MonoBehaviour:
         PlayerEntity:
           SceneIndexPlusOne: 0
         AttackCooldown:
-          RawValue: 0
+          RawValue: 65536
+        RespawnTimer:
+          RawValue: 327680
+        IsInitialized:
+          Value: 0
+        EnemyID: 1

@@ -191,6 +191,6 @@ public class CreatePlayerUI : MonoBehaviour
 
     public void OnClickClose()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene("MyMenu");
     }
 }

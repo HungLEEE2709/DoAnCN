@@ -3,17 +3,24 @@
     using Photon.Deterministic;
     using UnityEngine;
 
-    public unsafe class PlayerSpawner : SystemSignalsOnly, ISignalOnPlayerAdded, ISignalOnPlayerRemoved
+    public unsafe class PlayerSpawner : SystemMainThread, ISignalOnPlayerAdded, ISignalOnPlayerRemoved
     {
+        public override void OnInit(Frame f)
+        {
+            Debug.Log(">>> [PlayerSpawner] System Initialized! <<<");
+        }
+
+        public override void Update(Frame f) { }
+
         public void OnPlayerAdded(Frame frame, PlayerRef player, bool firstTime)
         {
-            string key = PlayerPrefs.GetString("PrefabKey", "");
-            Debug.Log("PrefabKey từ PlayerPrefs: " + key);
+            string key = PlayerPrefs.GetString("PrefabKey", "ryu"); // Default to ryu
+            Debug.Log($"[PlayerSpawner] OnPlayerAdded. PlayerRef: {player}, PrefabKey: '{key}'");
 
             if (string.IsNullOrEmpty(key))
             {
-                Debug.LogError("PrefabKey trống!");
-                return;
+                Debug.LogWarning("PrefabKey vẫn trống sau khi default! Force set 'ryu'");
+                key = "ryu";
             }
 
             EntityPrototype proto = null;
@@ -23,32 +30,32 @@
             {
                 case "RYU DAIKI":
                 case "ryu":
-                    loadPath = "Entities/RYU DAIKIEntityPrototype";
+                    loadPath = "Entities/Character/RYU DAIKIEntityPrototype";
                     break;
 
                 case "LUNA BLADE":
                 case "luna":
-                    loadPath = "Entities/LUNA BLADEEntityPrototype";
+                    loadPath = "Entities/Character/BLADEEntityPrototype";
                     break;
 
                 case "GRIMJAW":
                 case "grim":
-                    loadPath = "Entities/GRIMJAWEntityPrototype";
+                    loadPath = "Entities/Character/GRIMJAWEntityPrototype";
                     break;
 
                 case "ZIKK FANG":
                 case "zikk":
-                    loadPath = "Entities/ZIKK FANGEntityPrototype";
+                    loadPath = "Entities/Character/ZIKK FANGEntityPrototype";
                     break;
 
                 case "ELDRIA":
                 case "eldria":
-                    loadPath = "Entities/ELDRIAEntityPrototype";
+                    loadPath = "Entities/Character/ELDRIAEntityPrototype";
                     break;
 
                 case "MOROK":
                 case "morok":
-                    loadPath = "Entities/MOROKEntityPrototype";
+                    loadPath = "Entities/Character/MOROKEntityPrototype";
                     break;
 
                 default:
@@ -99,6 +106,27 @@
             {
                 var playerInfo = frame.Get<PlayerInfo>(spawnedPlayer);
                 playerInfo.PlayerRef = player;
+                
+                // Initialize Stats from PlayerPrefs
+                int currentHp = PlayerPrefs.GetInt("CurrentHp", 100);
+                int maxHp = PlayerPrefs.GetInt("MaxHp", 100);
+                int currentKi = PlayerPrefs.GetInt("CurrentKi", 50);
+                int maxKi = PlayerPrefs.GetInt("MaxKi", 50);
+
+                playerInfo.CurrentHealth = FP.FromFloat_UNSAFE(currentHp);
+                playerInfo.MaxHealth = FP.FromFloat_UNSAFE(maxHp);
+                playerInfo.Ki = FP.FromFloat_UNSAFE(currentKi);
+                playerInfo.MaxKi = FP.FromFloat_UNSAFE(maxKi);
+                
+                // Initialize Damage
+                int damage = PlayerPrefs.GetInt("Dame", 10); 
+                playerInfo.Damage = FP.FromFloat_UNSAFE(damage);
+                
+                // Initialize Gold & Potential & Power
+                playerInfo.Vang = PlayerPrefs.GetInt("Vang", 0);
+                playerInfo.TiemNang = PlayerPrefs.GetInt("TiemNang", 0);
+                playerInfo.SucManh = PlayerPrefs.GetInt("SucManh", 0);
+                
                 frame.Set(spawnedPlayer, playerInfo);
             }
             else

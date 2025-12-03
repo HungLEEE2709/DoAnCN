@@ -33,21 +33,48 @@ public class PlayerDataLoader : MonoBehaviour
         string json = req.downloadHandler.text;
         Debug.Log("API trả về: " + json);
 
-        PlayerInfoResponse data = JsonUtility.FromJson<PlayerInfoResponse>(json);
+        PlayerInfoResponse response = JsonUtility.FromJson<PlayerInfoResponse>(json);
 
-        if (data == null || data.player == null)
+        if (response == null || response.player == null)
         {
             Debug.LogError("Không có nhân vật đang chọn → chuyển CreatePlayer");
             onDone(false);
             yield break;
         }
 
+        PlayerData data = response.player;
+
         // Lưu Prefab + UserName
-        PlayerPrefs.SetString("PrefabKey", data.player.PrefabKey);
-        PlayerPrefs.SetString("PlayerName", data.player.UserName);
+        PlayerPrefs.SetString("PrefabKey", data.PrefabKey);
+        PlayerPrefs.SetString("PlayerName", data.UserName);
+
+        // Save Current & Max Stats
+        PlayerPrefs.SetInt("CurrentHp", data.Hp);
+        PlayerPrefs.SetInt("MaxHp", data.MaxHp);
+        PlayerPrefs.SetInt("CurrentKi", data.Ki);
+        PlayerPrefs.SetInt("MaxKi", data.MaxKi);
+        
+        // Save Dame, Vang, TiemNang, SucManh
+        PlayerPrefs.SetInt("Dame", data.Dame);
+        PlayerPrefs.SetInt("Vang", data.Vang);
+        PlayerPrefs.SetInt("TiemNang", data.TiemNang);
+        PlayerPrefs.SetInt("SucManh", data.SucManh);
+
         PlayerPrefs.Save();
 
-        Debug.Log(">>> PrefabKey = " + data.player.PrefabKey);
+        Debug.Log(">>> PrefabKey = " + data.PrefabKey);
+
+        // Load Map State
+        string mapUrl = "http://localhost:5000/api/mapstate/load/" + userId;
+        UnityWebRequest mapReq = UnityWebRequest.Get(mapUrl);
+        yield return mapReq.SendWebRequest();
+
+        if (mapReq.result == UnityWebRequest.Result.Success)
+        {
+            string mapJson = mapReq.downloadHandler.text;
+            Debug.Log("Map State: " + mapJson);
+            PlayerPrefs.SetString("MapState", mapJson);
+        }
 
         onDone(true);
     }
@@ -65,4 +92,12 @@ public class PlayerData
 {
     public string UserName;
     public string PrefabKey;
+    public int Hp;
+    public int MaxHp;
+    public int Ki;
+    public int MaxKi;
+    public int Dame;
+    public int Vang;
+    public int TiemNang;
+    public int SucManh;
 }

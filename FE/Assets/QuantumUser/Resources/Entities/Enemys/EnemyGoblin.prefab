@@ -636,7 +636,7 @@ MonoBehaviour:
     AttackRange:
       RawValue: 98304
     DetectionRange:
-      RawValue: 0
+      RawValue: 131072
     Damage:
       RawValue: 983040
     IsAttacking:
@@ -644,6 +644,13 @@ MonoBehaviour:
     IsDead:
       Value: 0
     PlayerEntity: {fileID: 0}
+    AttackCooldown:
+      RawValue: 65536
+    RespawnTimer:
+      RawValue: 327680
+    IsInitialized:
+      Value: 0
+    EnemyID: 1
 --- !u!114 &8069853929532662392
 MonoBehaviour:
   m_ObjectHideFlags: 0

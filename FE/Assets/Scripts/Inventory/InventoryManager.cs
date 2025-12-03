@@ -18,9 +18,17 @@ public class InventoryManager : MonoBehaviour
 
     [Header("UI")]
     public Image itemCursor;
+    public TextMeshProUGUI goldText; // Add this
     public string userId;
 
     private bool isMoving;
+
+    public static InventoryManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -281,5 +289,13 @@ public class InventoryManager : MonoBehaviour
                 return items[i];
 
         return null;
+    }
+
+    public void UpdateGoldUI(int gold)
+    {
+        if (goldText != null)
+        {
+            goldText.text = gold.ToString();
+        }
     }
 }

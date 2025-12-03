@@ -65,6 +65,9 @@ namespace Quantum.Prototypes.Unity {
     public QBoolean IsDead;
     public Quantum.QuantumEntityPrototype PlayerEntity;
     public FP AttackCooldown;
+    public FP RespawnTimer;
+    public QBoolean IsInitialized;
+    public Int32 EnemyID;
     partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.EnemyInfoPrototype prototype);
     public override Quantum.Prototypes.EnemyInfoPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
       var result = new Quantum.Prototypes.EnemyInfoPrototype();
@@ -82,6 +85,9 @@ namespace Quantum.Prototypes.Unity {
       converter.Convert(this.IsDead, out result.IsDead);
       converter.Convert(this.PlayerEntity, out result.PlayerEntity);
       converter.Convert(this.AttackCooldown, out result.AttackCooldown);
+      converter.Convert(this.RespawnTimer, out result.RespawnTimer);
+      converter.Convert(this.IsInitialized, out result.IsInitialized);
+      converter.Convert(this.EnemyID, out result.EnemyID);
       ConvertUser(converter, ref result);
       return result;
     }

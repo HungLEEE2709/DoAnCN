@@ -66,6 +66,9 @@ namespace Quantum.Prototypes {
     public QBoolean IsDead;
     public MapEntityId PlayerEntity;
     public FP AttackCooldown;
+    public FP RespawnTimer;
+    public QBoolean IsInitialized;
+    public Int32 EnemyID;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyInfo component = default;
         Materialize((Frame)f, ref component, in context);
@@ -86,6 +89,9 @@ namespace Quantum.Prototypes {
         result.IsDead = this.IsDead;
         PrototypeValidator.FindMapEntity(this.PlayerEntity, in context, out result.PlayerEntity);
         result.AttackCooldown = this.AttackCooldown;
+        result.RespawnTimer = this.RespawnTimer;
+        result.IsInitialized = this.IsInitialized;
+        result.EnemyID = this.EnemyID;
     }
   }
   [System.SerializableAttribute()]
@@ -130,6 +136,9 @@ namespace Quantum.Prototypes {
     public FP Speed;
     public QBoolean IsAttacking;
     public Int32 AttackTimer;
+    public Int32 Vang;
+    public Int32 TiemNang;
+    public Int32 SucManh;
     partial void MaterializeUser(Frame frame, ref Quantum.PlayerInfo result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.PlayerInfo component = default;
@@ -147,6 +156,9 @@ namespace Quantum.Prototypes {
         result.Speed = this.Speed;
         result.IsAttacking = this.IsAttacking;
         result.AttackTimer = this.AttackTimer;
+        result.Vang = this.Vang;
+        result.TiemNang = this.TiemNang;
+        result.SucManh = this.SucManh;
         MaterializeUser(frame, ref result, in context);
     }
   }

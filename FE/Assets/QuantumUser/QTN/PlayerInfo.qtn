@@ -10,7 +10,9 @@
     FP Speed;
     bool IsAttacking;
     int AttackTimer;
-   
+    Int32 Vang;
+    Int32 TiemNang;
+    Int32 SucManh;
 }
 component EnemyInfo {
     FP Time;
@@ -28,9 +30,14 @@ component EnemyInfo {
     bool IsDead;
     EntityRef PlayerEntity;
     FP AttackCooldown;
+    FP RespawnTimer;
+    bool IsInitialized;
+    Int32 EnemyID;
 
 }
 component ItemInfo {
     int ItemId;
     int Quantity;
 }
+
+
