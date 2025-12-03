@@ -617,42 +617,46 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct EnemyInfo : Quantum.IComponent {
-    public const Int32 SIZE = 136;
+    public const Int32 SIZE = 144;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(96)]
-    public FP Time;
-    [FieldOffset(40)]
-    public FP ChangeDirectionTime;
     [FieldOffset(104)]
-    public FPVector2 Direction;
-    [FieldOffset(120)]
-    public FPVector2 SpawnPosition;
-    [FieldOffset(80)]
-    public FP Radius;
-    [FieldOffset(72)]
-    public FP Health;
+    public FP Time;
     [FieldOffset(48)]
-    public FP CurrentHealth;
-    [FieldOffset(32)]
-    public FP AttackRange;
-    [FieldOffset(64)]
-    public FP DetectionRange;
-    [FieldOffset(56)]
-    public FP Damage;
-    [FieldOffset(4)]
-    public QBoolean IsAttacking;
-    [FieldOffset(8)]
-    public QBoolean IsDead;
-    [FieldOffset(16)]
-    public EntityRef PlayerEntity;
-    [FieldOffset(24)]
-    public FP AttackCooldown;
+    public FP ChangeDirectionTime;
+    [FieldOffset(112)]
+    public FPVector2 Direction;
+    [FieldOffset(128)]
+    public FPVector2 SpawnPosition;
     [FieldOffset(88)]
-    public FP RespawnTimer;
+    public FP Radius;
+    [FieldOffset(80)]
+    public FP Health;
+    [FieldOffset(56)]
+    public FP CurrentHealth;
+    [FieldOffset(40)]
+    public FP AttackRange;
+    [FieldOffset(72)]
+    public FP DetectionRange;
+    [FieldOffset(64)]
+    public FP Damage;
     [FieldOffset(12)]
+    public QBoolean IsAttacking;
+    [FieldOffset(16)]
+    public QBoolean IsDead;
+    [FieldOffset(24)]
+    public EntityRef PlayerEntity;
+    [FieldOffset(32)]
+    public FP AttackCooldown;
+    [FieldOffset(96)]
+    public FP RespawnTimer;
+    [FieldOffset(20)]
     public QBoolean IsInitialized;
-    [FieldOffset(0)]
+    [FieldOffset(8)]
     public Int32 EnemyID;
+    [FieldOffset(0)]
+    public Int32 DropItemId;
+    [FieldOffset(4)]
+    public Int32 DropItemQuantity;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 14407;
@@ -673,11 +677,15 @@ namespace Quantum {
         hash = hash * 31 + RespawnTimer.GetHashCode();
         hash = hash * 31 + IsInitialized.GetHashCode();
         hash = hash * 31 + EnemyID.GetHashCode();
+        hash = hash * 31 + DropItemId.GetHashCode();
+        hash = hash * 31 + DropItemQuantity.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (EnemyInfo*)ptr;
+        serializer.Stream.Serialize(&p->DropItemId);
+        serializer.Stream.Serialize(&p->DropItemQuantity);
         serializer.Stream.Serialize(&p->EnemyID);
         QBoolean.Serialize(&p->IsAttacking, serializer);
         QBoolean.Serialize(&p->IsDead, serializer);
@@ -699,17 +707,20 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct ItemInfo : Quantum.IComponent {
-    public const Int32 SIZE = 8;
+    public const Int32 SIZE = 12;
     public const Int32 ALIGNMENT = 4;
     [FieldOffset(0)]
     public Int32 ItemId;
     [FieldOffset(4)]
     public Int32 Quantity;
+    [FieldOffset(8)]
+    public QBoolean Collected;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 4099;
         hash = hash * 31 + ItemId.GetHashCode();
         hash = hash * 31 + Quantity.GetHashCode();
+        hash = hash * 31 + Collected.GetHashCode();
         return hash;
       }
     }
@@ -717,6 +728,7 @@ namespace Quantum {
         var p = (ItemInfo*)ptr;
         serializer.Stream.Serialize(&p->ItemId);
         serializer.Stream.Serialize(&p->Quantity);
+        QBoolean.Serialize(&p->Collected, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]

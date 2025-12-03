@@ -202,3 +202,5 @@ MonoBehaviour:
         IsInitialized:
           Value: 0
         EnemyID: 1
+        DropItemId: 0
+        DropItemQuantity: 0

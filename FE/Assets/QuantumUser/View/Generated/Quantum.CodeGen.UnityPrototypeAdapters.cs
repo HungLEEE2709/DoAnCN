@@ -68,6 +68,8 @@ namespace Quantum.Prototypes.Unity {
     public FP RespawnTimer;
     public QBoolean IsInitialized;
     public Int32 EnemyID;
+    public Int32 DropItemId;
+    public Int32 DropItemQuantity;
     partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.EnemyInfoPrototype prototype);
     public override Quantum.Prototypes.EnemyInfoPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
       var result = new Quantum.Prototypes.EnemyInfoPrototype();
@@ -88,6 +90,8 @@ namespace Quantum.Prototypes.Unity {
       converter.Convert(this.RespawnTimer, out result.RespawnTimer);
       converter.Convert(this.IsInitialized, out result.IsInitialized);
       converter.Convert(this.EnemyID, out result.EnemyID);
+      converter.Convert(this.DropItemId, out result.DropItemId);
+      converter.Convert(this.DropItemQuantity, out result.DropItemQuantity);
       ConvertUser(converter, ref result);
       return result;
     }

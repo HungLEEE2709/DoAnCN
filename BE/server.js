@@ -1,8 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
+
+dotenv.config(); // Load env vars before requiring other files
+
 const connectDB = require("./config/db");
 
-dotenv.config();
 connectDB();
 
 const app = express();

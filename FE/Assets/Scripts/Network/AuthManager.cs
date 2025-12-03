@@ -13,7 +13,7 @@ public class AuthManager : MonoBehaviour
     public Text statusText;
 
     private static readonly HttpClient client = new HttpClient();
-    private string apiBase = "http://localhost:5000/api/users"; 
+    private string apiBase = GameConfig.BaseUrl + "/api/users"; 
 
     public async void OnLoginButton()
     {

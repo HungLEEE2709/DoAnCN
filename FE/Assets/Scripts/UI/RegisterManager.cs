@@ -21,7 +21,7 @@ public class RegisterManager : MonoBehaviour
     public TMP_Text statusText;
 
     // Endpoint Đăng ký
-    public string registerUrl = "http://localhost:5000/api/users/register";
+    public string registerUrl = GameConfig.BaseUrl + "/api/users/register";
 
     // Tên Scene Login để quay lại
     public string StartUi = "StartUi"; 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class MapStateSaver : MonoBehaviour
 {
-    private string saveUrl = "http://localhost:5000/api/mapstate/save";
+    private string saveUrl = GameConfig.BaseUrl + "/api/mapstate/save";
 
     private void OnApplicationQuit()
     {

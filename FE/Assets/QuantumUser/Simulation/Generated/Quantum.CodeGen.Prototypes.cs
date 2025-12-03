@@ -69,6 +69,8 @@ namespace Quantum.Prototypes {
     public FP RespawnTimer;
     public QBoolean IsInitialized;
     public Int32 EnemyID;
+    public Int32 DropItemId;
+    public Int32 DropItemQuantity;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyInfo component = default;
         Materialize((Frame)f, ref component, in context);
@@ -92,6 +94,8 @@ namespace Quantum.Prototypes {
         result.RespawnTimer = this.RespawnTimer;
         result.IsInitialized = this.IsInitialized;
         result.EnemyID = this.EnemyID;
+        result.DropItemId = this.DropItemId;
+        result.DropItemQuantity = this.DropItemQuantity;
     }
   }
   [System.SerializableAttribute()]
@@ -111,6 +115,7 @@ namespace Quantum.Prototypes {
   public unsafe partial class ItemInfoPrototype : ComponentPrototype<Quantum.ItemInfo> {
     public Int32 ItemId;
     public Int32 Quantity;
+    public QBoolean Collected;
     partial void MaterializeUser(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.ItemInfo component = default;
@@ -120,6 +125,7 @@ namespace Quantum.Prototypes {
     public void Materialize(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context = default) {
         result.ItemId = this.ItemId;
         result.Quantity = this.Quantity;
+        result.Collected = this.Collected;
         MaterializeUser(frame, ref result, in context);
     }
   }

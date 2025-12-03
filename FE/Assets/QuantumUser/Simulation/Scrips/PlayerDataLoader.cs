@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerDataLoader : MonoBehaviour
 {
-    public string apiGetPlayer = "http://localhost:5000/api/playerInfo/chosen/";
+    public string apiGetPlayer = GameConfig.BaseUrl + "/api/playerInfo/chosen/";
 
     public IEnumerator LoadPlayerFromServer(System.Action<bool> onDone)
     {
@@ -65,7 +65,7 @@ public class PlayerDataLoader : MonoBehaviour
         Debug.Log(">>> PrefabKey = " + data.PrefabKey);
 
         // Load Map State
-        string mapUrl = "http://localhost:5000/api/mapstate/load/" + userId;
+        string mapUrl = GameConfig.BaseUrl + "/api/mapstate/load/" + userId;
         UnityWebRequest mapReq = UnityWebRequest.Get(mapUrl);
         yield return mapReq.SendWebRequest();
 

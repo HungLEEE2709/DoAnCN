@@ -35,7 +35,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField passwordInput;
     public TMP_Text statusText;
 
-    public string baseUrl = "http://localhost:5000/api/users";
+    public string baseUrl = GameConfig.BaseUrl + "/api/users";
 
     public string StartScene = "Start";
     public string RegisterUI = "RegisterUI";

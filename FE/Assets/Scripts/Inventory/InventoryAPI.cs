@@ -18,7 +18,7 @@ public class InventoryAPI : MonoBehaviour
     // =======================================================
     public IEnumerator LoadInventory(string userId, System.Action<InventoryContent> callback)
     {
-        string url = "http://localhost:5000/api/inventory/" + userId;
+        string url = GameConfig.BaseUrl + "/api/inventory/" + userId;
         Debug.Log("[API] GET " + url);
 
         UnityWebRequest req = UnityWebRequest.Get(url);
@@ -72,7 +72,7 @@ public class InventoryAPI : MonoBehaviour
     // =======================================================
     public IEnumerator SaveInventory(string userId, SlotClass[] items)
     {
-        string url = "http://localhost:5000/api/inventory/save";
+        string url = GameConfig.BaseUrl + "/api/inventory/save";
 
         InventoryContent payload = new InventoryContent();
         payload.userId = userId;
