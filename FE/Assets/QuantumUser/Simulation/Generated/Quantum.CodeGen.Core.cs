@@ -617,36 +617,40 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct EnemyInfo : Quantum.IComponent {
-    public const Int32 SIZE = 120;
+    public const Int32 SIZE = 128;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(80)]
-    public FP Time;
-    [FieldOffset(32)]
-    public FP ChangeDirectionTime;
     [FieldOffset(88)]
-    public FPVector2 Direction;
-    [FieldOffset(104)]
-    public FPVector2 SpawnPosition;
-    [FieldOffset(72)]
-    public FP Radius;
-    [FieldOffset(64)]
-    public FP Health;
+    public FP Time;
     [FieldOffset(40)]
-    public FP CurrentHealth;
-    [FieldOffset(24)]
-    public FP AttackRange;
-    [FieldOffset(56)]
-    public FP DetectionRange;
+    public FP ChangeDirectionTime;
+    [FieldOffset(96)]
+    public FPVector2 Direction;
+    [FieldOffset(112)]
+    public FPVector2 SpawnPosition;
+    [FieldOffset(80)]
+    public FP Radius;
+    [FieldOffset(72)]
+    public FP Health;
     [FieldOffset(48)]
+    public FP CurrentHealth;
+    [FieldOffset(32)]
+    public FP AttackRange;
+    [FieldOffset(64)]
+    public FP DetectionRange;
+    [FieldOffset(56)]
     public FP Damage;
-    [FieldOffset(0)]
-    public QBoolean IsAttacking;
-    [FieldOffset(4)]
-    public QBoolean IsDead;
     [FieldOffset(8)]
-    public EntityRef PlayerEntity;
+    public QBoolean IsAttacking;
+    [FieldOffset(12)]
+    public QBoolean IsDead;
     [FieldOffset(16)]
+    public EntityRef PlayerEntity;
+    [FieldOffset(24)]
     public FP AttackCooldown;
+    [FieldOffset(0)]
+    public Int32 DropItemId;
+    [FieldOffset(4)]
+    public Int32 DropItemQuantity;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 14407;
@@ -664,11 +668,15 @@ namespace Quantum {
         hash = hash * 31 + IsDead.GetHashCode();
         hash = hash * 31 + PlayerEntity.GetHashCode();
         hash = hash * 31 + AttackCooldown.GetHashCode();
+        hash = hash * 31 + DropItemId.GetHashCode();
+        hash = hash * 31 + DropItemQuantity.GetHashCode();
         return hash;
       }
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (EnemyInfo*)ptr;
+        serializer.Stream.Serialize(&p->DropItemId);
+        serializer.Stream.Serialize(&p->DropItemQuantity);
         QBoolean.Serialize(&p->IsAttacking, serializer);
         QBoolean.Serialize(&p->IsDead, serializer);
         EntityRef.Serialize(&p->PlayerEntity, serializer);

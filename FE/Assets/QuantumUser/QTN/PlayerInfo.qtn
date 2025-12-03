@@ -29,6 +29,10 @@ component EnemyInfo {
     EntityRef PlayerEntity;
     FP AttackCooldown;
 
+    // Item Drop
+    int DropItemId;
+    int DropItemQuantity;
+
 }
 component ItemInfo {
     int ItemId;

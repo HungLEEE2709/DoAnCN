@@ -68,9 +68,38 @@ namespace Quantum
                 enemy.CurrentHealth = FP._0;
                 enemy.IsDead = true;
                 enemy.IsAttacking = false;
+
+                // Drop item khi chết
+                if (enemy.DropItemId > 0 && enemy.DropItemQuantity > 0)
+                {
+                    SpawnDroppedItem(f, enemyEnt, enemy.DropItemId, enemy.DropItemQuantity);
+                }
             }
 
             f.Set(enemyEnt, enemy);
+        }
+
+        private void SpawnDroppedItem(Frame f, EntityRef enemyEnt, int itemId, int quantity)
+        {
+            // Lấy vị trí của enemy
+            var enemyTransform = f.Unsafe.GetPointer<Transform2D>(enemyEnt);
+            
+            // Tạo entity mới cho item
+            var itemEntity = f.Create();
+
+            // Set Transform2D component - spawn tại vị trí enemy
+            var itemTransform = new Transform2D();
+            itemTransform.Position = enemyTransform->Position;
+            f.Add(itemEntity, itemTransform);
+
+            // Set ItemInfo component
+            var itemInfo = new ItemInfo();
+            itemInfo.ItemId = itemId;
+            itemInfo.Quantity = quantity;
+            itemInfo.Collected = false;
+            f.Add(itemEntity, itemInfo);
+
+            Log.Info($"[Quantum] Enemy dropped item! ItemID: {itemId}, Qty: {quantity}");
         }
 
         private void HandlePickup(Frame f, EntityRef playerEnt, ref PlayerInfo player, EntityRef itemEnt, ref ItemInfo item)

@@ -66,6 +66,8 @@ namespace Quantum.Prototypes {
     public QBoolean IsDead;
     public MapEntityId PlayerEntity;
     public FP AttackCooldown;
+    public Int32 DropItemId;
+    public Int32 DropItemQuantity;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyInfo component = default;
         Materialize((Frame)f, ref component, in context);
@@ -86,6 +88,8 @@ namespace Quantum.Prototypes {
         result.IsDead = this.IsDead;
         PrototypeValidator.FindMapEntity(this.PlayerEntity, in context, out result.PlayerEntity);
         result.AttackCooldown = this.AttackCooldown;
+        result.DropItemId = this.DropItemId;
+        result.DropItemQuantity = this.DropItemQuantity;
     }
   }
   [System.SerializableAttribute()]

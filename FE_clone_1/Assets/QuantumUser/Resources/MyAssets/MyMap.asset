@@ -202,6 +202,8 @@ MonoBehaviour:
           SceneIndexPlusOne: 0
         AttackCooldown:
           RawValue: 0
+        DropItemId: 0
+        DropItemQuantity: 0
     - rid: 6590406582310273024
       type: {class: Transform2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
@@ -253,7 +255,7 @@ MonoBehaviour:
       type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
         CallbackFlags:
-          Value: 0
+          Value: 4095
     - rid: 6590406582310273027
       type: {class: ItemInfoPrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
       data:
