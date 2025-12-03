@@ -29,6 +29,11 @@ console.log("🔗 Mounting /api/inventory ...");
 app.use("/api/inventory", require("./routes/inventory"));
 console.log("✔ /api/inventory OK");
 
+// ---- HEALTH CHECK ----
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
+
 // ---- START SERVER ----
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
