@@ -6,6 +6,7 @@ namespace Quantum
     [Preserve]
     public unsafe class EnemyController : SystemMainThreadFilter<EnemyController.Filter>
     {
+
         public struct Filter
         {
             public EntityRef Entity;
@@ -14,11 +15,17 @@ namespace Quantum
             public EnemyInfo* Info;
         }
 
+        // thời gian từ lúc bắt đầu vung chém tới lúc trúng (phải khớp với animation)
+        private static readonly FP AttackWindup = FP.FromFloat_UNSAFE(0.8f);
+        // thời gian nghỉ giữa 2 cú chém
+        private static readonly FP AttackInterval = FP.FromFloat_UNSAFE(0.7f);
+
         public override void Update(Frame f, ref Filter filter)
         {
+
             EnemyInfo* info = filter.Info;
 
-            // Nếu HP <= 0 mà chưa set IsDead → set luôn
+            // ========== DEATH ==========
             if (info->CurrentHealth <= FP._0 && !info->IsDead)
             {
                 info->CurrentHealth = FP._0;
@@ -26,18 +33,14 @@ namespace Quantum
                 info->IsAttacking = false;
             }
 
-            // Nếu chết thì đứng im, không xử lý AI nữa
             if (info->IsDead)
             {
-                filter.Body->Velocity = FPVector2.Zero;
                 info->IsAttacking = false;
+                filter.Body->Velocity = FPVector2.Zero;
                 return;
             }
 
-            // ----------------------------
-            // LẤY PLAYER TỪ EnemyInfo.PlayerEntity
-            // (trong inspector bạn đã gán Player Entity rồi)
-            // ----------------------------
+            // ========== GET PLAYER ==========
             EntityRef playerEnt = info->PlayerEntity;
             if (!f.Exists(playerEnt))
                 return;
@@ -45,49 +48,74 @@ namespace Quantum
             PlayerInfo* playerPtr = f.Unsafe.GetPointer<PlayerInfo>(playerEnt);
             Transform2D* playerTr = f.Unsafe.GetPointer<Transform2D>(playerEnt);
 
-            // ----------------------------
-            // TỌA ĐỘ
-            // ----------------------------
             FPVector2 enemyPos = filter.Transform->Position;
             FPVector2 playerPos = playerTr->Position;
 
             FP dist = FPVector2.Distance(enemyPos, playerPos);
-
-            // ----------------------------
-            // UPDATE TIMER (cho patrol & cooldown)
-            // ----------------------------
             info->Time += f.DeltaTime;
 
-            // ----------------------------
-            // 1) DETECTION → CHASE OR ATTACK
-            // ----------------------------
+            // ========== PLAYER TRONG TẦM PHÁT HIỆN ==========
             if (dist < info->DetectionRange)
             {
-                // ===== ATTACK =====
+
+                // ======================
+                // TRONG TẦM CHÉM
+                // ======================
                 if (dist < info->AttackRange)
                 {
-                    info->IsAttacking = true;
+
+                    // không chạy nữa, đứng chém
                     filter.Body->Velocity = FPVector2.Zero;
 
-                    // Attack cooldown 0.25s
-                    if (info->Time > info->ChangeDirectionTime)
+                    // nếu chưa bắt đầu chém và đã hết cooldown -> bắt đầu cú chém mới
+                    if (!info->IsAttacking && info->AttackCooldown <= FP._0)
                     {
-                        info->ChangeDirectionTime = info->Time + FP._0_25;
+                        info->IsAttacking = true;   // bật animator Attack
+                        info->AttackCooldown = FP._0; // dùng như timer đếm thời gian vung chém
+                    }
 
-                        // QUAN TRỌNG: copy struct, chỉnh, rồi Set lại
-                        PlayerInfo player = *playerPtr;
+                    if (info->IsAttacking)
+                    {
+                        // đang trong 1 cú chém: tăng timer
+                        info->AttackCooldown += f.DeltaTime;
 
-                        player.CurrentHealth -= info->Damage;
-                        if (player.CurrentHealth < FP._0)
-                            player.CurrentHealth = FP._0;
+                        // ĐỦ THỜI GIAN VUNG (Animator đã chém tới) -> TRỪ MÁU MỘT LẦN
+                        if (info->AttackCooldown >= AttackWindup)
+                        {
 
-                        f.Set(playerEnt, player);   // ghi ngược về frame (UI/BE mới thấy)
+                            PlayerInfo p = *playerPtr;
+                            if (p.CurrentHealth > FP._0)
+                            {
+                                p.CurrentHealth -= info->Damage;
+                                if (p.CurrentHealth < FP._0)
+                                    p.CurrentHealth = FP._0;
+                                f.Set(playerEnt, p);
+                            }
+
+                            // kết thúc cú chém hiện tại
+                            info->IsAttacking = false;         // animator sẽ tắt Attack
+                            info->AttackCooldown = AttackInterval; // chờ trước khi được phép chém lại
+                        }
+                    }
+                    else
+                    {
+                        // không trong cú chém, chỉ đang chờ cooldown
+                        if (info->AttackCooldown > FP._0)
+                        {
+                            info->AttackCooldown -= f.DeltaTime;
+                        }
                     }
                 }
+                // ======================
+                // THẤY PLAYER NHƯNG CHƯA TỚI TẦM CHÉM
+                // ======================
                 else
                 {
-                    // ===== CHASE =====
-                    info->IsAttacking = false;
+                    info->IsAttacking = false; // animator tắt Attack
+
+                    // giảm cooldown nếu còn
+                    if (info->AttackCooldown > FP._0)
+                        info->AttackCooldown -= f.DeltaTime;
 
                     FPVector2 dir = (playerPos - enemyPos).Normalized;
                     filter.Body->Velocity = dir * FP._1_25;
@@ -96,14 +124,13 @@ namespace Quantum
                 return;
             }
 
-            // ----------------------------
-            // 2) PATROL (KHÔNG THẤY PLAYER)
-            // ----------------------------
+            // ========== PATROL (KHÔNG ATTACK) ==========
+            info->IsAttacking = false; // rất quan trọng
 
-            // Đổi hướng random
             if (info->Time > info->ChangeDirectionTime)
             {
-                info->ChangeDirectionTime = info->Time + f.Global->RngSession.Next(FP._1, FP._2);
+                info->ChangeDirectionTime =
+                    info->Time + f.Global->RngSession.Next(FP._1, FP._2);
 
                 info->Direction = new FPVector2(
                     f.Global->RngSession.Next(-FP._1, FP._1),
@@ -111,15 +138,12 @@ namespace Quantum
                 ).Normalized;
             }
 
-            // Giữ trong bán kính
             FP distToSpawn = FPVector2.Distance(enemyPos, info->SpawnPosition);
             if (distToSpawn > info->Radius)
             {
                 info->Direction = (info->SpawnPosition - enemyPos).Normalized;
             }
 
-            // Move patrol
-            info->IsAttacking = false;
             filter.Body->Velocity = info->Direction * FP._0_75;
         }
     }

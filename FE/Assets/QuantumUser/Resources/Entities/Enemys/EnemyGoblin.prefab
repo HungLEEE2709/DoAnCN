@@ -637,10 +637,13 @@ MonoBehaviour:
       RawValue: 98304
     DetectionRange:
       RawValue: 0
+    Damage:
+      RawValue: 983040
     IsAttacking:
       Value: 0
     IsDead:
       Value: 0
+    PlayerEntity: {fileID: 0}
 --- !u!114 &8069853929532662392
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -65,6 +65,7 @@ namespace Quantum.Prototypes {
     public QBoolean IsAttacking;
     public QBoolean IsDead;
     public MapEntityId PlayerEntity;
+    public FP AttackCooldown;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyInfo component = default;
         Materialize((Frame)f, ref component, in context);
@@ -84,6 +85,7 @@ namespace Quantum.Prototypes {
         result.IsAttacking = this.IsAttacking;
         result.IsDead = this.IsDead;
         PrototypeValidator.FindMapEntity(this.PlayerEntity, in context, out result.PlayerEntity);
+        result.AttackCooldown = this.AttackCooldown;
     }
   }
   [System.SerializableAttribute()]
@@ -95,6 +97,23 @@ namespace Quantum.Prototypes {
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.Direction = this.Direction;
         result.Attack = this.Attack;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.ItemInfo))]
+  public unsafe partial class ItemInfoPrototype : ComponentPrototype<Quantum.ItemInfo> {
+    public Int32 ItemId;
+    public Int32 Quantity;
+    partial void MaterializeUser(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.ItemInfo component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context = default) {
+        result.ItemId = this.ItemId;
+        result.Quantity = this.Quantity;
         MaterializeUser(frame, ref result, in context);
     }
   }

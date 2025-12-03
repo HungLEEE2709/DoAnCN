@@ -27,4 +27,10 @@ component EnemyInfo {
     bool IsAttacking;
     bool IsDead;
     EntityRef PlayerEntity;
+    FP AttackCooldown;
+
+}
+component ItemInfo {
+    int ItemId;
+    int Quantity;
 }

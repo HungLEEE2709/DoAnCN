@@ -6,14 +6,13 @@ using UnityEngine.Networking;
 
 public class PlayerUI : MonoBehaviour
 {
-    [Header("UI References")]
+
     public Image healthBar;
     public Image staminaBar;
 
     public TextMeshProUGUI healthAmount;
     public TextMeshProUGUI staminaAmount;
 
-    [Header("Stats")]
     public float maxHealth;
     public float currentHealth;
 
@@ -32,25 +31,17 @@ public class PlayerUI : MonoBehaviour
     {
         userId = PlayerPrefs.GetString("idUser", "");
 
-        if (string.IsNullOrEmpty(userId))
-        {
-            Debug.LogError("❌ Không có userId, hãy login trước!");
-            return;
-        }
-
         StartCoroutine(LoadPlayerStats());
     }
 
     void Update()
     {
-        RegenerateKi();   // 🔥 Gọi hồi KI
-
+        RegenerateKi();
         UpdateUI();
 
         if (statsChanged)
         {
             timer += Time.deltaTime;
-
             if (timer >= sendCooldown)
             {
                 StartCoroutine(UpdateStatsToServer());
@@ -60,9 +51,6 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    // ============================
-    // LOAD FROM SERVER
-    // ============================
     IEnumerator LoadPlayerStats()
     {
         string url = "http://localhost:5000/api/playerInfo/chosen/" + userId;
@@ -70,32 +58,16 @@ public class PlayerUI : MonoBehaviour
 
         yield return req.SendWebRequest();
 
-        if (req.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError("❌ API ERROR: " + req.error);
-            yield break;
-        }
-
-        PlayerResponse data = JsonUtility.FromJson<PlayerResponse>(req.downloadHandler.text);
-
-        if (data == null || data.player == null)
-        {
-            Debug.LogError("❌ Không nhận được dữ liệu nhân vật!");
-            yield break;
-        }
+        PlayerResponse data =
+            JsonUtility.FromJson<PlayerResponse>(req.downloadHandler.text);
 
         maxHealth = Mathf.Max(1, data.player.Hp);
         maxKi = Mathf.Max(1, data.player.Ki);
 
         currentHealth = maxHealth;
         currentKi = maxKi;
-
-        Debug.Log($"✅ LOAD OK: HP={maxHealth}, Ki={maxKi}");
     }
 
-    // ============================
-    // DAMAGE & KI USAGE
-    // ============================
     public void TakeDamage(float dmg)
     {
         currentHealth -= dmg;
@@ -110,9 +82,6 @@ public class PlayerUI : MonoBehaviour
         statsChanged = true;
     }
 
-    // ============================
-    // KI REGEN WHEN IDLE
-    // ============================
     void RegenerateKi()
     {
         if (currentKi < maxKi)
@@ -123,13 +92,16 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    // ============================
-    // UI UPDATE — FIX NaN
-    // ============================
+    public void SetHealthFromQuantum(float hp)
+    {
+        currentHealth = Mathf.Clamp(hp, 0, maxHealth);
+        statsChanged = true;
+    }
+
     private void UpdateUI()
     {
-        float hpFill = (maxHealth <= 0) ? 0 : currentHealth / maxHealth;
-        float kiFill = (maxKi <= 0) ? 0 : currentKi / maxKi;
+        float hpFill = currentHealth / maxHealth;
+        float kiFill = currentKi / maxKi;
 
         healthBar.fillAmount = Mathf.Clamp01(hpFill);
         staminaBar.fillAmount = Mathf.Clamp01(kiFill);
@@ -138,9 +110,6 @@ public class PlayerUI : MonoBehaviour
         staminaAmount.text = Mathf.RoundToInt(currentKi).ToString();
     }
 
-    // ============================
-    // UPDATE STATS TO SERVER
-    // ============================
     IEnumerator UpdateStatsToServer()
     {
         string url = "http://localhost:5000/api/playerInfo/update-stats";
@@ -160,8 +129,5 @@ public class PlayerUI : MonoBehaviour
         req.SetRequestHeader("Content-Type", "application/json");
 
         yield return req.SendWebRequest();
-
-        if (req.result != UnityWebRequest.Result.Success)
-            Debug.LogError("❌ Update HP/Ki Error: " + req.error);
     }
 }

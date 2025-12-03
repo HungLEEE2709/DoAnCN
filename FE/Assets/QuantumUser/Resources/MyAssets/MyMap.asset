@@ -57,9 +57,9 @@ MonoBehaviour:
       data:
         Position:
           X:
-            RawValue: -241827
+            RawValue: -370933
           Y:
-            RawValue: 217579
+            RawValue: 208404
         Rotation:
           RawValue: 0
     - rid: 1179563807366709249
@@ -186,12 +186,14 @@ MonoBehaviour:
         AttackRange:
           RawValue: 98304
         DetectionRange:
-          RawValue: 327680
+          RawValue: 262144
         Damage:
-          RawValue: 393216
+          RawValue: 327680
         IsAttacking:
           Value: 0
         IsDead:
           Value: 0
         PlayerEntity:
           SceneIndexPlusOne: 0
+        AttackCooldown:
+          RawValue: 0

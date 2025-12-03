@@ -617,27 +617,27 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct EnemyInfo : Quantum.IComponent {
-    public const Int32 SIZE = 112;
+    public const Int32 SIZE = 120;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(72)]
-    public FP Time;
-    [FieldOffset(24)]
-    public FP ChangeDirectionTime;
     [FieldOffset(80)]
-    public FPVector2 Direction;
-    [FieldOffset(96)]
-    public FPVector2 SpawnPosition;
-    [FieldOffset(64)]
-    public FP Radius;
-    [FieldOffset(56)]
-    public FP Health;
+    public FP Time;
     [FieldOffset(32)]
-    public FP CurrentHealth;
-    [FieldOffset(16)]
-    public FP AttackRange;
-    [FieldOffset(48)]
-    public FP DetectionRange;
+    public FP ChangeDirectionTime;
+    [FieldOffset(88)]
+    public FPVector2 Direction;
+    [FieldOffset(104)]
+    public FPVector2 SpawnPosition;
+    [FieldOffset(72)]
+    public FP Radius;
+    [FieldOffset(64)]
+    public FP Health;
     [FieldOffset(40)]
+    public FP CurrentHealth;
+    [FieldOffset(24)]
+    public FP AttackRange;
+    [FieldOffset(56)]
+    public FP DetectionRange;
+    [FieldOffset(48)]
     public FP Damage;
     [FieldOffset(0)]
     public QBoolean IsAttacking;
@@ -645,6 +645,8 @@ namespace Quantum {
     public QBoolean IsDead;
     [FieldOffset(8)]
     public EntityRef PlayerEntity;
+    [FieldOffset(16)]
+    public FP AttackCooldown;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 14407;
@@ -661,6 +663,7 @@ namespace Quantum {
         hash = hash * 31 + IsAttacking.GetHashCode();
         hash = hash * 31 + IsDead.GetHashCode();
         hash = hash * 31 + PlayerEntity.GetHashCode();
+        hash = hash * 31 + AttackCooldown.GetHashCode();
         return hash;
       }
     }
@@ -669,6 +672,7 @@ namespace Quantum {
         QBoolean.Serialize(&p->IsAttacking, serializer);
         QBoolean.Serialize(&p->IsDead, serializer);
         EntityRef.Serialize(&p->PlayerEntity, serializer);
+        FP.Serialize(&p->AttackCooldown, serializer);
         FP.Serialize(&p->AttackRange, serializer);
         FP.Serialize(&p->ChangeDirectionTime, serializer);
         FP.Serialize(&p->CurrentHealth, serializer);
@@ -679,6 +683,28 @@ namespace Quantum {
         FP.Serialize(&p->Time, serializer);
         FPVector2.Serialize(&p->Direction, serializer);
         FPVector2.Serialize(&p->SpawnPosition, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct ItemInfo : Quantum.IComponent {
+    public const Int32 SIZE = 8;
+    public const Int32 ALIGNMENT = 4;
+    [FieldOffset(0)]
+    public Int32 ItemId;
+    [FieldOffset(4)]
+    public Int32 Quantity;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 4099;
+        hash = hash * 31 + ItemId.GetHashCode();
+        hash = hash * 31 + Quantity.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (ItemInfo*)ptr;
+        serializer.Stream.Serialize(&p->ItemId);
+        serializer.Stream.Serialize(&p->Quantity);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -757,6 +783,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<CharacterController3D>();
       BuildSignalsArrayOnComponentAdded<Quantum.EnemyInfo>();
       BuildSignalsArrayOnComponentRemoved<Quantum.EnemyInfo>();
+      BuildSignalsArrayOnComponentAdded<Quantum.ItemInfo>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.ItemInfo>();
       BuildSignalsArrayOnComponentAdded<MapEntityLink>();
       BuildSignalsArrayOnComponentRemoved<MapEntityLink>();
       BuildSignalsArrayOnComponentAdded<NavMeshAvoidanceAgent>();
@@ -863,6 +891,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(InputPitchYaw), InputPitchYaw.SIZE);
       typeRegistry.Register(typeof(IntVector2), IntVector2.SIZE);
       typeRegistry.Register(typeof(IntVector3), IntVector3.SIZE);
+      typeRegistry.Register(typeof(Quantum.ItemInfo), Quantum.ItemInfo.SIZE);
       typeRegistry.Register(typeof(Joint), Joint.SIZE);
       typeRegistry.Register(typeof(Joint3D), Joint3D.SIZE);
       typeRegistry.Register(typeof(LayerMask), LayerMask.SIZE);
@@ -906,9 +935,10 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 2)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 3)
         .AddBuiltInComponents()
         .Add<Quantum.EnemyInfo>(Quantum.EnemyInfo.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.ItemInfo>(Quantum.ItemInfo.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerInfo>(Quantum.PlayerInfo.Serialize, null, null, ComponentFlags.None)
         .Finish();
     }

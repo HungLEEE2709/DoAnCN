@@ -689,9 +689,9 @@ MonoBehaviour:
     Health:
       RawValue: 228065
     CurrentHealth:
-      RawValue: 0
+      RawValue: 9830400
     MaxHealth:
-      RawValue: 0
+      RawValue: 9830400
     Ki:
       RawValue: 0
     MaxKi:
@@ -713,6 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3733bc5193a3edd4ab1ea4cfa3b20cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSmooth: 0.1
+  cameraOffset: {x: 0, y: 1.5, z: -10}
 --- !u!1 &3701926643807293140
 GameObject:
   m_ObjectHideFlags: 0

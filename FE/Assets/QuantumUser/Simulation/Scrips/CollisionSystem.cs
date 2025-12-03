@@ -2,23 +2,25 @@
 
 namespace Quantum
 {
-    public unsafe class CollisionSystem : SystemSignalsOnly, ISignalOnCollisionEnter2D
+    public unsafe class CollisionSystem :
+        SystemSignalsOnly,
+        ISignalOnCollisionEnter2D
     {
+
         public void OnCollisionEnter2D(Frame f, CollisionInfo2D info)
         {
-            Log.Debug($"COLLISION: {info.Entity} hit {info.Other}");
-
             EntityRef a = info.Entity;
             EntityRef b = info.Other;
 
-            // A = Player, B = Enemy
+            // ======================
+            // PLAYER → ENEMY (Attack)
+            // ======================
             if (f.TryGet<PlayerInfo>(a, out var playerA) &&
                 f.TryGet<EnemyInfo>(b, out var enemyB))
             {
                 HandlePlayerAttack(f, a, ref playerA, b, ref enemyB);
             }
 
-            // B = Player, A = Enemy
             if (f.TryGet<PlayerInfo>(b, out var playerB) &&
                 f.TryGet<EnemyInfo>(a, out var enemyA))
             {
@@ -26,11 +28,11 @@ namespace Quantum
             }
         }
 
-        private void HandlePlayerAttack(
-            Frame f,
+        private void HandlePlayerAttack(Frame f,
             EntityRef playerEnt, ref PlayerInfo player,
             EntityRef enemyEnt, ref EnemyInfo enemy)
         {
+
             if (!player.IsAttacking)
                 return;
 

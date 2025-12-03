@@ -1445,11 +1445,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7752909294943296149, guid: cbe72d363d419574990f4b418efc5aac, type: 3}
       propertyPath: Prototype.Damage.RawValue
-      value: 393216
+      value: 327680
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752909294943296149, guid: cbe72d363d419574990f4b418efc5aac, type: 3}
+      propertyPath: Prototype.AttackRange.RawValue
+      value: 98304
       objectReference: {fileID: 0}
     - target: {fileID: 7752909294943296149, guid: cbe72d363d419574990f4b418efc5aac, type: 3}
       propertyPath: Prototype.DetectionRange.RawValue
-      value: 327680
+      value: 262144
       objectReference: {fileID: 0}
     - target: {fileID: 8920279660368222669, guid: cbe72d363d419574990f4b418efc5aac, type: 3}
       propertyPath: PhysicsCollider.Shape2D.CircleRadius.RawValue
@@ -1743,6 +1747,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4824186262196131035, guid: ac5246298154987489e064ed881306c4, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824186262196131035, guid: ac5246298154987489e064ed881306c4, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7062603308060076470, guid: ac5246298154987489e064ed881306c4, type: 3}
       propertyPath: playerView
       value: 
@@ -1750,6 +1762,10 @@ PrefabInstance:
     - target: {fileID: 7606885530975242766, guid: ac5246298154987489e064ed881306c4, type: 3}
       propertyPath: m_Name
       value: Canvas(HpKi)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018546813441340922, guid: ac5246298154987489e064ed881306c4, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
