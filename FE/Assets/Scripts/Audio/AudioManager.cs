@@ -20,6 +20,9 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Âm thanh khi enemy tấn công")]
     public AudioClip enemyAttackSound;
 
+    [Tooltip("Âm thanh khi sử dụng item (hồi máu/ki)")]
+    public AudioClip itemUseSound;
+
     [Header("Settings")]
     [Range(0f, 1f)]
     public float sfxVolume = 1f;
@@ -130,6 +133,18 @@ public class AudioManager : MonoBehaviour
         else
         {
             Debug.LogWarning("[AudioManager] Enemy attack sound clip chưa được gán!");
+        }
+    }
+
+    public void PlayItemUseSound()
+    {
+        if (itemUseSound != null)
+        {
+            audioSource.PlayOneShot(itemUseSound, sfxVolume);
+        }
+        else
+        {
+            Debug.LogWarning("[AudioManager] Item use sound clip chưa được gán!");
         }
     }
 }

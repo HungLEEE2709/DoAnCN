@@ -2,4 +2,7 @@ input
 {
     FPVector2 Direction;
     button Attack;
+    int UseItemId;
+    int HealthRestore;
+    int KiRestore;
 }

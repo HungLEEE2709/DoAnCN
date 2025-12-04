@@ -1,0 +1,8 @@
+event ItemPickedUp
+{
+    player_ref Player;
+    int ItemId;
+    int Quantity;
+}
+
+// Event for using consumable items (HP/Ki recovery)

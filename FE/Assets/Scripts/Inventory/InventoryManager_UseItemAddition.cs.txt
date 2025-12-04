@@ -1,0 +1,129 @@
+// ===========================
+// THÊM VÀO InventoryManager.cs
+// ===========================
+
+// 1. THÊM VÀO Update() METHOD (sau dòng 108):
+// ========== SỬ DỤNG ITEM VỚI PHÍM E ==========
+if (Input.GetKeyDown(KeyCode.E))
+{
+    SlotClass hoveredSlot = GetClosestSlot();
+    if (hoveredSlot != null && hoveredSlot.GetItem() != null)
+    {
+        UseItem(hoveredSlot);
+    }
+}
+
+// 2. THÊM METHOD MỚI (trước dấu } cuối cùng của class, sau method ContainsItem):
+// ===========================
+// SỬ DỤNG ITEM
+// ===========================
+public void UseItem(SlotClass slot)
+{
+    if (slot == null || slot.GetItem() == null)
+    {
+        Debug.LogWarning("[Inventory] Slot rỗng, không thể dùng item");
+        return;
+    }
+
+    // Kiểm tra xem có phải consumable không
+    ConsumableClass consumable = slot.GetItem().GetConsumable();
+    if (consumable == null)
+    {
+        Debug.LogWarning($"[Inventory] {slot.GetItem().itemName} không phải consumable item");
+        return;
+    }
+
+    // Kiểm tra có hiệu quả không
+    if (consumable.healthRecovery <= 0 && consumable.kiRecovery <= 0)
+    {
+        Debug.LogWarning($"[Inventory] {consumable.itemName} không có hiệu quả hồi phục");
+        return;
+    }
+
+    // Lấy player entity từ Quantum
+    var runner = QuantumRunner.Default;
+    if (runner == null || runner.Game == null)
+    {
+        Debug.LogError("[Inventory] Quantum runner không tồn tại");
+        return;
+    }
+
+    var frame = runner.Game.Frames.Verified;
+    if (frame == null)
+    {
+        Debug.LogError("[Inventory] Quantum frame không tồn tại");
+        return;
+    }
+
+    // Tìm player entity của local player
+    EntityRef playerEntity = EntityRef.None;
+    var filter = frame.Filter<PlayerInfo>();
+    while (filter.Next(out var entity, out var playerInfo))
+    {
+        if (runner.Game.PlayerIsLocal(playerInfo.PlayerRef))
+        {
+            playerEntity = entity;
+            break;
+        }
+    }
+
+    if (playerEntity == EntityRef.None)
+    {
+        Debug.LogError("[Inventory] Không tìm thấy player entity");
+        return;
+    }
+
+    // Biến lưu trữ tạm thời thông tin item đang dùng
+    private int _pendingItemId;
+    private int _pendingHealthRestore;
+    private int _pendingKiRestore;
+
+    private void OnEnable()
+    {
+        QuantumCallback.Subscribe(this, (CallbackPollInput callback) => OnPollInput(callback));
+    }
+
+    private void OnPollInput(CallbackPollInput callback)
+    {
+        if (_pendingItemId > 0)
+        {
+            Quantum.Input i = new Quantum.Input();
+            i.UseItemId = _pendingItemId;
+            i.HealthRestore = _pendingHealthRestore;
+            i.KiRestore = _pendingKiRestore;
+            
+            callback.SetInput(i, DeterministicInputFlags.Command);
+            
+            // Reset sau khi đã gửi
+            _pendingItemId = 0;
+            _pendingHealthRestore = 0;
+            _pendingKiRestore = 0;
+        }
+    }
+
+    // Trong phương thức UseItem:
+    // Thay vì gửi event/command, ta lưu vào biến pending
+    _pendingItemId = consumable.itemId.GetHashCode();
+    _pendingHealthRestore = consumable.healthRecovery;
+    _pendingKiRestore = consumable.kiRecovery;
+
+    Debug.Log($"<color=lime>[Inventory] Đã dùng {consumable.itemName} (Queue Input)</color>");
+
+    // Phát âm thanh
+    if (AudioManager.Instance != null)
+    {
+        AudioManager.Instance.PlayItemUseSound();
+    }
+
+    // Giảm số lượng item
+    slot.SubQuantity(1);
+    if (slot.GetQuantity() <= 0)
+    {
+        slot.RemoveItem();
+    }
+
+    RefreshUI();
+
+    // Lưu inventory
+    StartCoroutine(InventoryAPI.Instance.SaveInventory(userId, items));
+}

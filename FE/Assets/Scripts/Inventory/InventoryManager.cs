@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Quantum;
+using Photon.Deterministic;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -103,34 +105,104 @@ public class InventoryManager : MonoBehaviour
     }
 
     // ===========================
-    // UPDATE (KÉO THẢ)
+    // USE ITEM (INPUT POLLING)
+    // ===========================
+    private int _pendingItemId;
+    private int _pendingHealthRestore;
+    private int _pendingKiRestore;
+
+    private void OnEnable()
+    {
+        QuantumCallback.Subscribe(this, (CallbackPollInput callback) => OnPollInput(callback));
+    }
+
+    private void OnPollInput(CallbackPollInput callback)
+    {
+        if (_pendingItemId != 0)
+        {
+            Quantum.Input i = new Quantum.Input();
+            i.UseItemId = _pendingItemId;
+            i.HealthRestore = _pendingHealthRestore;
+            i.KiRestore = _pendingKiRestore;
+            
+            callback.SetInput(i, DeterministicInputFlags.Command);
+            
+            // Reset sau khi đã gửi
+            _pendingItemId = 0;
+            _pendingHealthRestore = 0;
+            _pendingKiRestore = 0;
+        }
+    }
+
+    public void UseItem(SlotClass slot)
+    {
+        if (slot == null || slot.GetItem() == null) return;
+
+        ConsumableClass consumable = slot.GetItem().GetConsumable();
+        if (consumable != null)
+        {
+            // Queue Input cho Quantum
+            _pendingItemId = consumable.itemId.GetHashCode();
+            _pendingHealthRestore = consumable.healthRecovery;
+            _pendingKiRestore = consumable.kiRecovery;
+            Debug.Log($"<color=lime>[Inventory] Đã dùng {consumable.itemName} (Queue Input)</color>");
+
+            // Phát âm thanh
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayItemUseSound();
+            }
+
+            // Giảm số lượng
+            slot.SubQuantity(1);
+            if (slot.GetQuantity() <= 0)
+            {
+                slot.RemoveItem();
+            }
+
+            // Lưu inventory
+            StartCoroutine(InventoryAPI.Instance.SaveInventory(userId, items));
+            RefreshUI();
+        }
+    }
+
+    // ===========================
+    // UPDATE (KÉO THẢ & USE ITEM)
     // ===========================
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        // ... (Logic kéo thả cũ) ...
+        if (UnityEngine.Input.GetMouseButtonDown(0))
         {
-            if (isMoving)
-                EndMove();
-            else
-                BeginMove();
+            if (isMoving) EndMove();
+            else BeginMove();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (UnityEngine.Input.GetMouseButtonDown(1))
         {
-            if (!isMoving)
-                BeginSplit();
+            if (!isMoving) BeginSplit();
         }
 
         if (isMoving)
         {
             itemCursor.enabled = true;
-            itemCursor.transform.position = Input.mousePosition;
+            itemCursor.transform.position = UnityEngine.Input.mousePosition;
             itemCursor.sprite = movingSlot.GetItem().itemIcon;
         }
         else
         {
             itemCursor.enabled = false;
             itemCursor.sprite = null;
+        }
+
+        // DETECT USE ITEM (Phím E)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+        {
+            SlotClass slot = GetClosestSlot();
+            if (slot != null && slot.GetItem() != null)
+            {
+                UseItem(slot);
+            }
         }
     }
 
@@ -160,16 +232,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // ===========================
-    // KÉO THẢ
-    // ===========================
     private SlotClass GetClosestSlot()
     {
         for (int i = 0; i < slots.Length; i++)
         {
             RectTransform rect = slots[i].GetComponent<RectTransform>();
 
-            if (RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition))
+            if (RectTransformUtility.RectangleContainsScreenPoint(rect, UnityEngine.Input.mousePosition))
                 return items[i];
         }
 

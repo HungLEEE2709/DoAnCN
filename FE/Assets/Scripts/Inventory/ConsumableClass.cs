@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class ConsumableClass : ItemClass
 {
-    [Header("Consumable")]
+    [Header("Consumable Effects")]
     public int healthRecovery;
+    public int kiRecovery;
     public override ItemClass GetItem() { return this; }
     public override ToolClass GetTool() { return null; }
     public override MiscClass GetMisc() { return null; }

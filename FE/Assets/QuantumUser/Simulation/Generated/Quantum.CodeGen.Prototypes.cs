@@ -97,10 +97,16 @@ namespace Quantum.Prototypes {
   public unsafe partial class InputPrototype : StructPrototype {
     public FPVector2 Direction;
     public Button Attack;
+    public Int32 UseItemId;
+    public Int32 HealthRestore;
+    public Int32 KiRestore;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.Direction = this.Direction;
         result.Attack = this.Attack;
+        result.UseItemId = this.UseItemId;
+        result.HealthRestore = this.HealthRestore;
+        result.KiRestore = this.KiRestore;
         MaterializeUser(frame, ref result, in context);
     }
   }

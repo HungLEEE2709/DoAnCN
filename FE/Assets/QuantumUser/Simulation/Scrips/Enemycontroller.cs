@@ -15,10 +15,13 @@ namespace Quantum
             public EnemyInfo* Info;
         }
 
-        // thời gian từ lúc bắt đầu vung chém tới lúc trúng (phải khớp với animation)
-        private static readonly FP AttackWindup = FP.FromFloat_UNSAFE(0.8f);
-        // thời gian nghỉ giữa 2 cú chém
-        private static readonly FP AttackInterval = FP.FromFloat_UNSAFE(0.7f);
+        // Thời gian animation attack (phải đủ để animation chạy hết)
+        // Tăng lên để animation Goblin_Attack chạy đủ trước khi gây damage
+        private static readonly FP AttackWindup = FP.FromFloat_UNSAFE(1.2f);
+        
+        // Thời gian cooldown giữa các cú chém (tránh spam attack)
+        // Phải đủ lớn để animation kết thúc và có khoảng nghỉ
+        private static readonly FP AttackInterval = FP.FromFloat_UNSAFE(1.5f);
 
         public override void Update(Frame f, ref Filter filter)
         {

@@ -512,17 +512,26 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Input {
-    public const Int32 SIZE = 32;
+    public const Int32 SIZE = 40;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(16)]
+    [FieldOffset(24)]
     public FPVector2 Direction;
-    [FieldOffset(0)]
+    [FieldOffset(12)]
     public Button Attack;
+    [FieldOffset(8)]
+    public Int32 UseItemId;
+    [FieldOffset(0)]
+    public Int32 HealthRestore;
+    [FieldOffset(4)]
+    public Int32 KiRestore;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 19249;
         hash = hash * 31 + Direction.GetHashCode();
         hash = hash * 31 + Attack.GetHashCode();
+        hash = hash * 31 + UseItemId.GetHashCode();
+        hash = hash * 31 + HealthRestore.GetHashCode();
+        hash = hash * 31 + KiRestore.GetHashCode();
         return hash;
       }
     }
@@ -543,13 +552,16 @@ namespace Quantum {
     }
     static partial void SerializeCodeGen(void* ptr, FrameSerializer serializer) {
         var p = (Input*)ptr;
+        serializer.Stream.Serialize(&p->HealthRestore);
+        serializer.Stream.Serialize(&p->KiRestore);
+        serializer.Stream.Serialize(&p->UseItemId);
         Button.Serialize(&p->Attack, serializer);
         FPVector2.Serialize(&p->Direction, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 808;
+    public const Int32 SIZE = 856;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(0)]
     public AssetRef<Map> Map;
@@ -573,12 +585,12 @@ namespace Quantum {
     public Int32 PlayerConnectedCount;
     [FieldOffset(608)]
     [FramePrinter.FixedArrayAttribute(typeof(Input), 6)]
-    private fixed Byte _input_[192];
-    [FieldOffset(800)]
+    private fixed Byte _input_[240];
+    [FieldOffset(848)]
     public BitSet6 PlayerLastConnectionState;
     public readonly FixedArray<Input> input {
       get {
-        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 32, 6); }
+        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 40, 6); }
       }
     }
     public override readonly Int32 GetHashCode() {
@@ -847,6 +859,9 @@ namespace Quantum {
       var i = _globals->input.GetPointer(player);
       i->Direction = input.Direction;
       i->Attack = i->Attack.Update(this.Number, input.Attack);
+      i->UseItemId = input.UseItemId;
+      i->HealthRestore = input.HealthRestore;
+      i->KiRestore = input.KiRestore;
     }
     public Input* GetPlayerInput(PlayerRef player) {
       if ((int)player >= (int)_globals->input.Length) { throw new System.ArgumentOutOfRangeException("player"); }

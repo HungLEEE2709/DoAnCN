@@ -1,6 +1,0 @@
-event ItemPickedUp
-{
-    player_ref Player;
-    int ItemId;
-    int Quantity;
-}

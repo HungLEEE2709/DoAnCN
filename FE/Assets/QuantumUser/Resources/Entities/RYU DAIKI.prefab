@@ -945,7 +945,7 @@ MonoBehaviour:
     Damage:
       RawValue: 112067
     Health:
-      RawValue: 262144
+      RawValue: 18350080
     CurrentHealth:
       RawValue: 0
     MaxHealth:

@@ -54,6 +54,16 @@ MonoBehaviour:
     - rid: 4473337032252325890
     - rid: 4473337032252325891
   - Components:
+    - rid: 9187746554444775424
+    - rid: 9187746554444775425
+    - rid: 9187746554444775426
+    - rid: 9187746554444775427
+  - Components:
+    - rid: 3270613058271051776
+    - rid: 3270613058271051777
+    - rid: 3270613058271051778
+    - rid: 3270613058271051779
+  - Components:
     - rid: 5985634898092752896
     - rid: 5985634898092752897
     - rid: 5985634898092752898
@@ -216,6 +226,65 @@ MonoBehaviour:
           RawValue: 0
         RewardTiemNang:
           RawValue: 0
+    - rid: 3270613058271051776
+      type: {class: Transform2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Position:
+          X:
+            RawValue: -141669
+          Y:
+            RawValue: -266154
+        Rotation:
+          RawValue: 0
+    - rid: 3270613058271051777
+      type: {class: PhysicsCollider2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        ShapeConfig:
+          ShapeType: 1
+          PolygonCollider:
+            Id:
+              Value: 0
+          CircleRadius:
+            RawValue: 10393
+          CapsuleSize:
+            X:
+              RawValue: 20786
+            Y:
+              RawValue: 32906
+          EdgeExtent:
+            RawValue: 10393
+          BoxExtents:
+            X:
+              RawValue: 10393
+            Y:
+              RawValue: 8227
+          PositionOffset:
+            X:
+              RawValue: 0
+            Y:
+              RawValue: 0
+          RotationOffset:
+            RawValue: 0
+          UserTag: 0
+          IsPersistent: 1
+          CompoundShapes: []
+        Layer: 0
+        IsTrigger: 1
+        PhysicsMaterial:
+          Id:
+            Value: 0
+    - rid: 3270613058271051778
+      type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        CallbackFlags:
+          Value: 4095
+    - rid: 3270613058271051779
+      type: {class: ItemInfoPrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
+      data:
+        ItemId: 1
+        Quantity: 1
+        Collected:
+          Value: 0
     - rid: 4473337032252325888
       type: {class: Transform2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
       data:
@@ -387,6 +456,65 @@ MonoBehaviour:
         CallbackFlags:
           Value: 4095
     - rid: 6128635093331214339
+      type: {class: ItemInfoPrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
+      data:
+        ItemId: 1
+        Quantity: 1
+        Collected:
+          Value: 0
+    - rid: 9187746554444775424
+      type: {class: Transform2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        Position:
+          X:
+            RawValue: -400326
+          Y:
+            RawValue: 129479
+        Rotation:
+          RawValue: 0
+    - rid: 9187746554444775425
+      type: {class: PhysicsCollider2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        ShapeConfig:
+          ShapeType: 1
+          PolygonCollider:
+            Id:
+              Value: 0
+          CircleRadius:
+            RawValue: 10393
+          CapsuleSize:
+            X:
+              RawValue: 20786
+            Y:
+              RawValue: 32906
+          EdgeExtent:
+            RawValue: 10393
+          BoxExtents:
+            X:
+              RawValue: 10393
+            Y:
+              RawValue: 8227
+          PositionOffset:
+            X:
+              RawValue: 0
+            Y:
+              RawValue: 0
+          RotationOffset:
+            RawValue: 0
+          UserTag: 0
+          IsPersistent: 1
+          CompoundShapes: []
+        Layer: 0
+        IsTrigger: 1
+        PhysicsMaterial:
+          Id:
+            Value: 0
+    - rid: 9187746554444775426
+      type: {class: PhysicsCallbacks2DPrototype, ns: Quantum.Prototypes, asm: Quantum.Engine}
+      data:
+        CallbackFlags:
+          Value: 4095
+    - rid: 9187746554444775427
       type: {class: ItemInfoPrototype, ns: Quantum.Prototypes, asm: Quantum.Simulation}
       data:
         ItemId: 1
