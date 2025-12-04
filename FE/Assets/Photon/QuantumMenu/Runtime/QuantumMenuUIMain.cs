@@ -184,7 +184,7 @@
             StartCoroutine(CheckStatusForUI());
         }
 
-        private string apiCheck = "http://localhost:5000/api/playerInfo/check/";
+        private string apiCheck = GameConfig.BaseUrl + "/api/playerInfo/check/";
 
         System.Collections.IEnumerator CheckStatusForUI()
         {

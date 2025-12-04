@@ -1,0 +1,70 @@
+<%- include('layout', { body: ` <div class="profile-page">
+    <div class="profile-header">
+        <h2>Xin chào, <%= user.username %>!</h2>
+        <a href="/login" class="btn-logout">Đăng Xuất</a>
+    </div>
+
+    <% if (player) { %>
+        <div class="stats-card">
+            <h3>Thông Tin Nhân Vật</h3>
+            <div class="stat-row">
+                <span class="label">Tên nhân vật:</span>
+                <span class="value">
+                    <%= player.CharacterName || "Chưa đặt tên" %>
+                </span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Hành tinh:</span>
+                <span class="value">
+                    <%= player.Planet || "Trái Đất" %>
+                </span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box hp">
+                    <span class="icon">❤️</span>
+                    <span class="num">
+                        <%= player.Hp %>
+                    </span>
+                    <span class="txt">HP</span>
+                </div>
+                <div class="stat-box ki">
+                    <span class="icon">⚡</span>
+                    <span class="num">
+                        <%= player.Ki %>
+                    </span>
+                    <span class="txt">KI</span>
+                </div>
+                <div class="stat-box str">
+                    <span class="icon">💪</span>
+                    <span class="num">
+                        <%= player.SucManh %>
+                    </span>
+                    <span class="txt">Sức Mạnh</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password Section -->
+        <div class="auth-form" style="margin-top: 30px;">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">Đổi Mật Khẩu</h3>
+            <form action="/change-password" method="POST">
+                <input type="hidden" name="userId" value="<%= user._id %>">
+                <div class="form-group">
+                    <label>Mật khẩu cũ</label>
+                    <input type="password" name="oldPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu mới</label>
+                    <input type="password" name="newPassword" required>
+                </div>
+                <button type="submit" class="btn-submit">Cập Nhật</button>
+            </form>
+        </div>
+
+        <% } else { %>
+            <div class="alert warning">
+                Bạn chưa tạo nhân vật trong game! Hãy vào game để tạo nhân vật nhé.
+            </div>
+            <% } %>
+                </div>
+                ` }) %>

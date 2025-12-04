@@ -1,0 +1,24 @@
+<%- include('layout', { body: ` <div class="auth-form">
+    <h2>Đăng Nhập Tài Khoản</h2>
+
+    <% if (error) { %>
+        <div class="alert error">
+            <%= error %>
+        </div>
+        <% } %>
+
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label>Tài khoản</label>
+                    <input type="text" name="username" required placeholder="Nhập tên tài khoản">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required placeholder="Nhập mật khẩu">
+                </div>
+                <button type="submit" class="btn-submit">Đăng Nhập</button>
+            </form>
+
+            <p class="note">Chưa có tài khoản? Hãy đăng ký trong Game!</p>
+            </div>
+            ` }) %>

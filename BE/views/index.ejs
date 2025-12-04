@@ -1,0 +1,106 @@
+<%- include('layout', { body: ` <!-- HERO SECTION -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>AZURA LAND</h1>
+            <p class="subtitle">NHẬP VAI ĐA HÀNH TINH - CHIẾN ĐẤU ONLINE</p>
+            <p class="description">Trải nghiệm game nhập vai hành động đỉnh cao. Khám phá 3 hành tinh, săn Boss, PK tự
+                do và giao dịch không giới hạn.</p>
+            <div class="cta-group">
+                <a href="/download" class="btn-cta primary">TẢI GAME NGAY</a>
+                <a href="#leaderboard" class="btn-cta secondary">XEM XẾP HẠNG</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Placeholder for a cool game character image -->
+            <img src="/images/hero-char.png" alt="Azura Character" onerror="this.style.display='none'">
+        </div>
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <div id="features" class="section features">
+        <h2 class="section-title">TẠI SAO NÊN CHƠI?</h2>
+        <p class="section-subtitle">Không chỉ là game, đây là một thế giới sống động!</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">🌍</div>
+                <h3>Đa Hành Tinh</h3>
+                <p>Du hành giữa Azura-Prime, Nova và Zenith. Mỗi hành tinh là một thử thách mới.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚔️</div>
+                <h3>PK Thời Gian Thực</h3>
+                <p>Công nghệ Photon Quantum giúp trải nghiệm chiến đấu mượt mà, không độ trễ.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👹</div>
+                <h3>Săn Boss Thế Giới</h3>
+                <p>Tập hợp tổ đội, săn Boss khủng để nhận trang bị hiếm và ngọc rồng.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💎</div>
+                <h3>Giao Dịch Tự Do</h3>
+                <p>Thị trường mở, tự do buôn bán vật phẩm với người chơi khác.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEADERBOARD SECTION -->
+    <div id="leaderboard" class="section leaderboard">
+        <h2 class="section-title">BẢNG XẾP HẠNG</h2>
+        <p class="section-subtitle">Top 10 Cao Thủ Sức Mạnh</p>
+
+        <div class="leaderboard-table-wrapper">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nhân Vật</th>
+                        <th>Sức Mạnh</th>
+                        <th>Hành Tinh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Fake Data for Demo, replace with real EJS loop later -->
+                    <tr>
+                        <td class="rank-1">1</td>
+                        <td>SuperAdmin</td>
+                        <td>9,999,999</td>
+                        <td>Azura</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-2">2</td>
+                        <td>DragonSlayer</td>
+                        <td>5,420,000</td>
+                        <td>Nova</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-3">3</td>
+                        <td>NightMare</td>
+                        <td>4,100,200</td>
+                        <td>Zenith</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Newbie01</td>
+                        <td>1,200,000</td>
+                        <td>Azura</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Tester123</td>
+                        <td>500,000</td>
+                        <td>Nova</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CTA FOOTER -->
+    <div class="section cta-footer">
+        <h2>SẴN SÀNG TRỞ THÀNH CHIẾN BINH?</h2>
+        <p>Tải game ngay và bắt đầu hành trình chinh phục vũ trụ!</p>
+        <a href="/download" class="btn-cta primary">CHIẾN NGAY</a>
+    </div>
+    ` }) %>

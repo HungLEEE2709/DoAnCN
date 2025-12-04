@@ -12,6 +12,10 @@ const app = express();
 app.use(express.json()); // <-- JSON body
 app.use(express.urlencoded({ extended: true })); // <-- FORM body (x-www-form-urlencoded)
 
+// ---- VIEW ENGINE SETUP (EJS) ----
+app.set("view engine", "ejs");
+app.use(express.static("public")); // Serve static files (css, images)
+
 // -----------------------------------------
 console.log("Loading all routes...");
 
@@ -28,8 +32,12 @@ console.log("🔗 Mounting /api/inventory ...");
 app.use("/api/inventory", require("./routes/inventory"));
 console.log("✔ /api/inventory OK");
 
+// ---- WEB ROUTES (Frontend) ----
+app.use("/", require("./routes/web"));
+
 // ---- START SERVER ----
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server chạy tại http://localhost:${PORT}`);
+  console.log("DEBUG: Web routes should be mounted at /");
 });

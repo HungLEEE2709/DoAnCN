@@ -83,7 +83,7 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator LoadPlayerStats()
     {
-        string url = "http://localhost:5000/api/playerInfo/chosen/" + userId;
+        string url = GameConfig.BaseUrl + "/api/playerInfo/chosen/" + userId;
         UnityWebRequest req = UnityWebRequest.Get(url);
 
         yield return req.SendWebRequest();
@@ -158,7 +158,7 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator UpdateStatsToServer()
     {
-        string url = "http://localhost:5000/api/playerInfo/update-stats";
+        string url = GameConfig.BaseUrl + "/api/playerInfo/update-stats";
 
         PlayerStatsData payload = new PlayerStatsData()
         {

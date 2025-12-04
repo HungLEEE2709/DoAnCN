@@ -1,0 +1,26 @@
+<%- include('layout', { body: ` <div class="auth-form">
+    <h2>Xác Thực OTP</h2>
+    <p style="text-align: center; color: #aaa; margin-bottom: 20px;">
+        Mã OTP đã được gửi đến email <strong>
+            <%= email %>
+        </strong>.<br>
+        Vui lòng kiểm tra hộp thư (cả mục Spam).
+    </p>
+
+    <% if (locals.message) { %>
+        <div class="alert warning">
+            <%= message %>
+        </div>
+        <% } %>
+
+            <form action="/verify-otp" method="POST">
+                <input type="hidden" name="email" value="<%= email %>">
+                <div class="form-group">
+                    <label>Mã OTP (6 số)</label>
+                    <input type="text" name="otp" required placeholder="123456" maxlength="6"
+                        style="letter-spacing: 5px; text-align: center; font-size: 20px;">
+                </div>
+                <button type="submit" class="btn-submit">Xác Nhận</button>
+            </form>
+            </div>
+            ` }) %>

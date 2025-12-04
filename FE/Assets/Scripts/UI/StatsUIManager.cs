@@ -32,8 +32,8 @@ public class StatsUIManager : MonoBehaviour
     public TextMeshProUGUI sdValueText;
 
     [Header("API Config")]
-    public string apiGetPlayer = "http://localhost:5000/api/playerInfo/chosen/";
-    public string apiAddPotential = "http://localhost:5000/api/playerInfo/add-potential";
+    [System.NonSerialized] public string apiGetPlayer = GameConfig.BaseUrl + "/api/playerInfo/chosen/";
+    [System.NonSerialized] public string apiAddPotential = GameConfig.BaseUrl + "/api/playerInfo/add-potential";
 
     private string userId;
     private int currentPotential;

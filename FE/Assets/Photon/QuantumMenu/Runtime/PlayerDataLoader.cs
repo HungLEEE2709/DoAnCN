@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerDataLoader : MonoBehaviour
 {
-    public string apiGetPlayer = "http://localhost:5000/api/playerInfo/chosen/";
+    [System.NonSerialized] public string apiGetPlayer = GameConfig.BaseUrl + "/api/playerInfo/chosen/";
 
     public IEnumerator LoadPlayerFromServer(System.Action<bool> onDone)
     {
