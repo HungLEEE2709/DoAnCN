@@ -13,6 +13,7 @@
             systems.Add(new CollisionSystem());
             systems.Add(new EnemyController());
             systems.Add(new PlayerSpawner());
+            systems.Add(new ItemUsageSystem());
         }
     }
 }

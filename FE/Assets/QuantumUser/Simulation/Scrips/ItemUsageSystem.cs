@@ -22,8 +22,6 @@ namespace Quantum
 
         private void ProcessUseItem(Frame f, int playerIdx, Input* input)
         {
-            Log.Info($"[ItemUsage] Received Input from Player {playerIdx}: ItemId={input->UseItemId}, HP={input->HealthRestore}, Ki={input->KiRestore}");
-
             // Find player entity
             EntityRef playerEntity = EntityRef.None;
             var filter = f.Filter<PlayerInfo>();
@@ -49,7 +47,7 @@ namespace Quantum
             if (input->HealthRestore > 0)
             {
                 FP oldHealth = playerInfo->CurrentHealth;
-                playerInfo->CurrentHealth += FP.FromInt(input->HealthRestore);
+                playerInfo->CurrentHealth += FP.FromFloat_UNSAFE(input->HealthRestore);
 
                 // Clamp về MaxHealth
                 if (playerInfo->CurrentHealth > playerInfo->MaxHealth)
@@ -68,7 +66,7 @@ namespace Quantum
             if (input->KiRestore > 0)
             {
                 FP oldKi = playerInfo->Ki;
-                playerInfo->Ki += FP.FromInt(input->KiRestore);
+                playerInfo->Ki += FP.FromFloat_UNSAFE(input->KiRestore);
 
                 // Clamp về MaxKi
                 if (playerInfo->Ki > playerInfo->MaxKi)
