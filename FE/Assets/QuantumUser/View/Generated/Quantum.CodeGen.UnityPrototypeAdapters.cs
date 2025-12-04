@@ -67,6 +67,10 @@ namespace Quantum.Prototypes.Unity {
     public FP AttackCooldown;
     public FP RewardSucManh;
     public FP RewardTiemNang;
+    public AssetRef<EntityPrototype> DropItemPrototype;
+    public Int32 DropItemId;
+    public Int32 DropQuantity;
+    public Int32 DropChance;
     partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.EnemyInfoPrototype prototype);
     public override Quantum.Prototypes.EnemyInfoPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
       var result = new Quantum.Prototypes.EnemyInfoPrototype();
@@ -86,6 +90,10 @@ namespace Quantum.Prototypes.Unity {
       converter.Convert(this.AttackCooldown, out result.AttackCooldown);
       converter.Convert(this.RewardSucManh, out result.RewardSucManh);
       converter.Convert(this.RewardTiemNang, out result.RewardTiemNang);
+      converter.Convert(this.DropItemPrototype, out result.DropItemPrototype);
+      converter.Convert(this.DropItemId, out result.DropItemId);
+      converter.Convert(this.DropQuantity, out result.DropQuantity);
+      converter.Convert(this.DropChance, out result.DropChance);
       ConvertUser(converter, ref result);
       return result;
     }

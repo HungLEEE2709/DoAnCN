@@ -68,6 +68,10 @@ namespace Quantum.Prototypes {
     public FP AttackCooldown;
     public FP RewardSucManh;
     public FP RewardTiemNang;
+    public AssetRef<EntityPrototype> DropItemPrototype;
+    public Int32 DropItemId;
+    public Int32 DropQuantity;
+    public Int32 DropChance;
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.EnemyInfo component = default;
         Materialize((Frame)f, ref component, in context);
@@ -90,6 +94,10 @@ namespace Quantum.Prototypes {
         result.AttackCooldown = this.AttackCooldown;
         result.RewardSucManh = this.RewardSucManh;
         result.RewardTiemNang = this.RewardTiemNang;
+        result.DropItemPrototype = this.DropItemPrototype;
+        result.DropItemId = this.DropItemId;
+        result.DropQuantity = this.DropQuantity;
+        result.DropChance = this.DropChance;
     }
   }
   [System.SerializableAttribute()]

@@ -1,5 +1,6 @@
 ﻿using Photon.Deterministic;
 using UnityEngine.Scripting;
+using UnityEngine;
 
 namespace Quantum
 {
@@ -34,6 +35,24 @@ namespace Quantum
                 info->CurrentHealth = FP._0;
                 info->IsDead = true;
                 info->IsAttacking = false;
+                
+                // ========== ITEM DROP ==========
+                // Kiểm tra có Prototype và ID hợp lệ không
+                if (info->DropItemPrototype.Id.IsValid && info->DropItemId > 0 && info->DropQuantity > 0)
+                {
+                    // Random drop chance (0-100)
+                    int randomChance = f.Global->RngSession.Next(0, 100);
+                    int dropChance = info->DropChance > 0 ? info->DropChance : 100; // Default 100% if not set
+                    
+                    if (randomChance < dropChance)
+                    {
+                        SpawnDroppedItem(f, info->DropItemPrototype, info->DropItemId, info->DropQuantity, filter.Transform->Position);
+                    }
+                    else
+                    {
+                        Log.Debug($"[EnemyDrop] No drop (rolled {randomChance} vs {dropChance}%)");
+                    }
+                }
             }
 
             if (info->IsDead)
@@ -148,6 +167,66 @@ namespace Quantum
             }
 
             filter.Body->Velocity = info->Direction * FP._0_75;
+        }
+        
+        private void SpawnDroppedItem(Frame f, AssetRef<EntityPrototype> protoRef, int itemId, int quantity, FPVector2 position)
+        {
+            var proto = f.FindAsset(protoRef);
+            if (proto == null)
+            {
+                Log.Error($"[EnemyDrop] ❌ FAILED to find asset for prototype ref: {protoRef}");
+                return;
+            }
+
+            var itemEntity = f.Create(proto);
+            
+            if (itemEntity == EntityRef.None)
+            {
+                Log.Error($"[EnemyDrop] ❌ f.Create(proto) returned EntityRef.None! Prototype might be invalid.");
+                return;
+            }
+            else
+            {
+                Log.Info($"[EnemyDrop] ✅ Entity CREATED! ID: {itemEntity}. Checking components...");
+                
+                // Check Transform
+                if (f.Unsafe.TryGetPointer<Transform2D>(itemEntity, out var transformCheck))
+                {
+                     Log.Info($"[EnemyDrop] - Has Transform2D. Pos: {transformCheck->Position}");
+                }
+                else
+                {
+                     Log.Error($"[EnemyDrop] - MISSING Transform2D component!");
+                }
+                
+                // Check ItemInfo
+                if (f.Has<ItemInfo>(itemEntity))
+                {
+                     Log.Info($"[EnemyDrop] - Has ItemInfo component.");
+                }
+                else
+                {
+                     Log.Error($"[EnemyDrop] - MISSING ItemInfo component!");
+                }
+            }
+            
+            // Set Position
+            if (f.Unsafe.TryGetPointer<Transform2D>(itemEntity, out var t))
+            {
+                t->Position = position;
+                Log.Info($"[EnemyDrop] ✅ Set Position to {position}");
+            }
+
+            // Set Item Info
+            if (f.Unsafe.TryGetPointer<ItemInfo>(itemEntity, out var itemInfo))
+            {
+                itemInfo->ItemId = itemId;
+                itemInfo->Quantity = quantity;
+                itemInfo->Collected = false;
+                Log.Info($"[EnemyDrop] ✅ Set ItemInfo: ID={itemId}, Qty={quantity}");
+            }
+            
+            Log.Info($"[EnemyDrop] 🎁 SUCCESSFULLY Spawned Item {itemId} x{quantity} at {position}");
         }
     }
 }

@@ -644,6 +644,15 @@ MonoBehaviour:
     IsDead:
       Value: 0
     PlayerEntity: {fileID: 0}
+    AttackCooldown:
+      RawValue: 0
+    RewardSucManh:
+      RawValue: 0
+    RewardTiemNang:
+      RawValue: 0
+    DropItemId: 4
+    DropQuantity: 1
+    DropChance: 100
 --- !u!114 &8069853929532662392
 MonoBehaviour:
   m_ObjectHideFlags: 0

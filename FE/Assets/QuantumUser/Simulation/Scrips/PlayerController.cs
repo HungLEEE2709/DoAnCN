@@ -56,7 +56,7 @@ namespace Quantum
                             if (enemy.CurrentHealth <= FP._0)
                             {
                                 enemy.CurrentHealth = FP._0;
-                                enemy.IsDead = true;
+                                // enemy.IsDead = true; // ĐỂ ENEMY TỰ XỬ LÝ CHẾT
                                 enemy.IsAttacking = false;
                                 Log.Debug("Enemy Died by AoE!");
 

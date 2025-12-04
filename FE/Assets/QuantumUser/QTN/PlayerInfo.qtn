@@ -35,6 +35,12 @@ component EnemyInfo {
     // Rewards
     FP RewardSucManh;
     FP RewardTiemNang;
+    
+    // Item Drop
+    asset_ref<EntityPrototype> DropItemPrototype; 
+    int DropItemId;      
+    int DropQuantity;   
+    int DropChance;     
 }
 component ItemInfo {
     int ItemId;

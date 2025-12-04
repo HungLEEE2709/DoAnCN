@@ -12,7 +12,7 @@ namespace Quantum
         // ============================
         public void OnTriggerEnter2D(Frame f, TriggerInfo2D info)
         {
-            Log.Info($"[Quantum] OnTriggerEnter2D detected between {info.Entity} and {info.Other}");
+            // Log.Info($"[Quantum] OnTriggerEnter2D detected between {info.Entity} and {info.Other}");
 
             EntityRef a = info.Entity;
             EntityRef b = info.Other;
@@ -60,6 +60,7 @@ namespace Quantum
             if (f.TryGet<PlayerInfo>(a, out var playerA) &&
                 f.TryGet<ItemInfo>(b, out var itemB))
             {
+                Log.Info($"[Collision] Player {a} hit Item {b}");
                 HandlePickup(f, a, ref playerA, b, ref itemB);
             }
 
@@ -67,6 +68,7 @@ namespace Quantum
             if (f.TryGet<ItemInfo>(a, out var itemA) &&
                 f.TryGet<PlayerInfo>(b, out var playerB))
             {
+                Log.Info($"[Collision] Item {a} hit Player {b}");
                 HandlePickup(f, b, ref playerB, a, ref itemA);
             }
         }

@@ -135,10 +135,8 @@
             }
             else
             {
-                Debug.LogWarning("Prototype chưa có PlayerInfo component!");
             }
 
-            Debug.Log($"Spawn thành công nhân vật: {key} cho PlayerRef {player}");
         }
 
         public void OnPlayerRemoved(Frame frame, PlayerRef player)
