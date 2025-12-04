@@ -18,6 +18,14 @@ public class InventoryToggle : MonoBehaviour
         {
             isOpen = !isOpen;
             inventoryCanvas.SetActive(isOpen);
+
+            if (AudioManager.Instance != null)
+            {
+                if (isOpen)
+                    AudioManager.Instance.PlayInventoryOpen();
+                else
+                    AudioManager.Instance.PlayInventoryClose();
+            }
         }
     }
 }

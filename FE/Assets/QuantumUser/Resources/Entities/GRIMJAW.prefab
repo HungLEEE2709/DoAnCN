@@ -496,10 +496,10 @@ MonoBehaviour:
       UserTag: 0
       IsPersistent: 1
       CompoundShapes: []
-    LayerSource: 0
+    LayerSource: 1
     Layer: 0
     CallbackFlags:
-      Value: 2
+      Value: 4095
   PhysicsBody:
     IsEnabled: 1
     Config2D: 118
@@ -701,6 +701,10 @@ MonoBehaviour:
     IsAttacking:
       Value: 0
     AttackTimer: 0
+    SucManh:
+      RawValue: 0
+    TiemNang:
+      RawValue: 0
 --- !u!114 &8924521488979030613
 MonoBehaviour:
   m_ObjectHideFlags: 0

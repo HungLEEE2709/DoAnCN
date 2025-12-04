@@ -109,6 +109,7 @@ namespace Quantum.Prototypes {
   public unsafe partial class ItemInfoPrototype : ComponentPrototype<Quantum.ItemInfo> {
     public Int32 ItemId;
     public Int32 Quantity;
+    public QBoolean Collected;
     partial void MaterializeUser(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.ItemInfo component = default;
@@ -118,6 +119,7 @@ namespace Quantum.Prototypes {
     public void Materialize(Frame frame, ref Quantum.ItemInfo result, in PrototypeMaterializationContext context = default) {
         result.ItemId = this.ItemId;
         result.Quantity = this.Quantity;
+        result.Collected = this.Collected;
         MaterializeUser(frame, ref result, in context);
     }
   }

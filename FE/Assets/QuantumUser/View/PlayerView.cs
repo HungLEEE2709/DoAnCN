@@ -53,6 +53,10 @@ public class PlayerView : QuantumEntityViewComponent
                 animator.SetTrigger("attack");
                 ui.UseKi(3);
             }
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAttackSound();
+            }
         }
 
         lastAttack = info.IsAttacking;

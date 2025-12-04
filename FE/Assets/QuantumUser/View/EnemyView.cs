@@ -12,6 +12,7 @@ public class EnemyView : QuantumEntityViewComponent
     private HealthBar healthBar;
 
     private bool playedDeath = false;
+    private bool wasAttacking = false;
 
     private void Awake()
     {
@@ -76,6 +77,17 @@ public class EnemyView : QuantumEntityViewComponent
 
             return;
         }
+
+        // ===== ENEMY ATTACK SOUND =====
+        if (enemyInfo.IsAttacking && !wasAttacking)
+        {
+            // Enemy bắt đầu tấn công → phát âm thanh
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayEnemyAttackSound();
+            }
+        }
+        wasAttacking = enemyInfo.IsAttacking;
 
         animator.SetBool("IsAttack", enemyInfo.IsAttacking);
     }
