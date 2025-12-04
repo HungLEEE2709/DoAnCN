@@ -15,6 +15,7 @@ namespace Quantum
                 // Check if an item is being used (ItemId > 0)
                 if (input->UseItemId > 0)
                 {
+                    Log.Info($"[ItemUsageSystem] 🎯 Detected UseItemId: {input->UseItemId} | HealthRestore: {input->HealthRestore} | KiRestore: {input->KiRestore}");
                     ProcessUseItem(f, i, input);
                 }
             }
@@ -40,6 +41,8 @@ namespace Quantum
                 return;
             }
 
+            Log.Info($"[ItemUsageSystem] ✅ Found PlayerEntity for PlayerRef {playerIdx}");
+
             PlayerInfo* playerInfo = f.Unsafe.GetPointer<PlayerInfo>(playerEntity);
             bool wasHealed = false;
 
@@ -58,7 +61,11 @@ namespace Quantum
                 if (playerInfo->CurrentHealth > oldHealth)
                 {
                     wasHealed = true;
-                    Log.Info($"[ItemUsage] Player {playerIdx} healed {input->HealthRestore} HP. New HP: {playerInfo->CurrentHealth}");
+                    Log.Info($"[ItemUsage] ✅ Player {playerIdx} healed {input->HealthRestore} HP. Old HP: {oldHealth} → New HP: {playerInfo->CurrentHealth}");
+                }
+                else
+                {
+                    Log.Warn($"[ItemUsage] ⚠️ Player {playerIdx} HP is already at MAX! Current HP: {playerInfo->CurrentHealth} / {playerInfo->MaxHealth}");
                 }
             }
 
@@ -77,9 +84,20 @@ namespace Quantum
                 if (playerInfo->Ki > oldKi)
                 {
                     wasHealed = true;
-                    Log.Info($"[ItemUsage] Player {playerIdx} recovered {input->KiRestore} Ki. New Ki: {playerInfo->Ki}");
+                    Log.Info($"[ItemUsage] ✅ Player {playerIdx} recovered {input->KiRestore} Ki. Old Ki: {oldKi} → New Ki: {playerInfo->Ki}");
+                }
+                else
+                {
+                    Log.Warn($"[ItemUsage] ⚠️ Player {playerIdx} Ki is already at MAX! Current Ki: {playerInfo->Ki} / {playerInfo->MaxKi}");
                 }
             }
+            
+            // ⚠️ IMPORTANT: Clear the input to prevent processing the same item multiple times
+            // This is necessary when using Repeatable input flags
+            input->UseItemId = 0;
+            input->HealthRestore = 0;
+            input->KiRestore = 0;
+            Log.Info($"[ItemUsageSystem] 🔄 Input consumed and cleared for PlayerRef {playerIdx}");
         }
     }
 }

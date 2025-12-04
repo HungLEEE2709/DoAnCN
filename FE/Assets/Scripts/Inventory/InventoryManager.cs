@@ -125,12 +125,15 @@ public class InventoryManager : MonoBehaviour
             i.HealthRestore = _pendingHealthRestore;
             i.KiRestore = _pendingKiRestore;
             
-            callback.SetInput(i, DeterministicInputFlags.Command);
+            
+            // Changed from Command to Repeatable to ensure input is processed
+            callback.SetInput(i, DeterministicInputFlags.Repeatable);
             
             // Reset sau khi đã gửi
             _pendingItemId = 0;
             _pendingHealthRestore = 0;
             _pendingKiRestore = 0;
+            
         }
     }
 
@@ -141,37 +144,29 @@ public class InventoryManager : MonoBehaviour
         ConsumableClass consumable = slot.GetItem().GetConsumable();
         if (consumable != null)
         {
-            // Queue Input cho Quantum
             _pendingItemId = consumable.itemId.GetHashCode();
             _pendingHealthRestore = consumable.healthRecovery;
             _pendingKiRestore = consumable.kiRecovery;
-            Debug.Log($"<color=lime>[Inventory] Đã dùng {consumable.itemName} (Queue Input)</color>");
+            
 
-            // Phát âm thanh
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayItemUseSound();
             }
 
-            // Giảm số lượng
             slot.SubQuantity(1);
             if (slot.GetQuantity() <= 0)
             {
                 slot.RemoveItem();
             }
 
-            // Lưu inventory
             StartCoroutine(InventoryAPI.Instance.SaveInventory(userId, items));
             RefreshUI();
         }
     }
 
-    // ===========================
-    // UPDATE (KÉO THẢ & USE ITEM)
-    // ===========================
     private void Update()
     {
-        // ... (Logic kéo thả cũ) ...
         if (UnityEngine.Input.GetMouseButtonDown(0))
         {
             if (isMoving) EndMove();
@@ -195,7 +190,6 @@ public class InventoryManager : MonoBehaviour
             itemCursor.sprite = null;
         }
 
-        // DETECT USE ITEM (Phím E)
         if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             SlotClass slot = GetClosestSlot();
@@ -206,9 +200,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // ===========================
-    // UI UPDATE
-    // ===========================
     private void RefreshUI()
     {
         for (int i = 0; i < slots.Length; i++)
@@ -287,7 +278,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (originalSlot.GetItem() != null)
             {
-                // STACK
+
                 if (originalSlot.GetItem() == movingSlot.GetItem() &&
                     originalSlot.GetItem().isStackable)
                 {
@@ -325,9 +316,6 @@ public class InventoryManager : MonoBehaviour
         RefreshUI();
     }
 
-    // ===========================
-    // ADD / REMOVE
-    // ===========================
     public void PickupItem(string itemId, int quantity)
     {
         var item = ItemDatabase.Get(itemId);

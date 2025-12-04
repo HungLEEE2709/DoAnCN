@@ -60,7 +60,7 @@ namespace Quantum
                                 enemy.IsAttacking = false;
                                 Log.Debug("Enemy Died by AoE!");
 
-                                // Reward
+                                // Reward Stats
                                 f.Info->SucManh += (enemy.RewardSucManh > 0 ? enemy.RewardSucManh : 10);
                                 f.Info->TiemNang += (enemy.RewardTiemNang > 0 ? enemy.RewardTiemNang : 1);
                             }

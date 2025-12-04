@@ -55,10 +55,10 @@ public class QuantumInventoryListener : MonoBehaviour
         switch (itemId)
         {
             case 1: return "apple";
-            case 2:
-                return "coins" +
-                    "";
-            case 3: return "Potion";
+            case 2: return "coins";
+            case 3: return "hp";
+            case 4: return "ki";
+
             default:
                 Debug.LogWarning($"[QuantumListener] Unknown ItemId: {itemId}");
                 return null;
